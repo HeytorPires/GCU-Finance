@@ -4,12 +4,15 @@ public class Usuario {
     private Long id;
     private String login;
     private String senha;
+    private String tipo;
 
-    public Usuario(String login, String senha) {
+    public Usuario(Long id, String login, String senha, String tipo) {
+        this.id = id;
         this.login = login;
         this.senha = senha;
+        this.tipo = tipo;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -34,10 +37,15 @@ public class Usuario {
         this.senha = senha;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "login=" + login + ", senha=" + senha + '}';
+    public String getTipo() {
+        return tipo;
     }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    
     
     
 }
