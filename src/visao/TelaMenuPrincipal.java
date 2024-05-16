@@ -1,4 +1,7 @@
 package visao;
+import visao.Cadastro.TelaCadastroDespesas;
+import visao.Cadastro.TelaCadastroReceita;
+
 
 public class TelaMenuPrincipal extends javax.swing.JFrame {
 
@@ -20,7 +23,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemUsuario = new javax.swing.JMenuItem();
+        jMenuItemDespesas = new javax.swing.JMenuItem();
+        jMenuItemReceita = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -28,13 +33,29 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
-        jMenuItem2.setText("Usuario");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemUsuario.setText("Usuario");
+        jMenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuItemUsuario);
+
+        jMenuItemDespesas.setText("Despesa");
+        jMenuItemDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDespesasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemDespesas);
+
+        jMenuItemReceita.setText("Receita");
+        jMenuItemReceita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReceitaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemReceita);
 
         jMenuBar1.add(jMenu1);
 
@@ -70,9 +91,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuarioActionPerformed
         new TelaCadastroUsuario().setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemUsuarioActionPerformed
+
+    private void jMenuItemDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDespesasActionPerformed
+        new TelaCadastroDespesas().setVisible(true);
+    }//GEN-LAST:event_jMenuItemDespesasActionPerformed
+
+    private void jMenuItemReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReceitaActionPerformed
+        new TelaCadastroReceita().setVisible(true);
+    }//GEN-LAST:event_jMenuItemReceitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,6 +132,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TelaMenuPrincipal().setVisible(true);
             }
@@ -114,6 +144,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemDespesas;
+    private javax.swing.JMenuItem jMenuItemReceita;
+    private javax.swing.JMenuItem jMenuItemUsuario;
     // End of variables declaration//GEN-END:variables
 }
