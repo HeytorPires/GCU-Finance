@@ -26,6 +26,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemUsuario = new javax.swing.JMenuItem();
         jMenuItemDespesas = new javax.swing.JMenuItem();
         jMenuItemReceita = new javax.swing.JMenuItem();
+        PerfilMenu = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -59,6 +60,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        PerfilMenu.setText("Perfil");
+        jMenuBar1.add(PerfilMenu);
+
         jMenu2.setText("Sistema");
 
         jMenuItem1.setText("Sair");
@@ -81,7 +85,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
@@ -140,6 +144,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu PerfilMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
