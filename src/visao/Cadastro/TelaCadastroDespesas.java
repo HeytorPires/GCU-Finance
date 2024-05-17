@@ -30,13 +30,13 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButtonCadastro = new javax.swing.JButton();
-        jButtonLimpar = new javax.swing.JButton();
-        jButtonSair = new javax.swing.JButton();
+        nameInputDespesas = new javax.swing.JTextField();
+        valorInputDespesas = new javax.swing.JTextField();
+        TipoListBox = new javax.swing.JComboBox<>();
+        cadastroDespesasButton = new javax.swing.JButton();
+        limparDespesasButton = new javax.swing.JButton();
+        sairDespesasButton = new javax.swing.JButton();
+        dataInputDespesas = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,32 +48,43 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
 
         jLabel4.setText("Valor:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        valorInputDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                valorInputDespesasActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TipoListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButtonCadastro.setText("Cadastrar");
-        jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
+        cadastroDespesasButton.setText("Cadastrar");
+        cadastroDespesasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastroActionPerformed(evt);
+                cadastroDespesasButtonActionPerformed(evt);
             }
         });
 
-        jButtonLimpar.setText("Limpar");
-        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+        limparDespesasButton.setText("Limpar");
+        limparDespesasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimparActionPerformed(evt);
+                limparDespesasButtonActionPerformed(evt);
             }
         });
 
-        jButtonSair.setText("Sair");
-        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+        sairDespesasButton.setText("Sair");
+        sairDespesasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSairActionPerformed(evt);
+                sairDespesasButtonActionPerformed(evt);
+            }
+        });
+
+        dataInputDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataInputDespesasActionPerformed(evt);
+            }
+        });
+        dataInputDespesas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dataInputDespesasKeyPressed(evt);
             }
         });
 
@@ -92,17 +103,17 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jComboBox1, 0, 192, Short.MAX_VALUE))
+                            .addComponent(nameInputDespesas)
+                            .addComponent(valorInputDespesas)
+                            .addComponent(TipoListBox, 0, 192, Short.MAX_VALUE)
+                            .addComponent(dataInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCadastro)
+                        .addComponent(cadastroDespesasButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                        .addComponent(jButtonLimpar)
+                        .addComponent(limparDespesasButton)
                         .addGap(64, 64, 64)
-                        .addComponent(jButtonSair)
+                        .addComponent(sairDespesasButton)
                         .addGap(75, 75, 75))))
         );
         layout.setVerticalGroup(
@@ -111,45 +122,53 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TipoListBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(valorInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastro)
-                    .addComponent(jButtonLimpar)
-                    .addComponent(jButtonSair))
+                    .addComponent(cadastroDespesasButton)
+                    .addComponent(limparDespesasButton)
+                    .addComponent(sairDespesasButton))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+    private void sairDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairDespesasButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButtonSairActionPerformed
+    }//GEN-LAST:event_sairDespesasButtonActionPerformed
 
-    private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
+    private void cadastroDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroDespesasButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCadastroActionPerformed
+    }//GEN-LAST:event_cadastroDespesasButtonActionPerformed
 
-    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLimparActionPerformed
+    private void limparDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparDespesasButtonActionPerformed
+        //this.
+    }//GEN-LAST:event_limparDespesasButtonActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void valorInputDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorInputDespesasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_valorInputDespesasActionPerformed
+
+    private void dataInputDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataInputDespesasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataInputDespesasActionPerformed
+
+    private void dataInputDespesasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dataInputDespesasKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataInputDespesasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -185,16 +204,16 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCadastro;
-    private javax.swing.JButton jButtonLimpar;
-    private javax.swing.JButton jButtonSair;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> TipoListBox;
+    private javax.swing.JButton cadastroDespesasButton;
+    private javax.swing.JFormattedTextField dataInputDespesas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton limparDespesasButton;
+    private javax.swing.JTextField nameInputDespesas;
+    private javax.swing.JButton sairDespesasButton;
+    private javax.swing.JTextField valorInputDespesas;
     // End of variables declaration//GEN-END:variables
 }
