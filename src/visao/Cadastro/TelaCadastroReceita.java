@@ -4,7 +4,7 @@
  */
 package visao.Cadastro;
 import javax.swing.JOptionPane;
-import model.Despesa;
+import model.Receita;
 /**
  *
  * @author Usuario
@@ -159,18 +159,32 @@ public class TelaCadastroReceita extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
-        // TODO add your handling code here:
-        String Nome = this.nameInputReceita.getText();
-        String Data = this.dataInputReceita.getText();
-        String Valor = this.valorInputReceita.getText();
-        if(Nome.equals("" )|| Data.equals("")|| Valor.equals("")){
-            JOptionPane.showMessageDialog(this,"Requisitos de Cadastro invalidos!");
-        } else { 
-            Despesa novaDespesa = new Despesa(Nome, Valor, Data, TOP_ALIGNMENT);
-            JOptionPane.showMessageDialog(this,"Despesa Cadastrada com sucesso");
-            System.out.println(novaDespesa);
-            this.Limpar();
-        }
+         String Nome = this.nameInputReceita.getText();
+    String Data = this.dataInputReceita.getText();
+    float Valor = 0.0f;
+
+    // Tentar converter o valor para float e capturar exceções
+    try {
+        Valor = Float.parseFloat(this.valorInputReceita.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Valor digitado não é um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return; // Interrompe o processamento se o valor não for válido
+    }
+    
+    // Verifica se os campos obrigatórios estão preenchidos
+    if (Nome.equals("") || Data.equals("")) {
+        JOptionPane.showMessageDialog(this, "Requisitos de Cadastro inválidos!");
+    } else { 
+        // Cria um novo objeto Receita
+        Receita novareceita = new Receita(Nome, "teste", Data, Valor);
+        JOptionPane.showMessageDialog(this, "Despesa Cadastrada com sucesso");
+        System.out.println(novareceita.getNome());
+        System.out.println(novareceita.getData());
+        System.out.println(novareceita.getTipo());
+        System.out.println(novareceita.getValor());
+        
+        this.Limpar();
+    }
         
     }//GEN-LAST:event_jButtonCadastroActionPerformed
 
