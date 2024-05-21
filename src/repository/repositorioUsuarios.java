@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Laboratorio
  */
-public class repositorio {
+public class repositorioUsuarios {
     public static List<Usuario> usuarios = new ArrayList<>();
     
     public static void init() {
