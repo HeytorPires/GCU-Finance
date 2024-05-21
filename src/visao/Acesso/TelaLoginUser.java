@@ -3,17 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Acesso;
+//import repository.repositorio;
+
+import visao.Cadastro.TelaCadastroUser;
+
 
 /**
  *
  * @author Fabiano
  */
-public class Login extends javax.swing.JFrame {
+public class TelaLoginUser extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public TelaLoginUser() {
         initComponents();
     }
 
@@ -26,32 +30,35 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        loginInputUsuario = new javax.swing.JPasswordField();
+        jTextField1 = new javax.swing.JTextField();
         loginButtonCadastro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         loginInputSenha = new javax.swing.JPasswordField();
         loginButtonLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        loginInputLogin = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        loginInputUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginInputUsuarioActionPerformed(evt);
-            }
-        });
-
-        loginButtonCadastro.setText("Cadastrar");
+        loginButtonCadastro.setText("Cadastro");
         loginButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonCadastroActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Usuario:");
 
-        jLabel3.setText("Senha");
+        jLabel3.setText("Senha:");
+
+        loginInputSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginInputSenhaActionPerformed(evt);
+            }
+        });
 
         loginButtonLogin.setText("Login");
         loginButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +69,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Logotipo sem fundo.png"))); // NOI18N
 
+        loginInputLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginInputLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,56 +82,72 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(loginButtonLogin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(loginButtonCadastro))
-                    .addComponent(loginInputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(loginInputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(212, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(loginButtonLogin)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(loginButtonCadastro))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(loginInputSenha)))))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginInputLogin, loginInputSenha});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1)
-                .addGap(54, 54, 54)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginInputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(loginInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginInputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(loginInputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(loginButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(loginButtonCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
         );
 
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {loginInputLogin, loginInputSenha});
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginInputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginInputUsuarioActionPerformed
-
     private void loginButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonCadastroActionPerformed
-        // TODO add your handling code here:
-        //new Cadastro().setVisible(true);
-                
+        new TelaCadastroUser().setVisible(true);
     }//GEN-LAST:event_loginButtonCadastroActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-        // TODO add your handling code here:
+       //String login = this.loginInputUsuario.getText();
+       //String password = this.loginInputUsuario.getText();
+       
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
+    private void loginInputLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginInputLoginActionPerformed
+
+    private void loginInputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginInputSenhaActionPerformed
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -136,21 +165,22 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Login().setVisible(true);
+                new TelaLoginUser().setVisible(true);
             }
         });
     }
@@ -159,9 +189,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton loginButtonCadastro;
     private javax.swing.JButton loginButtonLogin;
+    private javax.swing.JTextField loginInputLogin;
     private javax.swing.JPasswordField loginInputSenha;
-    private javax.swing.JPasswordField loginInputUsuario;
     // End of variables declaration//GEN-END:variables
 }

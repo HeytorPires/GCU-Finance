@@ -1,39 +1,37 @@
 package model;
 
 public class Usuario {
-    private Long id;
-    private String login;
+    private int id;
+    private String nome;
     private String email;
     private String senha;
-    private String tipo;
 
-    public Usuario(Long id, String login, String email, String senha, String tipo) {
+    public Usuario(int id, String nome, String email, String senha) {
         this.id = id;
-        this.login = login;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.tipo = tipo;
     }
 
      public Usuario(String login, String senha) {
-        this.login = login;
+        this.nome = login;
         this.senha = senha;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public String getLogin() {
-        return login;
+        return nome;
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.nome = login;
     }
 
     public String getSenha() {
@@ -42,14 +40,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getEmail() {
@@ -62,7 +52,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", login=" + login + ", email=" + email + ", senha=" + senha + ", tipo=" + tipo + '}';
+        return "Usuario{" + "id=" + id + ", login=" + nome + ", email=" + email + ", senha=" + senha + '}';
     }
 
     

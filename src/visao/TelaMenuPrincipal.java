@@ -1,6 +1,11 @@
 package visao;
 import visao.Cadastro.TelaCadastroDespesas;
 import visao.Cadastro.TelaCadastroReceita;
+import visao.Cadastro.TelaCadastroCategoria;
+import visao.Editar.TelaEditarDespesas;
+import visao.Editar.TelaEditarReceita;
+import visao.Editar.TelaEditarUsuario;
+import visao.Editar.TelaEditarCategoria;
 
 
 public class TelaMenuPrincipal extends javax.swing.JFrame {
@@ -23,15 +28,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItemUsuario = new javax.swing.JMenuItem();
-        jMenuItemDespesas = new javax.swing.JMenuItem();
-        jMenuItemReceita = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuCadastroUsuario = new javax.swing.JMenuItem();
+        jMenuCadastroDespesas = new javax.swing.JMenuItem();
+        jMenuCadastroReceita = new javax.swing.JMenuItem();
+        jMenuCadastroCategoria = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuEditarDespesas = new javax.swing.JMenuItem();
+        jMenuEditarReceita = new javax.swing.JMenuItem();
+        jMenuEditarCategoria = new javax.swing.JMenuItem();
         PerfilMenu = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuEditarUsuario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -39,54 +46,81 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
-        jMenuItemUsuario.setText("Usuario");
-        jMenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastroUsuario.setText("Usuario");
+        jMenuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemUsuarioActionPerformed(evt);
+                jMenuCadastroUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemUsuario);
+        jMenu1.add(jMenuCadastroUsuario);
 
-        jMenuItemDespesas.setText("Despesa");
-        jMenuItemDespesas.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastroDespesas.setText("Despesa");
+        jMenuCadastroDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDespesasActionPerformed(evt);
+                jMenuCadastroDespesasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemDespesas);
+        jMenu1.add(jMenuCadastroDespesas);
 
-        jMenuItemReceita.setText("Receita");
-        jMenuItemReceita.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastroReceita.setText("Receita");
+        jMenuCadastroReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemReceitaActionPerformed(evt);
+                jMenuCadastroReceitaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemReceita);
+        jMenu1.add(jMenuCadastroReceita);
 
-        jMenuItem3.setText("Categoria");
-        jMenu1.add(jMenuItem3);
+        jMenuCadastroCategoria.setText("Categoria");
+        jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastroCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCadastroCategoria);
 
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Editar");
 
-        jMenuItem2.setText("Despesas");
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem4.setText("Receita");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuEditarDespesas.setText("Despesas");
+        jMenuEditarDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuEditarDespesasActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu3.add(jMenuEditarDespesas);
 
-        jMenuItem5.setText("Categoria");
-        jMenu3.add(jMenuItem5);
+        jMenuEditarReceita.setText("Receita");
+        jMenuEditarReceita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditarReceitaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuEditarReceita);
+
+        jMenuEditarCategoria.setText("Categoria");
+        jMenuEditarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditarCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuEditarCategoria);
 
         jMenuBar1.add(jMenu3);
 
         PerfilMenu.setText("Perfil");
+
+        jMenuItem6.setText("Visualizar");
+        PerfilMenu.add(jMenuItem6);
+
+        jMenuEditarUsuario.setText("Editar");
+        jMenuEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditarUsuarioActionPerformed(evt);
+            }
+        });
+        PerfilMenu.add(jMenuEditarUsuario);
+
         jMenuBar1.add(PerfilMenu);
 
         jMenu2.setText("Sistema");
@@ -121,57 +155,42 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItemDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDespesasActionPerformed
+    private void jMenuCadastroDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroDespesasActionPerformed
         new TelaCadastroDespesas().setVisible(true);
-    }//GEN-LAST:event_jMenuItemDespesasActionPerformed
+    }//GEN-LAST:event_jMenuCadastroDespesasActionPerformed
 
-    private void jMenuItemReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReceitaActionPerformed
+    private void jMenuCadastroReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroReceitaActionPerformed
         new TelaCadastroReceita().setVisible(true);
-    }//GEN-LAST:event_jMenuItemReceitaActionPerformed
+    }//GEN-LAST:event_jMenuCadastroReceitaActionPerformed
 
-    private void jMenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuarioActionPerformed
+    private void jMenuCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroUsuarioActionPerformed
         new TelaCadastroUsuario().setVisible(true);
-    }//GEN-LAST:event_jMenuItemUsuarioActionPerformed
+    }//GEN-LAST:event_jMenuCadastroUsuarioActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMenuEditarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarReceitaActionPerformed
+       new TelaEditarReceita().setVisible(true);
+    }//GEN-LAST:event_jMenuEditarReceitaActionPerformed
+
+    private void jMenuEditarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarDespesasActionPerformed
+        new TelaEditarDespesas().setVisible(true);
+    }//GEN-LAST:event_jMenuEditarDespesasActionPerformed
+
+    private void jMenuEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCategoriaActionPerformed
+        new TelaEditarCategoria().setVisible(true);
+    }//GEN-LAST:event_jMenuEditarCategoriaActionPerformed
+
+    private void jMenuEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarUsuarioActionPerformed
+        new TelaEditarUsuario().setVisible(true);
+    }//GEN-LAST:event_jMenuEditarUsuarioActionPerformed
+
+    private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
+        new TelaCadastroCategoria().setVisible(true);
+    }//GEN-LAST:event_jMenuCadastroCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TelaMenuPrincipal().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu PerfilMenu;
@@ -179,13 +198,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCadastroCategoria;
+    private javax.swing.JMenuItem jMenuCadastroDespesas;
+    private javax.swing.JMenuItem jMenuCadastroReceita;
+    private javax.swing.JMenuItem jMenuCadastroUsuario;
+    private javax.swing.JMenuItem jMenuEditarCategoria;
+    private javax.swing.JMenuItem jMenuEditarDespesas;
+    private javax.swing.JMenuItem jMenuEditarReceita;
+    private javax.swing.JMenuItem jMenuEditarUsuario;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItemDespesas;
-    private javax.swing.JMenuItem jMenuItemReceita;
-    private javax.swing.JMenuItem jMenuItemUsuario;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }

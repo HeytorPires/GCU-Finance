@@ -6,7 +6,7 @@ package visao.Editar;
 
 /**
  *
- * @author Fabiano
+ * @author Laboratorio
  */
 public class TelaEditarUsuario extends javax.swing.JFrame {
 
