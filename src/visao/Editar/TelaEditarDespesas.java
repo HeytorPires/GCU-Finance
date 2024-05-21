@@ -4,17 +4,37 @@
  */
 package visao.Editar;
 
+import javax.swing.JOptionPane;
+import model.Despesa;
+
 /**
  *
  * @author Laboratorio
  */
 public class TelaEditarDespesas extends javax.swing.JFrame {
-
+private TelaEditarDespesas tela;
+  private Despesa despesa;
     /**
      * Creates new form TelaEditarDespesas
      */
-    public TelaEditarDespesas() {
+    public TelaEditarDespesas(TelaEditarDespesas tela, Despesa despesa) {
+        this.tela = tela;
+        this.despesa = despesa;
+        mostrarDadosProduto();
         initComponents();
+
+        
+    }
+    private void mostrarDadosProduto() {
+        this.nameInputDespesas.setText(despesa.getNome());
+        //this.jComboBoxTipo.setText(despesa.getTipo());
+        this.dataInputDespesas.setText((despesa.getData()));
+        this.valorInputDespesas.setText(Float.toString(despesa.getValor()));
+    }
+    private void Limpar(){
+        this.nameInputDespesas.setText("");
+        this.dataInputDespesas.setText("");
+        this.valorInputDespesas.setText(""); 
     }
 
     /**
@@ -26,21 +46,177 @@ public class TelaEditarDespesas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonSair = new javax.swing.JButton();
+        nameInputDespesas = new javax.swing.JTextField();
+        dataInputDespesas = new javax.swing.JTextField();
+        valorInputDespesas = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
+        jButtonCadastro = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
+
+        nameInputDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameInputDespesasActionPerformed(evt);
+            }
+        });
+
+        valorInputDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valorInputDespesasActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome:");
+
+        jLabel2.setText("Tipo:");
+
+        jLabel3.setText("Data:");
+
+        jLabel4.setText("Valor:");
+
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
+        jButtonCadastro.setText("Cadastrar");
+        jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastroActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxTipo, 0, 192, Short.MAX_VALUE)
+                            .addComponent(nameInputDespesas)
+                            .addComponent(dataInputDespesas, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(valorInputDespesas))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 46, Short.MAX_VALUE)
+                        .addComponent(jButtonCadastro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSair)
+                        .addGap(75, 75, 75))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(nameInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(dataInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(valorInputDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCadastro)
+                    .addComponent(jButtonLimpar)
+                    .addComponent(jButtonSair))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void nameInputDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputDespesasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameInputDespesasActionPerformed
+
+    private void valorInputDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorInputDespesasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valorInputDespesasActionPerformed
+
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
+
+    private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
+        String Nome = this.nameInputDespesas.getText();
+        String Data = this.dataInputDespesas.getText();
+        float Valor = 0.0f;
+
+        // Tentar converter o valor para float e capturar exceções
+        try {
+            Valor = Float.parseFloat(this.valorInputDespesas.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Valor digitado não é um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return; // Interrompe o processamento se o valor não for válido
+        }
+
+        // Verifica se os campos obrigatórios estão preenchidos
+        if (Nome.equals("") || Data.equals("") ) {
+            JOptionPane.showMessageDialog(this, "Requisitos de Cadastro inválidos!");
+        } else {
+            // Cria um novo objeto Receita
+            Despesa novareceita = new Despesa(Nome, "teste", Data, Valor);
+            JOptionPane.showMessageDialog(this, "Despesa Cadastrada com sucesso");
+            System.out.println(novareceita.getNome());
+
+            System.out.println(model.Receita.class.toString());
+
+            this.Limpar();
+        }
+
+    }//GEN-LAST:event_jButtonCadastroActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        // TODO add your handling code here:
+        this.Limpar();
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,11 +248,22 @@ public class TelaEditarDespesas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaEditarDespesas().setVisible(true);
+                // TelaEditarDespesas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField dataInputDespesas;
+    private javax.swing.JButton jButtonCadastro;
+    private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField nameInputDespesas;
+    private javax.swing.JTextField valorInputDespesas;
     // End of variables declaration//GEN-END:variables
 }

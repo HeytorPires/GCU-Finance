@@ -16,7 +16,7 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
     public TelaCadastroDespesas() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,9 +110,9 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cadastroDespesasButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
                         .addComponent(limparDespesasButton)
-                        .addGap(64, 64, 64)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(sairDespesasButton)
                         .addGap(75, 75, 75))))
         );

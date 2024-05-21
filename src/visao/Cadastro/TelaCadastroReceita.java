@@ -179,9 +179,9 @@ public class TelaCadastroReceita extends javax.swing.JFrame {
         Receita novareceita = new Receita(Nome, "teste", Data, Valor);
         JOptionPane.showMessageDialog(this, "Despesa Cadastrada com sucesso");
         System.out.println(novareceita.getNome());
-        System.out.println(novareceita.getData());
-        System.out.println(novareceita.getTipo());
-        System.out.println(novareceita.getValor());
+      
+        
+        System.out.println(model.Receita.class.toString());
         
         this.Limpar();
     }

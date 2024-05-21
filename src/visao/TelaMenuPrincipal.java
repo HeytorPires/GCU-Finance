@@ -21,7 +21,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         initComponents();
         ListarDespesas();
     }
-    public void ListarDespesas(){
+    private void ListarDespesas(){
        DefaultListModel model = new DefaultListModel();
        model.clear();
        model.addAll(repository.repositorioUsuarios.usuarios);
@@ -79,7 +79,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("jButton1");
+        jButton3.setText("Cancelar");
 
         jMenu1.setText("Cadastro");
 
@@ -186,7 +186,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonEditarDespesa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addComponent(jButtonExcluirDespesas)
                         .addGap(44, 44, 44)
                         .addComponent(jButton3)
@@ -229,7 +229,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuEditarReceitaActionPerformed
 
     private void jMenuEditarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarDespesasActionPerformed
-        new TelaEditarDespesas().setVisible(true);
+        //new TelaEditarDespesas().setVisible(true);
     }//GEN-LAST:event_jMenuEditarDespesasActionPerformed
 
     private void jMenuEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCategoriaActionPerformed
