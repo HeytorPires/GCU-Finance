@@ -46,7 +46,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuCadastroUsuario = new javax.swing.JMenuItem();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
         jMenuCadastroReceita = new javax.swing.JMenuItem();
         jMenuCadastroCategoria = new javax.swing.JMenuItem();
@@ -72,6 +71,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jListDespesas);
 
         jButtonEditarDespesa.setText("Editar");
+        jButtonEditarDespesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarDespesaActionPerformed(evt);
+            }
+        });
 
         jButtonExcluirDespesas.setText("Excluir");
         jButtonExcluirDespesas.addActionListener(new java.awt.event.ActionListener() {
@@ -83,14 +87,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jButton3.setText("Cancelar");
 
         jMenu1.setText("Cadastro");
-
-        jMenuCadastroUsuario.setText("Usuario");
-        jMenuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadastroUsuarioActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuCadastroUsuario);
 
         jMenuCadastroDespesas.setText("Despesa");
         jMenuCadastroDespesas.addActionListener(new java.awt.event.ActionListener() {
@@ -180,30 +176,28 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonEditarDespesa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addGap(64, 64, 64)
                         .addComponent(jButtonExcluirDespesas)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton3)
-                        .addGap(43, 43, 43))))
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton3)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditarDespesa)
-                    .addComponent(jButton3)
-                    .addComponent(jButtonExcluirDespesas))
-                .addGap(32, 32, 32))
+                    .addComponent(jButtonExcluirDespesas)
+                    .addComponent(jButton3))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,16 +215,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         new TelaCadastroReceita().setVisible(true);
     }//GEN-LAST:event_jMenuCadastroReceitaActionPerformed
 
-    private void jMenuCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroUsuarioActionPerformed
-        new TelaCadastroUsuario().setVisible(true);
-    }//GEN-LAST:event_jMenuCadastroUsuarioActionPerformed
-
     private void jMenuEditarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarReceitaActionPerformed
        new TelaEditarReceita().setVisible(true);
     }//GEN-LAST:event_jMenuEditarReceitaActionPerformed
 
     private void jMenuEditarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarDespesasActionPerformed
-       //new TelaEditarDespesas().
+       
     }//GEN-LAST:event_jMenuEditarDespesasActionPerformed
 
     private void jMenuEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCategoriaActionPerformed
@@ -253,6 +243,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         ListarDespesas();        
         }
     }//GEN-LAST:event_jButtonExcluirDespesasActionPerformed
+
+    private void jButtonEditarDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarDespesaActionPerformed
+       int indice = this.jListDespesas.getSelectedIndex();
+    if (indice >= 0) {
+        Despesa despesa = (Despesa) this.jListDespesas.getSelectedValuesList();
+        new TelaEditarDespesas(this, despesa).setVisible(true);
+    }
+    }//GEN-LAST:event_jButtonEditarDespesaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -300,7 +298,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenuItem jMenuCadastroDespesas;
     private javax.swing.JMenuItem jMenuCadastroReceita;
-    private javax.swing.JMenuItem jMenuCadastroUsuario;
     private javax.swing.JMenuItem jMenuEditarCategoria;
     private javax.swing.JMenuItem jMenuEditarDespesas;
     private javax.swing.JMenuItem jMenuEditarReceita;

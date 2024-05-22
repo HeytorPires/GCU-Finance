@@ -5,6 +5,7 @@ import model.Usuario;
 public class UsuarioTeste {
     
     public static void main(String[] args) {
+        //
         String nome = "Heytor";
         String senha = "senha123";
         int id = 01;
@@ -13,6 +14,8 @@ public class UsuarioTeste {
         System.out.println(usuario.getLogin().equals(nome));
         System.out.println(usuario.getSenha().equals(senha));
         System.out.println(usuario);
+        
+
     }
     
 }

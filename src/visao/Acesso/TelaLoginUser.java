@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Acesso;
+import model.Usuario;
 import repository.repositorioUsuarios;
-
+import visao.TelaMenuPrincipal;
 import visao.Cadastro.TelaCadastroUser;
 
 
@@ -21,6 +22,7 @@ public class TelaLoginUser extends javax.swing.JFrame {
         repository.repositorioUsuarios.init();
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -135,8 +137,22 @@ public class TelaLoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonCadastroActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-       String login = this.loginInputLogin.getText();
-       String password = this.loginInputSenha.getText();
+         String login = this.loginInputLogin.getText();
+        String senha = new String(this.loginInputSenha.getPassword());
+        
+        Usuario usuario = repositorioUsuarios.validarUsuario(login, senha);
+        
+        if (usuario != null) {
+            // Login bem-sucedido
+            javax.swing.JOptionPane.showMessageDialog(this, "Login bem-sucedido! Bem-vindo, " + usuario.getLogin());
+            new TelaMenuPrincipal().setVisible(true);
+            this.dispose();
+        } else {
+            // Login falhou
+            javax.swing.JOptionPane.showMessageDialog(this, "Credenciais inválidas. Por favor, tente novamente.");
+        }
+       
+       
        
        
        

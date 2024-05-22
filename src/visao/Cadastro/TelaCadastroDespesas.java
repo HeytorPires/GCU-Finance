@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Cadastro;
-import repository.repositorioCategoria;
 import javax.swing.JOptionPane;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
+import repository.repositorioCategoria;
 import model.Despesa;
 
 /**
@@ -18,14 +20,15 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
      */
     public TelaCadastroDespesas() {
         repositorioCategoria.init();
+        ListarCategorias();
         initComponents();
     }
     private void ListarCategorias(){
        DefaultListModel model = new DefaultListModel();
        model.clear();
-       model.addAll(repository.repositorioDespesas.despesas);
-       this.jListDespesas.setModel(model);
-    }
+       model.addAll(repository.repositorioCategoria.categorias);
+       this.TipoListBox.setModel((ComboBoxModel<String>) model); 
+   }
     private void Limpar(){
         this.nameInputDespesas.setText("");
         this.dataInputDespesas.setText("");
@@ -71,6 +74,11 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
         });
 
         TipoListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TipoListBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipoListBoxActionPerformed(evt);
+            }
+        });
 
         cadastroDespesasButton.setText("Cadastrar");
         cadastroDespesasButton.addActionListener(new java.awt.event.ActionListener() {
@@ -167,29 +175,30 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
     }//GEN-LAST:event_sairDespesasButtonActionPerformed
             
     private void cadastroDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroDespesasButtonActionPerformed
-         String Nome = this.nameInputDespesas.getText();
-        String Data = this.dataInputDespesas.getText();
-        float Valor = 0.0f;
+    String Nome = this.nameInputDespesas.getText();
+    String Data = this.dataInputDespesas.getText();
+    float Valor = 0.0f;
+    String tipo = (String) this.TipoListBox.getSelectedItem();
 
+   
     try {
         Valor = Float.parseFloat(this.valorInputDespesas.getText());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Valor digitado não é um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
-        return; // Interrompe o processamento se o valor não for válido
+        return; 
     }
-    
+
     // Verifica se os campos obrigatórios estão preenchidos
     if (Nome.equals("") || Data.equals("")) {
         JOptionPane.showMessageDialog(this, "Requisitos de Cadastro inválidos!");
-    } else { 
-        // Cria um novo objeto Receita
-        Despesa novadespesa = new Despesa(Nome, "teste", Data, Valor);
+    } else {
+        // Cria um novo objeto Despesa usando o tipo selecionado
+        Despesa novadespesa = new Despesa(Nome, tipo, Data, Valor);
         JOptionPane.showMessageDialog(this, "Despesa Cadastrada com sucesso");
-        
-      
-        
-        System.out.println(novadespesa.toString());
-        
+        System.out.println(novadespesa.getNome());
+
+        System.out.println(model.Despesa.class.toString());
+
         this.Limpar();
     }
     }//GEN-LAST:event_cadastroDespesasButtonActionPerformed
@@ -209,6 +218,10 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
     private void dataInputDespesasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dataInputDespesasKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_dataInputDespesasKeyPressed
+
+    private void TipoListBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoListBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TipoListBoxActionPerformed
 
     /**
      * @param args the command line arguments

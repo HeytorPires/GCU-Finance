@@ -12,6 +12,7 @@ import java.util.List;
  * @author Laboratorio
  */
 public class repositorioCategoria {
+    
     public static List<Categoria> categorias = new ArrayList<>();
     
     public static void init() {

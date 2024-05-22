@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Editar;
-
+import visao.TelaMenuPrincipal;
 import javax.swing.JOptionPane;
 import model.Despesa;
 
@@ -12,15 +12,16 @@ import model.Despesa;
  * @author Laboratorio
  */
 public class TelaEditarDespesas extends javax.swing.JFrame {
-    private TelaEditarDespesas tela;
+    private TelaMenuPrincipal tela;
     private Despesa despesa;
    
-    public TelaEditarDespesas(TelaEditarDespesas tela, Despesa despesa) {
+    public TelaEditarDespesas(TelaMenuPrincipal tela, Despesa despesa) {
         this.tela = tela;
         this.despesa = despesa;
-        mostrarDadosProduto();
         initComponents();
+        mostrarDadosProduto();
 
+        
         
     }
     private void mostrarDadosProduto() {
@@ -28,6 +29,7 @@ public class TelaEditarDespesas extends javax.swing.JFrame {
         this.jComboBoxTipo.addItem(despesa.getTipo());
         this.dataInputDespesas.setText((despesa.getData()));
         this.valorInputDespesas.setText(Float.toString(despesa.getValor()));
+        this.nameInputDespesas.requestFocus();
     }
     private void Limpar(){
         this.nameInputDespesas.setText("");
@@ -218,7 +220,7 @@ public class TelaEditarDespesas extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* t the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -241,7 +243,6 @@ public class TelaEditarDespesas extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

@@ -102,7 +102,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private void limpar() {
         this.textFieldLogin.setText("");
         this.passwordFieldSenha.setText("");
-        
         this.textFieldLogin.requestFocus();
     }
         
