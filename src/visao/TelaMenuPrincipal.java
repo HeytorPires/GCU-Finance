@@ -18,13 +18,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
      */
     public TelaMenuPrincipal() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        repositorioDespesas.init();
         initComponents();
         ListarDespesas();
     }
     private void ListarDespesas(){
        DefaultListModel model = new DefaultListModel();
        model.clear();
-       model.addAll(repository.repositorioUsuarios.usuarios);
+       model.addAll(repository.repositorioDespesas.despesas);
        this.jListDespesas.setModel(model);
     }
 
@@ -229,7 +230,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuEditarReceitaActionPerformed
 
     private void jMenuEditarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarDespesasActionPerformed
-        //new TelaEditarDespesas().setVisible(true);
+       //new TelaEditarDespesas().
     }//GEN-LAST:event_jMenuEditarDespesasActionPerformed
 
     private void jMenuEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCategoriaActionPerformed

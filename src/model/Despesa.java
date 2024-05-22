@@ -53,6 +53,11 @@ public class Despesa {
     public void setValor(float valor) {
         this.valor = valor;
     }
+
+    @Override
+    public String toString() {
+        return "Despesa{" + nome + " - " + tipo + " - " +  Data + " - " +  valor + " - " + '}';
+    }
     
     
     

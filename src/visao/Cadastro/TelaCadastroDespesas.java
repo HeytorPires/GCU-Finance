@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Cadastro;
+import repository.repositorioCategoria;
+import javax.swing.JOptionPane;
+import model.Despesa;
 
 /**
  *
@@ -14,8 +17,21 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
      * Creates new form TelaCadastroDespesas
      */
     public TelaCadastroDespesas() {
+        repositorioCategoria.init();
         initComponents();
     }
+    private void ListarCategorias(){
+       DefaultListModel model = new DefaultListModel();
+       model.clear();
+       model.addAll(repository.repositorioDespesas.despesas);
+       this.jListDespesas.setModel(model);
+    }
+    private void Limpar(){
+        this.nameInputDespesas.setText("");
+        this.dataInputDespesas.setText("");
+        this.valorInputDespesas.setText(""); 
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,13 +165,37 @@ public class TelaCadastroDespesas extends javax.swing.JFrame {
     private void sairDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairDespesasButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_sairDespesasButtonActionPerformed
-
+            
     private void cadastroDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroDespesasButtonActionPerformed
-        // TODO add your handling code here:
+         String Nome = this.nameInputDespesas.getText();
+        String Data = this.dataInputDespesas.getText();
+        float Valor = 0.0f;
+
+    try {
+        Valor = Float.parseFloat(this.valorInputDespesas.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Valor digitado não é um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return; // Interrompe o processamento se o valor não for válido
+    }
+    
+    // Verifica se os campos obrigatórios estão preenchidos
+    if (Nome.equals("") || Data.equals("")) {
+        JOptionPane.showMessageDialog(this, "Requisitos de Cadastro inválidos!");
+    } else { 
+        // Cria um novo objeto Receita
+        Despesa novadespesa = new Despesa(Nome, "teste", Data, Valor);
+        JOptionPane.showMessageDialog(this, "Despesa Cadastrada com sucesso");
+        
+      
+        
+        System.out.println(novadespesa.toString());
+        
+        this.Limpar();
+    }
     }//GEN-LAST:event_cadastroDespesasButtonActionPerformed
 
     private void limparDespesasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparDespesasButtonActionPerformed
-        //this.
+        Limpar();
     }//GEN-LAST:event_limparDespesasButtonActionPerformed
 
     private void valorInputDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorInputDespesasActionPerformed

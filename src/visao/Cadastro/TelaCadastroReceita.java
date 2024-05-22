@@ -159,9 +159,9 @@ public class TelaCadastroReceita extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
-         String Nome = this.nameInputReceita.getText();
-    String Data = this.dataInputReceita.getText();
-    float Valor = 0.0f;
+        String Nome = this.nameInputReceita.getText();
+        String Data = this.dataInputReceita.getText();
+        float Valor = 0.0f;
 
     // Tentar converter o valor para float e capturar exceções
     try {

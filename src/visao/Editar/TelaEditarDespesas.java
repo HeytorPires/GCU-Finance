@@ -12,11 +12,9 @@ import model.Despesa;
  * @author Laboratorio
  */
 public class TelaEditarDespesas extends javax.swing.JFrame {
-private TelaEditarDespesas tela;
-  private Despesa despesa;
-    /**
-     * Creates new form TelaEditarDespesas
-     */
+    private TelaEditarDespesas tela;
+    private Despesa despesa;
+   
     public TelaEditarDespesas(TelaEditarDespesas tela, Despesa despesa) {
         this.tela = tela;
         this.despesa = despesa;
@@ -27,7 +25,7 @@ private TelaEditarDespesas tela;
     }
     private void mostrarDadosProduto() {
         this.nameInputDespesas.setText(despesa.getNome());
-        //this.jComboBoxTipo.setText(despesa.getTipo());
+        this.jComboBoxTipo.addItem(despesa.getTipo());
         this.dataInputDespesas.setText((despesa.getData()));
         this.valorInputDespesas.setText(Float.toString(despesa.getValor()));
     }
@@ -87,7 +85,6 @@ private TelaEditarDespesas tela;
 
         jLabel4.setText("Valor:");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -214,7 +211,6 @@ private TelaEditarDespesas tela;
     }//GEN-LAST:event_jButtonCadastroActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
         this.Limpar();
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
@@ -247,6 +243,7 @@ private TelaEditarDespesas tela;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 // TelaEditarDespesas().setVisible(true);
             }

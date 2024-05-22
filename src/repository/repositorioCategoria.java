@@ -3,20 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repository;
-import model.Despesa;
 import java.util.ArrayList;
+import model.Categoria;
 import java.util.List;
+
 /**
  *
  * @author Laboratorio
  */
-public class repositorioDespesas {
-    public static List<Despesa> despesas = new ArrayList<>();
+public class repositorioCategoria {
+    public static List<Categoria> categorias = new ArrayList<>();
     
     public static void init() {
-        despesas.add( new Despesa("Mensalidade", "Estudos","07-06-2024",659));
+        categorias.add( new Categoria(03,"Mercado", "Compras de Mercado"));
       
     }
+    
 }
-
- 

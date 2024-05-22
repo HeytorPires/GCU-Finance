@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Acesso;
-//import repository.repositorio;
+import repository.repositorioUsuarios;
 
 import visao.Cadastro.TelaCadastroUser;
 
@@ -18,6 +18,7 @@ public class TelaLoginUser extends javax.swing.JFrame {
      * Creates new form Login
      */
     public TelaLoginUser() {
+        repository.repositorioUsuarios.init();
         initComponents();
     }
 
@@ -134,8 +135,10 @@ public class TelaLoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonCadastroActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-       //String login = this.loginInputUsuario.getText();
-       //String password = this.loginInputUsuario.getText();
+       String login = this.loginInputLogin.getText();
+       String password = this.loginInputSenha.getText();
+       
+       
        
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
