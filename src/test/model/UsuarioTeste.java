@@ -1,5 +1,4 @@
 package test.model;
-
 import model.Usuario;
 
 public class UsuarioTeste {

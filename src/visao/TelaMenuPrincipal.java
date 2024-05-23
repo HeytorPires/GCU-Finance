@@ -56,6 +56,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         PerfilMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuEditarUsuario = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -70,6 +71,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListDespesas);
 
+        jButtonEditarDespesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
         jButtonEditarDespesa.setText("Editar");
         jButtonEditarDespesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +79,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonExcluirDespesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/delete.png"))); // NOI18N
         jButtonExcluirDespesas.setText("Excluir");
         jButtonExcluirDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,8 +87,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/cancel.png"))); // NOI18N
         jButton3.setText("Cancelar");
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page.png"))); // NOI18N
         jMenu1.setText("Cadastro");
 
         jMenuCadastroDespesas.setText("Despesa");
@@ -114,6 +119,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page_edit.png"))); // NOI18N
         jMenu3.setText("Editar");
 
         jMenuEditarDespesas.setText("Despesas");
@@ -142,6 +148,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        PerfilMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user.png"))); // NOI18N
         PerfilMenu.setText("Perfil");
 
         jMenuItem6.setText("Visualizar");
@@ -157,7 +164,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(PerfilMenu);
 
-        jMenu2.setText("Sistema");
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/information.png"))); // NOI18N
+        jMenu5.setText("Sobre");
+        jMenuBar1.add(jMenu5);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
+        jMenu2.setText("Sair");
 
         jMenuItem1.setText("Sair");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +197,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jButtonExcluirDespesas)
                         .addGap(69, 69, 69)
                         .addComponent(jButton3)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,10 +214,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuCadastroDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroDespesasActionPerformed
         new TelaCadastroDespesas().setVisible(true);
@@ -252,6 +260,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButtonEditarDespesaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -294,6 +306,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenuItem jMenuCadastroDespesas;
