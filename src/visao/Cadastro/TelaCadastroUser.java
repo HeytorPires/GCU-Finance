@@ -75,6 +75,7 @@ public class TelaCadastroUser extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Logotipo sem fundo.png"))); // NOI18N
 
+        jButtonCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/accept.png"))); // NOI18N
         jButtonCadastro.setText("Cadastrar");
         jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +83,7 @@ public class TelaCadastroUser extends javax.swing.JFrame {
             }
         });
 
+        cadastroButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         cadastroButtonVoltar.setText("Voltar");
         cadastroButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
