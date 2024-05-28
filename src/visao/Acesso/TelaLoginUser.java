@@ -3,23 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Acesso;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import model.Usuario;
-import repository.repositorioUsuarios;
 import visao.TelaMenuPrincipal;
-import visao.Cadastro.TelaCadastroUser;
 
+import java.sql.PreparedStatement; 
+import java.sql.ResultSet; 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.dao.UsuarioDAO;
 
 /**
  *
  * @author Fabiano
  */
+@SuppressWarnings("static-access")
 public class TelaLoginUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+  
     public TelaLoginUser() {
-        repository.repositorioUsuarios.init();
         initComponents();
     }
     
@@ -133,33 +136,33 @@ public class TelaLoginUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonCadastroActionPerformed
-        new TelaCadastroUser().setVisible(true);
+      //  new TelaCadastroUser().setVisible(true);
     }//GEN-LAST:event_loginButtonCadastroActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-         String login = this.loginInputLogin.getText();
-        String senha = new String(this.loginInputSenha.getPassword());
-        
-        Usuario usuario = repositorioUsuarios.validarUsuario(login, senha);
-        
-        if (usuario != null) {
-            // Login bem-sucedido
-            javax.swing.JOptionPane.showMessageDialog(this, "Login bem-sucedido! Bem-vindo, " + usuario.getLogin());
-            new TelaMenuPrincipal().setVisible(true);
-            this.dispose();
-        } else {
-            // Login falhou
-            javax.swing.JOptionPane.showMessageDialog(this, "Credenciais inválidas. Por favor, tente novamente.");
+         
+       UsuarioDAO dao = new UsuarioDAO();
+         String email = this.loginInputLogin.getText();
+         String senha = new String(loginInputSenha.getPassword());
+         
+        try {
+            if(dao.checklogin(email, senha)){
+                JOptionPane.showMessageDialog(null, "Seja bem Vindo");
+              //  new TelaHome().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Dados Invalidos");
+                loginInputLogin.setText("");
+                loginInputSenha.setText("");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            
         }
-       
-       
-       
-       
-       
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
+    
     private void loginInputLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputLoginActionPerformed
-        // TODO add your handling code here:
+        // TODO add you handling code here:
     }//GEN-LAST:event_loginInputLoginActionPerformed
 
     private void loginInputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputSenhaActionPerformed

@@ -1,14 +1,8 @@
 package visao;
-import model.Despesa;
-import repository.repositorioDespesas;
+
 import javax.swing.DefaultListModel;
-import visao.Cadastro.TelaCadastroDespesas;
-import visao.Cadastro.TelaCadastroReceita;
-import visao.Cadastro.TelaCadastroCategoria;
-import visao.Editar.TelaEditarDespesas;
-import visao.Editar.TelaEditarReceita;
-import visao.Editar.TelaEditarUsuario;
-import visao.Editar.TelaEditarCategoria;
+
+
 
 
 public class TelaMenuPrincipal extends javax.swing.JFrame {
@@ -18,16 +12,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
      */
     public TelaMenuPrincipal() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        repositorioDespesas.init();
         initComponents();
-        ListarDespesas();
     }
-    private void ListarDespesas(){
-       DefaultListModel model = new DefaultListModel();
-       model.clear();
-       model.addAll(repository.repositorioDespesas.despesas);
-       this.jListDespesas.setModel(model);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,20 +26,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu4 = new javax.swing.JMenu();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListDespesas = new javax.swing.JList<>();
-        jButtonEditarDespesa = new javax.swing.JButton();
-        jButtonExcluirDespesas = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
         jMenuCadastroReceita = new javax.swing.JMenuItem();
         jMenuCadastroCategoria = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuEditarDespesas = new javax.swing.JMenuItem();
-        jMenuEditarReceita = new javax.swing.JMenuItem();
-        jMenuEditarCategoria = new javax.swing.JMenuItem();
         PerfilMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuEditarUsuario = new javax.swing.JMenuItem();
@@ -64,34 +42,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jListDespesas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jListDespesas);
-
-        jButtonEditarDespesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
-        jButtonEditarDespesa.setText("Editar");
-        jButtonEditarDespesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarDespesaActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluirDespesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/delete.png"))); // NOI18N
-        jButtonExcluirDespesas.setText("Excluir");
-        jButtonExcluirDespesas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirDespesasActionPerformed(evt);
-            }
-        });
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/cancel.png"))); // NOI18N
-        jButton3.setText("Cancelar");
-
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page.png"))); // NOI18N
-        jMenu1.setText("Cadastro");
+        jMenu1.setText("Gerenciar");
 
         jMenuCadastroDespesas.setText("Despesa");
         jMenuCadastroDespesas.addActionListener(new java.awt.event.ActionListener() {
@@ -118,35 +70,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuCadastroCategoria);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page_edit.png"))); // NOI18N
-        jMenu3.setText("Editar");
-
-        jMenuEditarDespesas.setText("Despesas");
-        jMenuEditarDespesas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEditarDespesasActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuEditarDespesas);
-
-        jMenuEditarReceita.setText("Receita");
-        jMenuEditarReceita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEditarReceitaActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuEditarReceita);
-
-        jMenuEditarCategoria.setText("Categoria");
-        jMenuEditarCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuEditarCategoriaActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuEditarCategoria);
-
-        jMenuBar1.add(jMenu3);
 
         PerfilMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user.png"))); // NOI18N
         PerfilMenu.setText("Perfil");
@@ -187,78 +110,31 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonEditarDespesa)
-                        .addGap(64, 64, 64)
-                        .addComponent(jButtonExcluirDespesas)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton3)))
-                .addContainerGap(23, Short.MAX_VALUE))
+            .addGap(0, 484, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEditarDespesa)
-                    .addComponent(jButtonExcluirDespesas)
-                    .addComponent(jButton3))
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addGap(0, 306, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuCadastroDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroDespesasActionPerformed
-        new TelaCadastroDespesas().setVisible(true);
+        //new TelaCadastroDespesas().setVisible(true);
     }//GEN-LAST:event_jMenuCadastroDespesasActionPerformed
 
     private void jMenuCadastroReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroReceitaActionPerformed
-        new TelaCadastroReceita().setVisible(true);
+       // new TelaCadastroReceita().setVisible(true);
     }//GEN-LAST:event_jMenuCadastroReceitaActionPerformed
 
-    private void jMenuEditarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarReceitaActionPerformed
-       new TelaEditarReceita().setVisible(true);
-    }//GEN-LAST:event_jMenuEditarReceitaActionPerformed
-
-    private void jMenuEditarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarDespesasActionPerformed
-       
-    }//GEN-LAST:event_jMenuEditarDespesasActionPerformed
-
-    private void jMenuEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCategoriaActionPerformed
-        new TelaEditarCategoria().setVisible(true);
-    }//GEN-LAST:event_jMenuEditarCategoriaActionPerformed
-
     private void jMenuEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarUsuarioActionPerformed
-        new TelaEditarUsuario().setVisible(true);
+       
     }//GEN-LAST:event_jMenuEditarUsuarioActionPerformed
 
     private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
-        new TelaCadastroCategoria().setVisible(true);
+        //new TelaCadastroCategoria().setVisible(true);
     }//GEN-LAST:event_jMenuCadastroCategoriaActionPerformed
-
-    private void jButtonExcluirDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirDespesasActionPerformed
-        int indice = this.jListDespesas.getSelectedIndex();
-        if(indice >= 0){
-        Despesa despesa = (Despesa) this.jListDespesas.getSelectedValuesList();
-        repositorioDespesas.despesas.remove(despesa);
-        ListarDespesas();        
-        }
-    }//GEN-LAST:event_jButtonExcluirDespesasActionPerformed
-
-    private void jButtonEditarDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarDespesaActionPerformed
-       int indice = this.jListDespesas.getSelectedIndex();
-    if (indice >= 0) {
-        Despesa despesa = (Despesa) this.jListDespesas.getSelectedValuesList();
-        new TelaEditarDespesas(this, despesa).setVisible(true);
-    }
-    }//GEN-LAST:event_jButtonEditarDespesaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.dispose();
@@ -298,25 +174,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu PerfilMenu;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButtonEditarDespesa;
-    private javax.swing.JButton jButtonExcluirDespesas;
-    private javax.swing.JList<String> jListDespesas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenuItem jMenuCadastroDespesas;
     private javax.swing.JMenuItem jMenuCadastroReceita;
-    private javax.swing.JMenuItem jMenuEditarCategoria;
-    private javax.swing.JMenuItem jMenuEditarDespesas;
-    private javax.swing.JMenuItem jMenuEditarReceita;
     private javax.swing.JMenuItem jMenuEditarUsuario;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

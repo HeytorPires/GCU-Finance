@@ -2,19 +2,19 @@ package model;
 
 public class Usuario {
     private int id;
-    private String nome;
+    private String username;
     private String email;
     private String senha;
 
-    public Usuario(int id, String nome, String email, String senha) {
+    public Usuario(int id, String username, String email, String senha) {
         this.id = id;
-        this.nome = nome;
+        this.username = username;
         this.email = email;
         this.senha = senha;
     }
 
-     public Usuario(String login, String senha) {
-        this.nome = login;
+     public Usuario(String username, String senha) {
+        this.username = username;
         this.senha = senha;
     }
 
@@ -27,11 +27,11 @@ public class Usuario {
     }
 
     public String getLogin() {
-        return nome;
+        return username;
     }
 
     public void setLogin(String login) {
-        this.nome = login;
+        this.username = login;
     }
 
     public String getSenha() {
@@ -52,7 +52,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", login=" + nome + ", email=" + email + ", senha=" + senha + '}';
+        return "Usuario{" + "id=" + id + ", login=" + username + ", email=" + email + ", senha=" + senha + '}';
     }
 
     
