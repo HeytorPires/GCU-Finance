@@ -10,7 +10,7 @@ public class UsuarioTeste {
         int id = 01;
         String email = "heytor@gmail.com";
         Usuario usuario = new Usuario(id, nome, email, senha);
-        System.out.println(usuario.getLogin().equals(nome));
+        System.out.println(usuario.getUsername().equals(nome));
         System.out.println(usuario.getSenha().equals(senha));
         System.out.println(usuario);
         

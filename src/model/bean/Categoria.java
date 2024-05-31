@@ -2,29 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.bean;
 
 /**
  *
  * @author Fabiano
  */
 public class Categoria {
-    private long id;
+    private int id_categoria;
     private String nome;
-    private String descricao;
+    private String descricao; 
+    private int code;
+    private int id_usuario;
 
-    public Categoria(long id, String nome, String descricao) {
-        this.id = id;
+    public Categoria(int id_categoria, String nome, String descricao, int code, int id_usuario) {
+        this.id_categoria = id_categoria;
         this.nome = nome;
         this.descricao = descricao;
+        this.code = code;
+        this.id_usuario = id_usuario;
     }
 
-    public long getId() {
-        return id;
+    
+
+    public Categoria() {
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public int getId_categoria() {
+        return id_categoria;
+    }
+
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
     }
 
     public String getNome() {
@@ -43,10 +52,32 @@ public class Categoria {
         this.descricao = descricao;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
     @Override
     public String toString() {
-        return "Categoria{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + '}';
+        return  nome + "-" + code ;
     }
+
+    
+
     
     
+    
+    
+
 }

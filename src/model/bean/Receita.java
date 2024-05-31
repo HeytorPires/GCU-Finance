@@ -2,60 +2,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.bean;
 
 /**
  *
- * @author Usuario
+ * @author heyto
  */
 public class Receita {
-    private String nome;
-    private String tipo;
-    private String data;
-    private float valor;
+    private int id_receita;
+    private String titulo;
+    private double valor;
+    private int id_usuario;
 
-    public Receita(String nome, String tipo, String data, float valor) {
-        this.nome = nome;
-        this.tipo = tipo;
-        this.data = data;
+    public Receita(int id_receita, String titulo, double valor, int id_usuario) {
+        this.id_receita = id_receita;
+        this.titulo = titulo;
         this.valor = valor;
+        this.id_usuario = id_usuario;
     }
 
-    public String getNome() {
-        return nome;
+    public Receita() {
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getId_receita() {
+        return id_receita;
     }
 
-    public String getTipo() {
-        return tipo;
+    public void setId_receita(int id_receita) {
+        this.id_receita = id_receita;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public String getData() {
-        return data;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     @Override
     public String toString() {
-        return "Receita{" + "nome=" + nome + ", tipo=" + tipo + ", data=" + data + ", valor=" + valor + '}';
+        return "Receita{" + "id_despesa=" + id_receita + ", titulo=" + titulo + ", valor=" + valor + ", id_usuario=" + id_usuario + '}';
     }
     
     

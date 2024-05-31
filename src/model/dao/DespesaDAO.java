@@ -58,7 +58,6 @@ public class DespesaDAO {
                 System.out.println(rs);
                 
                 while(rs.next()){
-                    System.out.println(rs.getMetaData());
                   Despesa despesa = new Despesa();
                     
                     despesa.setId(rs.getInt("id_despesa"));

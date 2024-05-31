@@ -19,10 +19,10 @@ import model.dao.UsuarioDAO;
  * @author Fabiano
  */
 @SuppressWarnings("static-access")
-public class TelaLoginUser extends javax.swing.JFrame {
+public class TelaLoginUsuario extends javax.swing.JFrame {
 
   
-    public TelaLoginUser() {
+    public TelaLoginUsuario() {
         initComponents();
     }
     
@@ -141,14 +141,15 @@ public class TelaLoginUser extends javax.swing.JFrame {
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
          
-       UsuarioDAO dao = new UsuarioDAO();
-         String email = this.loginInputLogin.getText();
-         String senha = new String(loginInputSenha.getPassword());
-         
+        UsuarioDAO dao = new UsuarioDAO();
+        String email = this.loginInputLogin.getText();
+        String senha = new String(loginInputSenha.getPassword());
+
         try {
-            if(dao.checklogin(email, senha)){
-                JOptionPane.showMessageDialog(null, "Seja bem Vindo");
-              //  new TelaHome().setVisible(true);
+            Usuario usuario = dao.checklogin(email, senha);
+            if (usuario != null) {
+                JOptionPane.showMessageDialog(null, "Seja bem Vindo, " + usuario.getUsername());
+                new TelaMenuPrincipal().setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Dados Invalidos");
@@ -156,7 +157,7 @@ public class TelaLoginUser extends javax.swing.JFrame {
                 loginInputSenha.setText("");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro ao tentar logar: " + ex.getMessage());
         }
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
@@ -187,14 +188,16 @@ public class TelaLoginUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -202,7 +205,7 @@ public class TelaLoginUser extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TelaLoginUser().setVisible(true);
+                new TelaLoginUsuario().setVisible(true);
             }
         });
     }
