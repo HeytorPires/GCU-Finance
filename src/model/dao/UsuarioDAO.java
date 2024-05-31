@@ -40,6 +40,36 @@ public class UsuarioDAO {
                 ConnectionFactory.CloseConnection(con, stmt);
             }
         }
+    
+    public Usuario readByID(int id_usuario) throws ClassNotFoundException, SQLException {
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    Usuario usuario = null; // Inicialize a variável que irá armazenar o usuário
+    
+    try {
+        con = ConnectionFactory.getConnection();
+        stmt = con.prepareStatement("SELECT * FROM usuario WHERE id_usuario = ?");
+        stmt.setInt(1, id_usuario);
+        rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            usuario = new Usuario();
+            usuario.setId_usuario(rs.getInt("id_usuario"));
+            usuario.setUsername(rs.getString("username"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setSenha(rs.getString("senha"));
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
+    } finally {
+        ConnectionFactory.CloseConnection(con, stmt, rs);
+    }
+    
+    return usuario;
+}
+    
 
     public Usuario checklogin(String email, String senha) throws ClassNotFoundException, SQLException {
         Connection con = (Connection) ConnectionFactory.getConnection();

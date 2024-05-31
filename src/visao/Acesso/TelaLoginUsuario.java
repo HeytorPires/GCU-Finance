@@ -47,8 +47,11 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setResizable(false);
 
         loginButtonCadastro.setText("Cadastro");
+        loginButtonCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonCadastroActionPerformed(evt);
@@ -66,9 +69,15 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         });
 
         loginButtonLogin.setText("Entrar");
+        loginButtonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonLoginActionPerformed(evt);
+            }
+        });
+        loginButtonLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loginButtonLoginKeyPressed(evt);
             }
         });
 
@@ -85,7 +94,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(104, 104, 104)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loginInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -100,11 +109,11 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
                                         .addComponent(loginButtonLogin)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(loginButtonCadastro))
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel1)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addComponent(loginInputSenha)))))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginInputLogin, loginInputSenha});
@@ -169,6 +178,10 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
     private void loginInputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInputSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_loginInputSenhaActionPerformed
+
+    private void loginButtonLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonLoginKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButtonLoginKeyPressed
     
     
     /**
