@@ -5,7 +5,7 @@
 package visao.Acesso;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import model.Usuario;
+import model.bean.Usuario;
 import visao.TelaMenuPrincipal;
 
 import java.sql.PreparedStatement; 
@@ -21,7 +21,6 @@ import model.dao.UsuarioDAO;
 @SuppressWarnings("static-access")
 public class TelaLoginUsuario extends javax.swing.JFrame {
 
-  
     public TelaLoginUsuario() {
         initComponents();
     }
@@ -66,7 +65,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
             }
         });
 
-        loginButtonLogin.setText("Login");
+        loginButtonLogin.setText("Entrar");
         loginButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonLoginActionPerformed(evt);
@@ -136,7 +135,8 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonCadastroActionPerformed
-      //  new TelaCadastroUser().setVisible(true);
+      new TelaCadastroUsuario().setVisible(true);
+      this.dispose();
     }//GEN-LAST:event_loginButtonCadastroActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
@@ -149,7 +149,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
             Usuario usuario = dao.checklogin(email, senha);
             if (usuario != null) {
                 JOptionPane.showMessageDialog(null, "Seja bem Vindo, " + usuario.getUsername());
-                new TelaMenuPrincipal().setVisible(true);
+                new TelaMenuPrincipal(usuario.getId_usuario()).setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Dados Invalidos");

@@ -1,5 +1,5 @@
 package test.model;
-import model.Usuario;
+import model.bean.Usuario;
 
 public class UsuarioTeste {
     

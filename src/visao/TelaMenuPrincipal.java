@@ -1,6 +1,14 @@
 package visao;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.bean.Usuario;
+import visao.Acesso.TelaCadastroUsuario;
+import visao.CRUD.TelaCategoriaCRUD;
+import visao.CRUD.TelaReceitaCRUD;
 
 
 
@@ -10,9 +18,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaMenuPrincipal
      */
-    public TelaMenuPrincipal() {
+      private int id_usuario;
+
+    public TelaMenuPrincipal(int id_usuario) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        this.id_usuario = id_usuario;
+
+    }
+
+    private TelaMenuPrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
@@ -26,6 +42,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu4 = new javax.swing.JMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
@@ -34,17 +52,32 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         PerfilMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuEditarUsuario = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu4.setText("jMenu4");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page.png"))); // NOI18N
         jMenu1.setText("Gerenciar");
 
+        jMenuCadastroDespesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page_add.png"))); // NOI18N
         jMenuCadastroDespesas.setText("Despesa");
         jMenuCadastroDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +86,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuCadastroDespesas);
 
+        jMenuCadastroReceita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/money_add.png"))); // NOI18N
         jMenuCadastroReceita.setText("Receita");
         jMenuCadastroReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +95,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuCadastroReceita);
 
+        jMenuCadastroCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
         jMenuCadastroCategoria.setText("Categoria");
         jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,9 +109,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         PerfilMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user.png"))); // NOI18N
         PerfilMenu.setText("Perfil");
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/eye.png"))); // NOI18N
         jMenuItem6.setText("Visualizar");
         PerfilMenu.add(jMenuItem6);
 
+        jMenuEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_edit.png"))); // NOI18N
         jMenuEditarUsuario.setText("Editar");
         jMenuEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,15 +122,20 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         PerfilMenu.add(jMenuEditarUsuario);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_delete.png"))); // NOI18N
+        jMenu3.setText("jMenu3");
+        PerfilMenu.add(jMenu3);
+
         jMenuBar1.add(PerfilMenu);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/information.png"))); // NOI18N
-        jMenu5.setText("Sobre");
-        jMenuBar1.add(jMenu5);
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/computer.png"))); // NOI18N
+        jMenu2.setText("Sistema");
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
-        jMenu2.setText("Sair");
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/information.png"))); // NOI18N
+        jMenuItem2.setText("Sobre");
+        jMenu2.add(jMenuItem2);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         jMenuItem1.setText("Sair");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,22 +152,28 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
+            .addGap(0, 613, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 306, Short.MAX_VALUE)
+            .addGap(0, 937, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuCadastroDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroDespesasActionPerformed
-        //new TelaCadastroDespesas().setVisible(true);
+        //new Tela().setVisible(true);
     }//GEN-LAST:event_jMenuCadastroDespesasActionPerformed
 
     private void jMenuCadastroReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroReceitaActionPerformed
-       // new TelaCadastroReceita().setVisible(true);
+          try {
+              new TelaReceitaCRUD(id_usuario).setVisible(true);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_jMenuCadastroReceitaActionPerformed
 
     private void jMenuEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarUsuarioActionPerformed
@@ -133,11 +181,21 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuEditarUsuarioActionPerformed
 
     private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
-        //new TelaCadastroCategoria().setVisible(true);
+          try {
+              new TelaCategoriaCRUD(id_usuario).setVisible(true);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_jMenuCadastroCategoriaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        this.dispose();
+            int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                this.dispose(); 
+                }
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
@@ -161,14 +219,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu PerfilMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenuItem jMenuCadastroDespesas;
     private javax.swing.JMenuItem jMenuCadastroReceita;
     private javax.swing.JMenuItem jMenuEditarUsuario;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

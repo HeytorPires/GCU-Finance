@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.Cadastro;
+package visao.Acesso;
 
 import java.lang.System.Logger.Level;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Usuario;
+import model.bean.Usuario;
 import model.dao.UsuarioDAO;
 import visao.Acesso.TelaLoginUsuario;
 

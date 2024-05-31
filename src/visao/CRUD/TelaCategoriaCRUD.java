@@ -19,7 +19,8 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     /**
      * Creates new form TelaCategoriaCRUD
      */
-     public TelaCategoriaCRUD() throws ClassNotFoundException, SQLException {
+    private int id_usuario;
+     public TelaCategoriaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
          try {
             readJtable();
@@ -27,12 +28,16 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private TelaCategoriaCRUD() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
         CategoriaDAO pdao = new CategoriaDAO();
 
-        pdao.readById(1).stream().forEach((c) -> {
+        pdao.readById(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
                 c.getId_categoria(),
                 c.getNome(),
@@ -115,6 +120,11 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         jLabel3.setText("Descricao");
 
         BotaoExcluir.setText("Excluir");
+        BotaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BotaoExcluirMouseReleased(evt);
+            }
+        });
         BotaoExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoExcluirActionPerformed(evt);
@@ -273,7 +283,7 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         c.setNome(InputTitulo.getText());
         c.setDescricao(InputDescricao.getText());
         c.setCode(Integer.parseInt(InputCode.getText()));
-
+        c.setId_usuario(id_usuario);
         InputTitulo.setText("");
         InputTitulo.setText("");
         InputDescricao.setText("");
@@ -325,6 +335,10 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotaoAtualizarActionPerformed
 
+    private void BotaoExcluirMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoExcluirMouseReleased
+        
+    }//GEN-LAST:event_BotaoExcluirMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -355,13 +369,7 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new TelaCategoriaCRUD().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new TelaCategoriaCRUD().setVisible(true);
             }
         });
     }

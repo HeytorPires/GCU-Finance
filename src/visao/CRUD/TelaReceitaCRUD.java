@@ -20,20 +20,27 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
      */
-    public TelaReceitaCRUD() throws ClassNotFoundException, SQLException {
+    private int id_usuario;
+
+    public TelaReceitaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        this.id_usuario = id_usuario;
          try {
             readJtable();
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private TelaReceitaCRUD() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
         ReceitaDAO pdao = new ReceitaDAO();
 
-        pdao.readById(1).stream().forEach((d) -> {
+        pdao.readById(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_receita(),
                 d.getTitulo(),
@@ -251,7 +258,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
-
+        r.setId_usuario(id_usuario);
         InputTitulo.setText("");
         InputValor.setText("");
        
@@ -267,7 +274,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-        
+        System.out.println(id_usuario);
         try {
             readJtableForDesc(InputPesquisa.getText());
         } catch (SQLException | ClassNotFoundException ex) {
@@ -328,11 +335,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new TelaReceitaCRUD().setVisible(true);
-                } catch (ClassNotFoundException | SQLException ex) {
-                    java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new TelaReceitaCRUD().setVisible(true);
             }
         });
     }

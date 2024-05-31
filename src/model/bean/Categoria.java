@@ -22,9 +22,7 @@ public class Categoria {
         this.code = code;
         this.id_usuario = id_usuario;
     }
-
     
-
     public Categoria() {
     }
 
