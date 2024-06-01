@@ -60,7 +60,7 @@ public class DespesaDAO {
                 while(rs.next()){
                   Despesa despesa = new Despesa();
                     
-                    despesa.setId(rs.getInt("id_despesa"));
+                    despesa.setId_despesa(rs.getInt("id_despesa"));
                     despesa.setTitulo(rs.getString("titulo"));
                     despesa.setValor(rs.getDouble("valor"));
                     despesa.setData(rs.getDate("data"));
@@ -88,7 +88,7 @@ public class DespesaDAO {
                 stmt.setDouble(2, d.getValor());
                 stmt.setDate(3, d.getData()); 
                 stmt.setInt(4, d.getId_categoria()); 
-                stmt.setInt(5, d.getId()); 
+                stmt.setInt(5, d.getId_despesa()); 
                 
                 stmt.executeUpdate();
                 
@@ -108,7 +108,7 @@ public class DespesaDAO {
             try {
                 stmt = con.prepareStatement("DELETE FROM despesa WHERE id_despesa = ?");
                 
-                stmt.setInt(1, d.getId());
+                stmt.setInt(1, d.getId_despesa());
                 
                 stmt.executeUpdate();
                 
@@ -136,7 +136,7 @@ public class DespesaDAO {
 
             while (rs.next()) {
                 Despesa despesa = new Despesa();
-                despesa.setId(rs.getInt("id_despesa"));
+                despesa.setId_despesa(rs.getInt("id_despesa"));
                 despesa.setTitulo(rs.getString("titulo"));
                 despesa.setValor(rs.getDouble("valor"));
                 despesa.setData(rs.getDate("data")); 
@@ -151,5 +151,42 @@ public class DespesaDAO {
         }
         return despesas;
     }
+        public List<Despesa> readById(int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            
+            List<Despesa> despesas = new ArrayList<>();
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ?");
+                stmt.setInt(1, id_usuario);
+                rs = stmt.executeQuery();
+                System.out.println(rs);
+                
+                while(rs.next()){
+                    System.out.println(rs.getMetaData());
+                  Despesa despesa = new Despesa();
+                    
+                    despesa.setId_despesa(rs.getInt("id_despesa"));
+                    despesa.setTitulo(rs.getString("titulo"));
+                    despesa.setValor(rs.getDouble("valor"));
+                    despesa.setData(rs.getDate("data"));
+                    despesa.setId_categoria(rs.getInt("id_categoria"));
+                    despesa.setId_categoria(rs.getInt("id_usuario"));
+                    
+                    despesas.add(despesa);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.CloseConnection(con, stmt, rs);
+            }
+            return despesas;
+        }
         
 }

@@ -3,48 +3,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.CRUD;
-
+import java.lang.System.Logger;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Categoria;
-import model.dao.CategoriaDAO;
+import model.bean.Despesa;
+import model.dao.DespesaDAO;
 import visao.TelaMenuPrincipal;
 /**
  *
  * @author heyto
  */
-public class TelaCategoriaCRUD extends javax.swing.JFrame {
+public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaCategoriaCRUD
+     * Creates new form TelaReceitaCRUD
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     private int id_usuario;
-     public TelaCategoriaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
+
+    public TelaDespesaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        this.id_usuario = id_usuario;
          try {
             readJtable();
         } catch (SQLException | ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private TelaCategoriaCRUD() {
+    private TelaDespesaCRUD() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
-        CategoriaDAO pdao = new CategoriaDAO();
+        DespesaDAO pdao = new DespesaDAO();
 
-        pdao.readById(id_usuario).stream().forEach((c) -> {
+        pdao.readById(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
-                c.getId_categoria(),
-                c.getNome(),
-                c.getDescricao(),
-                c.getCode()
+                d.getId_despesa(),
+                d.getTitulo(),
+                d.getValor(),
+                d.getData(),
+                d.getId_categoria()
             });
         });
     }
@@ -52,19 +57,19 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     public void readJtableForDesc(String titulo) throws SQLException, ClassNotFoundException  {
     DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
     modelo.setNumRows(0);
-    CategoriaDAO pdao = new CategoriaDAO();
+    DespesaDAO pdao = new DespesaDAO();
 
 
-    pdao.readForDesc(titulo).stream().forEach((c) -> {
+    pdao.readForDesc(titulo).stream().forEach((d) -> {
         modelo.addRow(new Object[]{
-            c.getId_categoria(),
-                c.getNome(),
-                c.getDescricao(),
-                c.getCode()
+            d.getId_despesa(),
+                d.getTitulo(),
+                d.getValor(),
+                d.getData(),
+                d.getId_categoria()
         });
     });
 }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,39 +79,39 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        InputTitulo = new javax.swing.JTextField();
-        InputDescricao = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaExibir = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         BotaoExcluir = new javax.swing.JButton();
         InputPesquisa = new javax.swing.JTextField();
         BotaoCadastrar = new javax.swing.JButton();
         buttonPesquisa = new javax.swing.JButton();
         BotaoAtualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        InputCode = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        InputTitulo = new javax.swing.JTextField();
+        InputValor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         botaoSair = new javax.swing.JButton();
+        Inputdata = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("titulo");
-
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Código"
+                "ID", "Titulo", "Valor", "Data", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -120,14 +125,7 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaExibir);
 
-        jLabel3.setText("Descricao");
-
         BotaoExcluir.setText("Excluir");
-        BotaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BotaoExcluirMouseReleased(evt);
-            }
-        });
         BotaoExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoExcluirActionPerformed(evt);
@@ -163,7 +161,9 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
 
         jLabel4.setText("Pesquisa");
 
-        jLabel5.setText("Code");
+        jLabel1.setText("titulo");
+
+        jLabel3.setText("valor");
 
         botaoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         botaoSair.setText("Sair");
@@ -174,23 +174,25 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
             }
         });
 
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y/MM/dd"))));
+
+        jLabel5.setText("Categoria");
+
+        jLabel6.setText("Data");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotaoCadastrar)
-                                .addGap(18, 18, 18)
-                                .addComponent(BotaoExcluir)
-                                .addGap(30, 30, 30)
-                                .addComponent(BotaoAtualizar)
-                                .addGap(74, 74, 74))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,58 +201,72 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(147, 147, 147)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(InputDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
-                                .addGap(31, 31, 31)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(InputCode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(buttonPesquisa)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                                .addGap(13, 13, 13)
+                                .addComponent(BotaoCadastrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(BotaoExcluir)
+                                .addGap(30, 30, 30)
+                                .addComponent(BotaoAtualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonPesquisa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                        .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InputDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InputCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BotaoExcluir)
                         .addComponent(BotaoAtualizar)
                         .addComponent(BotaoCadastrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonPesquisa))))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonPesquisa)
+                        .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(356, 356, 356))
         );
-
-        BotaoExcluir.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,35 +275,30 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
 
         if (TabelaExibir.getSelectedRow() != -1) {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
-            InputDescricao.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
-            InputCode.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+            InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
         }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Categoria c = new Categoria();
-            CategoriaDAO dao = new CategoriaDAO();
+            Despesa r = new Despesa();
+            DespesaDAO dao = new DespesaDAO();
 
-            c.setId_categoria((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
 
             InputTitulo.setText("");
-            InputDescricao.setText("");
-            InputCode.setText("");
-            
+            InputValor.setText("");
+            Inputdata.setText("");
 
-          
+           
             try {
-                dao.delete(c);
+                dao.delete(r);
                 readJtable();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-            
+            } catch (ClassNotFoundException | SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }           
         }
     }//GEN-LAST:event_BotaoExcluirActionPerformed
 
@@ -297,56 +308,55 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        Categoria c = new Categoria();
-        CategoriaDAO dao = new CategoriaDAO();
+        Despesa r = new Despesa();
+        DespesaDAO dao = new DespesaDAO();
 
-        c.setNome(InputTitulo.getText());
-        c.setDescricao(InputDescricao.getText());
-        c.setCode(Integer.parseInt(InputCode.getText()));
-        c.setId_usuario(id_usuario);
+        r.setTitulo(InputTitulo.getText());
+        r.setValor(Double.parseDouble(InputValor.getText()));
+        r.setData(Date.valueOf(Inputdata.getText()));
+        //categoria
+        r.setId_usuario(id_usuario);
         InputTitulo.setText("");
-        InputTitulo.setText("");
-        InputDescricao.setText("");
-        InputCode.setText("");
-
+        InputValor.setText("");
+        Inputdata.setText("");
+       
         try {
-            dao.Create(c);
+            dao.Create(r);
             readJtable();
 
         } catch (ClassNotFoundException | SQLException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+       
+        
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-
+        System.out.println(id_usuario);
         try {
             readJtableForDesc(InputPesquisa.getText());
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Categoria c = new Categoria();
-            CategoriaDAO dao = new CategoriaDAO();
+            Despesa r = new Despesa();
+            DespesaDAO dao = new DespesaDAO();
 
-            c.setNome(InputTitulo.getText());
-            c.setDescricao(InputDescricao.getText());
-            c.setCode(Integer.parseInt(InputCode.getText()));
+            r.setTitulo(InputTitulo.getText());
+            r.setValor(Double.parseDouble(InputValor.getText()));
+            r.setData(Date.valueOf(Inputdata.getText()));
+            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
 
-            c.setId_categoria((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
-            
             InputTitulo.setText("");
-            InputDescricao.setText("");
-            InputCode.setText("");
+            InputValor.setText("");
+            Inputdata.setText("");
 
             try {
-                dao.update(c);
+                dao.update(r);
                 readJtable();
 
             } catch (ClassNotFoundException | SQLException ex) {
@@ -355,12 +365,8 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotaoAtualizarActionPerformed
 
-    private void BotaoExcluirMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoExcluirMouseReleased
-        
-    }//GEN-LAST:event_BotaoExcluirMouseReleased
-
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
-         int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 new TelaMenuPrincipal(id_usuario).setVisible(true);
                 this.dispose(); 
@@ -384,20 +390,20 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCategoriaCRUD().setVisible(true);
+                new TelaDespesaCRUD().setVisible(true);
             }
         });
     }
@@ -406,17 +412,19 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     private javax.swing.JButton BotaoAtualizar;
     private javax.swing.JButton BotaoCadastrar;
     private javax.swing.JButton BotaoExcluir;
-    private javax.swing.JTextField InputCode;
-    private javax.swing.JTextField InputDescricao;
     private javax.swing.JTextField InputPesquisa;
     private javax.swing.JTextField InputTitulo;
+    private javax.swing.JTextField InputValor;
+    private javax.swing.JFormattedTextField Inputdata;
     private javax.swing.JTable TabelaExibir;
     private javax.swing.JButton botaoSair;
     private javax.swing.JButton buttonPesquisa;
+    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,6 +40,9 @@
               <Image iconType="3" name="/assets/Icones/page.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuCadastroDespesas">
@@ -48,6 +51,9 @@
                   <Image iconType="3" name="/assets/Icones/page_add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Despesa"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastroDespesasActionPerformed"/>
@@ -59,6 +65,9 @@
                   <Image iconType="3" name="/assets/Icones/money_add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Receita"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastroReceitaActionPerformed"/>
@@ -70,6 +79,9 @@
                   <Image iconType="3" name="/assets/Icones/note_edit.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Categoria"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastroCategoriaActionPerformed"/>
@@ -83,6 +95,9 @@
               <Image iconType="3" name="/assets/Icones/user.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Perfil"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
@@ -91,6 +106,9 @@
                   <Image iconType="3" name="/assets/Icones/eye.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Visualizar"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
@@ -102,6 +120,9 @@
                   <Image iconType="3" name="/assets/Icones/user_edit.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar Dados"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuEditarUsuarioActionPerformed"/>
@@ -113,6 +134,9 @@
                   <Image iconType="3" name="/assets/Icones/user_delete.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir Dados"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -123,6 +147,9 @@
               <Image iconType="3" name="/assets/Icones/computer.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sistema"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -131,6 +158,9 @@
                   <Image iconType="3" name="/assets/Icones/information.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
@@ -139,6 +169,9 @@
                   <Image iconType="3" name="/assets/Icones/door_out.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -173,12 +206,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="613" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="500" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="937" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

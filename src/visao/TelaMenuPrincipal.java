@@ -77,9 +77,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page.png"))); // NOI18N
         jMenu1.setText("Gerenciar");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuCadastroDespesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page_add.png"))); // NOI18N
         jMenuCadastroDespesas.setText("Despesa");
+        jMenuCadastroDespesas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuCadastroDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuCadastroDespesasActionPerformed(evt);
@@ -89,6 +91,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuCadastroReceita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/money_add.png"))); // NOI18N
         jMenuCadastroReceita.setText("Receita");
+        jMenuCadastroReceita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuCadastroReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuCadastroReceitaActionPerformed(evt);
@@ -98,6 +101,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuCadastroCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
         jMenuCadastroCategoria.setText("Categoria");
+        jMenuCadastroCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuCadastroCategoriaActionPerformed(evt);
@@ -109,9 +113,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         PerfilMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user.png"))); // NOI18N
         PerfilMenu.setText("Perfil");
+        PerfilMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/eye.png"))); // NOI18N
         jMenuItem6.setText("Visualizar");
+        jMenuItem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -121,6 +127,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_edit.png"))); // NOI18N
         jMenuEditarUsuario.setText("Editar Dados");
+        jMenuEditarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuEditarUsuarioActionPerformed(evt);
@@ -130,19 +137,23 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_delete.png"))); // NOI18N
         jMenuItem3.setText("Excluir Dados");
+        jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PerfilMenu.add(jMenuItem3);
 
         jMenuBar1.add(PerfilMenu);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/computer.png"))); // NOI18N
         jMenu2.setText("Sistema");
+        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/information.png"))); // NOI18N
         jMenuItem2.setText("Sobre");
+        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu2.add(jMenuItem2);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         jMenuItem1.setText("Sair");
+        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -158,11 +169,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 937, Short.MAX_VALUE)
+            .addGap(0, 377, Short.MAX_VALUE)
         );
 
         pack();
