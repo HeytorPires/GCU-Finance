@@ -51,6 +51,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         });
     }
     
+    
     public void readJtableForDesc(String titulo) throws SQLException, ClassNotFoundException  {
     DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
     modelo.setNumRows(0);
@@ -228,7 +229,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addComponent(BotaoExcluir)
                         .addComponent(BotaoAtualizar)
                         .addComponent(BotaoCadastrar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buttonPesquisa)))
                 .addGap(18, 18, 18)
