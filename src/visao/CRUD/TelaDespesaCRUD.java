@@ -52,7 +52,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
-                d.getId_categoria()
+                d.getCode()
             });
         });
     }
@@ -69,7 +69,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
-                d.getId_categoria()
+                d.getCode()
         });
     });
 }
@@ -97,8 +97,8 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         botaoSair = new javax.swing.JButton();
         Inputdata = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        BoxCategoria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        inputCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(650, 500));
@@ -115,7 +115,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,9 +178,14 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         });
 
-        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y/MM/dd"))));
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y-MM-dd"))));
+        Inputdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InputdataActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setText("Categoria");
+        jLabel5.setText("Code");
 
         jLabel6.setText("Data");
 
@@ -195,7 +200,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                 .addComponent(BotaoExcluir)
                 .addGap(30, 30, 30)
                 .addComponent(BotaoAtualizar)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
@@ -225,11 +230,14 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(BoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(108, 108, 108))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(inputCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,21 +245,18 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
+                        .addGap(72, 100, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
@@ -277,6 +282,8 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         if (TabelaExibir.getSelectedRow() != -1) {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
             InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
+            Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+            inputCategoria.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4).toString());
         }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
@@ -315,12 +322,13 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
         r.setData(Date.valueOf(Inputdata.getText()));
-        //categoria
         r.setId_usuario(id_usuario);
+        r.setCode(Integer.parseInt(inputCategoria.getText()));
+        //categoria
         InputTitulo.setText("");
         InputValor.setText("");
         Inputdata.setText("");
-       
+        inputCategoria.setText("");
         try {
             dao.Create(r);
             readJtable();
@@ -339,6 +347,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }        
+        System.out.println("id usuario "+ id_usuario);;
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
@@ -351,11 +360,17 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             r.setValor(Double.parseDouble(InputValor.getText()));
             r.setData(Date.valueOf(Inputdata.getText()));
             r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
+            r.setCode(Integer.parseInt(inputCategoria.getText()));
+            
+//        r.setTitulo(InputTitulo.getText());
+//        r.setValor(Double.parseDouble(InputValor.getText()));
+//        r.setData(Date.valueOf(Inputdata.getText()));
+//        r.setId_usuario(id_usuario);
+//        r.setId_categoria(Integer.parseInt(inputCategoria.getText()));
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");
-
+            inputCategoria.setText("");
             try {
                 dao.update(r);
                 readJtable();
@@ -373,6 +388,10 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_botaoSairActionPerformed
+
+    private void InputdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputdataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InputdataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,7 +432,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private javax.swing.JButton BotaoAtualizar;
     private javax.swing.JButton BotaoCadastrar;
     private javax.swing.JButton BotaoExcluir;
-    private javax.swing.JComboBox<Object> BoxCategoria;
     private javax.swing.JTextField InputPesquisa;
     private javax.swing.JTextField InputTitulo;
     private javax.swing.JTextField InputValor;
@@ -421,6 +439,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private javax.swing.JTable TabelaExibir;
     private javax.swing.JButton botaoSair;
     private javax.swing.JButton buttonPesquisa;
+    private javax.swing.JTextField inputCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

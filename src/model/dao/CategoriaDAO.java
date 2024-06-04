@@ -23,7 +23,7 @@ public class CategoriaDAO {
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
-            
+             ResultSet rs = null;
             try {
                     stmt = con.prepareStatement("INSERT INTO categoria (nome, descricao, code, id_usuario) values  (?,?,?,?)");
                 
@@ -38,7 +38,7 @@ public class CategoriaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
         public List<Categoria> read() throws ClassNotFoundException, SQLException{
@@ -53,10 +53,8 @@ public class CategoriaDAO {
                 
                 stmt = con.prepareStatement("SELECT * FROM categoria");
                 rs = stmt.executeQuery();
-                System.out.println(rs);
                 
                 while(rs.next()){
-                    System.out.println(rs.getMetaData());
                   Categoria categoria = new Categoria();
                     
                     categoria.setId_categoria(rs.getInt("id_categoria"));
@@ -78,7 +76,7 @@ public class CategoriaDAO {
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
-            
+             ResultSet rs = null;
             try {
                 stmt = con.prepareStatement("UPDATE categoria SET nome = ?,descricao = ?, code = ? WHERE id_categoria = ?");
                 
@@ -94,14 +92,14 @@ public class CategoriaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
         public void delete(Categoria d) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
-            
+             ResultSet rs = null;
             try {
                 stmt = con.prepareStatement("DELETE FROM categoria WHERE id_categoria = ?");
                 
@@ -114,7 +112,7 @@ public class CategoriaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
         
@@ -162,10 +160,8 @@ public class CategoriaDAO {
                 stmt = con.prepareStatement("SELECT * FROM categoria WHERE id_usuario = ?");
                 stmt.setInt(1, id_usuario);
                 rs = stmt.executeQuery();
-                System.out.println(rs);
                 
                 while(rs.next()){
-                    System.out.println(rs.getMetaData());
                   Categoria categoria = new Categoria();
                     
                     categoria.setId_categoria(rs.getInt("id_categoria"));

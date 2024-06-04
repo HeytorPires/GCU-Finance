@@ -23,7 +23,7 @@ public class ReceitaDAO {
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
-            
+             ResultSet rs = null;
             try {
                     stmt = con.prepareStatement("INSERT INTO receita (titulo, valor, id_usuario) values  (?,?,?)");
                 
@@ -38,7 +38,7 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
         public List<Receita> read() throws ClassNotFoundException, SQLException{
@@ -54,10 +54,8 @@ public class ReceitaDAO {
                 
                 stmt = con.prepareStatement("SELECT * FROM receita");
                 rs = stmt.executeQuery();
-                System.out.println(rs);
                 
                 while(rs.next()){
-                    System.out.println(rs.getMetaData());
                   Receita receita = new Receita();
                     
                     receita.setId_receita(rs.getInt("id_receita"));
@@ -79,6 +77,7 @@ public class ReceitaDAO {
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
+            ResultSet rs = null;
             
             try {
                 stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?  WHERE id_receita = ?");
@@ -94,14 +93,15 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
+
             }
         }
         public void delete(Receita r) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
-            
+            ResultSet rs = null;
             try {
                 stmt = con.prepareStatement("DELETE FROM receita WHERE id_receita = ?");
                 
@@ -114,7 +114,7 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
         

@@ -62,6 +62,10 @@ public class Usuario {
         return "Usuario{" + "id=" + id_usuario + ", login=" + username + ", email=" + email + ", senha=" + senha + '}';
     }
 
+    public Object stream() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     
     
