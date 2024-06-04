@@ -181,4 +181,40 @@ public class CategoriaDAO {
             return categorias;
         }
         
+        public List<Categoria> readByIdAndCode(int id_usuario, int code) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            
+            List<Categoria> categorias = new ArrayList<>();
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM categoria WHERE id_usuario = ? and code = ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                  Categoria categoria = new Categoria();
+                    
+                    categoria.setId_categoria(rs.getInt("id_categoria"));
+                    categoria.setNome(rs.getString("nome"));
+                    categoria.setDescricao(rs.getString("descricao"));
+                    categoria.setCode(rs.getInt("code"));
+                    categoria.setId_usuario(rs.getInt("id_usuario"));
+                    
+                    categorias.add(categoria);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.CloseConnection(con, stmt, rs);
+            }
+            return categorias;
+        }
+        
 }

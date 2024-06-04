@@ -10,6 +10,7 @@ import model.bean.Categoria;
 import model.bean.Usuario;
 import model.dao.CategoriaDAO;
 import model.dao.DespesaDAO;
+import model.dao.MovimentacoesDAO;
 import model.dao.ReceitaDAO;
 import visao.Sobre.TelaSobre;
 import visao.CRUD.TelaCategoriaCRUD;
@@ -54,7 +55,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
           } catch (SQLException ex) {
               Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           }
-          
+          try {
+              readJtableMovimentacao();
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }
 
     private TelaMenuPrincipal() {
@@ -106,6 +113,20 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             });
         });
     }
+    public void readJtableMovimentacao() throws  ClassNotFoundException, SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaMovi.getModel();
+        modelo.setNumRows(0);
+        MovimentacoesDAO pdao = new MovimentacoesDAO();
+
+        pdao.readById(id_usuario).stream().forEach((m) -> {
+            modelo.addRow(new Object[]{
+                m.getTitulo(),
+                m.getValor(),
+                m.getData(),
+                m.getCode() 
+            });
+        });
+    }
     
 
     /**
@@ -135,7 +156,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         TabelaCategoria = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaMovi = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
@@ -249,7 +270,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TabelaReceitas);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -317,26 +338,26 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Categorias", jPanel4);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaMovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Valor", "Data", "Code"
+                "Titulo", "Valor", "Data", "Code", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable2);
+        jScrollPane4.setViewportView(tabelaMovi);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -589,6 +610,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabelaMovi;
     // End of variables declaration//GEN-END:variables
 }

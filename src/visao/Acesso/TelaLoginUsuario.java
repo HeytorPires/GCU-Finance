@@ -23,6 +23,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
 
     public TelaLoginUsuario() {
         initComponents();
+        this.setLocationRelativeTo( null );
     }
     
 
@@ -79,6 +80,9 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         loginButtonLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 loginButtonLoginKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                loginButtonLoginKeyTyped(evt);
             }
         });
 
@@ -195,6 +199,10 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
     private void loginButtonLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonLoginKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_loginButtonLoginKeyPressed
+
+    private void loginButtonLoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonLoginKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButtonLoginKeyTyped
     
     
     /**

@@ -82,15 +82,14 @@ public class ReceitaDAO {
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            
             try {
                 stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?, data = ?, code = ?   WHERE id_receita = ?");
                 
-               stmt.setString(1, r.getTitulo());
+                stmt.setString(1, r.getTitulo());
                 stmt.setDouble(2, r.getValor());
-                stmt.setInt(3, r.getId_receita());
-                stmt.setDate(4, (Date) r.getData());
-                stmt.setInt(5, r.getCode());
+                stmt.setDate(3, (Date) r.getData());
+                stmt.setInt(4, r.getCode());
+                stmt.setInt(5, r.getId_receita());
                 
                 
                 stmt.executeUpdate();

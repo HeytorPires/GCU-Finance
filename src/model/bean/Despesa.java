@@ -12,36 +12,23 @@ import java.sql.Date;
 public class Despesa {
     private int id_despesa;
     private String titulo;
-    private String tipo;
     private Date data;
     private double valor;
-    private int id_categoria;
     private int id_usuario;
     private int code;
 
-    public Despesa(int id_despesa, String titulo, String tipo, Date data, double valor, int id_categoria, int id_usuario, int code) {
+    public Despesa(int id_despesa, String titulo, Date data, double valor, int id_usuario, int code) {
         this.id_despesa = id_despesa;
         this.titulo = titulo;
-        this.tipo = tipo;
         this.data = data;
         this.valor = valor;
-        this.id_categoria = id_categoria;
         this.id_usuario = id_usuario;
         this.code = code;
     }
 
     public Despesa() {
     }
-
     
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public Date getData() {
         return data;
     }
@@ -73,14 +60,6 @@ public class Despesa {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public int getId_categoria() {
-        return id_categoria;
-    }
-
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
     }
 
     public int getId_usuario() {

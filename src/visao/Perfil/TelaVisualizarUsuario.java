@@ -4,9 +4,11 @@
  */
 package visao.Perfil;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Usuario;
 import model.dao.UsuarioDAO;
 import visao.TelaMenuPrincipal;
 
@@ -24,18 +26,26 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
         initComponents();
         id_usuario = this.id_usuario;
         
-//        readInfoUSer();
+         try {
+             readInfoUSer();
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(TelaVisualizarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(TelaVisualizarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+         }
 
     }
     
-//    public void readInfoUSer()  {
-//        
-//        Usuario usuario = new Usuario();
-//        
-//        VisuName.setText(usuario.getUsername());
-//        VisuEmail.setText(usuario.getEmail());
-//        VisuPassword.setText(usuario.getSenha());
-//    }
+    public void readInfoUSer() throws ClassNotFoundException, SQLException  {
+        
+        UsuarioDAO pdao = new UsuarioDAO();
+            
+        System.out.println("teste " +  pdao.readByID(id_usuario));
+        
+        VisuName.setText(pdao.readByID(id_usuario).getUsername());
+        VisuEmail.setText(pdao.readByID(id_usuario).getEmail());
+        VisuPassword.setText(pdao.readByID(id_usuario).getSenha());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

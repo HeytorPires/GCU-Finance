@@ -45,7 +45,7 @@ public class UsuarioDAO {
     Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    Usuario usuario = null; // Inicialize a variável que irá armazenar o usuário
+    Usuario usuario = null;
     
     try {
         con = ConnectionFactory.getConnection();

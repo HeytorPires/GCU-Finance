@@ -46,7 +46,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         pdao.readById(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_receita(),
-               d.getTitulo(),
+                d.getTitulo(),
                 d.getValor(),
                 d.getData(),
                 d.getCode()
@@ -335,7 +335,6 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-        System.out.println(id_usuario);
         try {
             readJtableForDesc(InputPesquisa.getText());
         } catch (SQLException | ClassNotFoundException ex) {
@@ -351,11 +350,16 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
             r.setTitulo(InputTitulo.getText());
             r.setValor(Double.parseDouble(InputValor.getText()));
+            r.setId_usuario(id_usuario);
             r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             r.setData(java.sql.Date.valueOf(Inputdata.getText()));
             r.setCode(Integer.parseInt(inputcode.getText()));
+            
             InputTitulo.setText("");
             InputValor.setText("");
+            Inputdata.setText("");
+            inputcode.setText("");
+            InputPesquisa.setText("");
 
             try {
                 dao.update(r);
