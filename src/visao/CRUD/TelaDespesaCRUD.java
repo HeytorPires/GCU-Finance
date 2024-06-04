@@ -7,6 +7,8 @@ import java.lang.System.Logger;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Despesa;
@@ -45,6 +47,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
         DespesaDAO pdao = new DespesaDAO();
+        System.out.println("usaurio id DESPESA" + id_usuario);
 
         pdao.readById(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
@@ -73,6 +76,18 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         });
     });
 }
+    public String converterDataParaMySQL(String texto) {
+        String regex = "\\b(\\d{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        
+        if (matcher.find()) {
+            String dataMySQL = matcher.group(1) + "-" + matcher.group(2) + "-" + matcher.group(3);
+            return dataMySQL;
+        } else {
+            return null; // Retorna null se não encontrar uma data no formato especificado
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,7 +116,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         inputCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(650, 500));
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,7 +125,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Titulo", "Valor", "Data", "Categoria"
+                "ID", "Titulo", "Valor", "Data", "Cod. Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -178,7 +192,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         });
 
-        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y-MM-dd"))));
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
         Inputdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputdataActionPerformed(evt);
@@ -187,7 +201,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
         jLabel5.setText("Code");
 
-        jLabel6.setText("Data");
+        jLabel6.setText("Data(yyyy-mm-dd)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,7 +335,14 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
-        r.setData(Date.valueOf(Inputdata.getText()));
+        String dataMySQL = converterDataParaMySQL(Inputdata.getText());
+        if (dataMySQL != null) {
+            r.setData(Date.valueOf(dataMySQL));
+        } else {
+            // Tratar caso a data não esteja no formato esperado
+            JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
+            return; // Abortar a operação
+        };
         r.setId_usuario(id_usuario);
         r.setCode(Integer.parseInt(inputCategoria.getText()));
         //categoria
@@ -362,11 +383,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             r.setCode(Integer.parseInt(inputCategoria.getText()));
             
-//        r.setTitulo(InputTitulo.getText());
-//        r.setValor(Double.parseDouble(InputValor.getText()));
-//        r.setData(Date.valueOf(Inputdata.getText()));
-//        r.setId_usuario(id_usuario);
-//        r.setId_categoria(Integer.parseInt(inputCategoria.getText()));
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");

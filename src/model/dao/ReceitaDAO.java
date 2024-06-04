@@ -25,11 +25,13 @@ public class ReceitaDAO {
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                    stmt = con.prepareStatement("INSERT INTO receita (titulo, valor, id_usuario) values  (?,?,?)");
+                    stmt = con.prepareStatement("INSERT INTO receita (titulo, valor, id_usuario, data, code) values  (?,?,?,?,?)");
                 
                 stmt.setString(1,r.getTitulo());
                 stmt.setDouble(2, r.getValor());
                 stmt.setInt(3, r.getId_usuario());
+                stmt.setDate(4, (Date) r.getData());
+                stmt.setInt(5, r.getCode());
                 
                 stmt.executeUpdate();
                 
@@ -62,6 +64,8 @@ public class ReceitaDAO {
                     receita.setTitulo(rs.getString("titulo"));
                     receita.setValor(rs.getDouble("valor"));
                     receita.setId_usuario(rs.getInt("id_usuario"));
+                    receita.setData(rs.getDate("data"));
+                    receita.setCode(rs.getInt("code"));
                     
                     receitas.add(receita);
                 }
@@ -80,11 +84,14 @@ public class ReceitaDAO {
             ResultSet rs = null;
             
             try {
-                stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?  WHERE id_receita = ?");
+                stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?, data = ?, code = ?   WHERE id_receita = ?");
                 
                stmt.setString(1, r.getTitulo());
                 stmt.setDouble(2, r.getValor());
                 stmt.setInt(3, r.getId_receita());
+                stmt.setDate(4, (Date) r.getData());
+                stmt.setInt(5, r.getCode());
+                
                 
                 stmt.executeUpdate();
                 
@@ -133,10 +140,12 @@ public class ReceitaDAO {
 
             while (rs.next()) {
                 Receita receita = new Receita();
-                receita.setId_receita(rs.getInt("id_receita"));
-                receita.setTitulo(rs.getString("titulo"));
-                receita.setValor(rs.getDouble("valor"));
-                receita.setId_usuario(rs.getInt("id_usuario")); 
+                    receita.setId_receita(rs.getInt("id_receita"));
+                    receita.setTitulo(rs.getString("titulo"));
+                    receita.setValor(rs.getDouble("valor"));
+                    receita.setId_usuario(rs.getInt("id_usuario"));
+                    receita.setData(rs.getDate("data"));
+                    receita.setCode(rs.getInt("code")); 
 
                 receitas.add(receita);
             }
@@ -162,16 +171,16 @@ public class ReceitaDAO {
                 stmt = con.prepareStatement("SELECT * FROM receita WHERE id_usuario = ?");
                 stmt.setInt(1, id_usuario);
                 rs = stmt.executeQuery();
-                System.out.println(rs);
                 
                 while(rs.next()){
-                    System.out.println(rs.getMetaData());
                   Receita receita = new Receita();
                     
                     receita.setId_receita(rs.getInt("id_receita"));
                     receita.setTitulo(rs.getString("titulo"));
                     receita.setValor(rs.getDouble("valor"));
                     receita.setId_usuario(rs.getInt("id_usuario"));
+                    receita.setData(rs.getDate("data"));
+                    receita.setCode(rs.getInt("code"));
                     
                     receitas.add(receita);
                 }

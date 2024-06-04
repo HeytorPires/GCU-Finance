@@ -59,7 +59,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Usuario:");
+        jLabel2.setText("Email:");
 
         jLabel3.setText("Senha:");
 

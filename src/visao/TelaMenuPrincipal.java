@@ -61,7 +61,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void readJtableDespesa() throws  ClassNotFoundException, SQLException {
-        DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaDespesas.getModel();
         modelo.setNumRows(0);
         DespesaDAO pdao = new DespesaDAO();
 
@@ -77,21 +77,23 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }
     
     public void readJtableReceita() throws  ClassNotFoundException, SQLException {
-        DefaultTableModel modelo = (DefaultTableModel) TabelaExibir1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
         modelo.setNumRows(0);
         ReceitaDAO pdao = new ReceitaDAO();
-
+        System.out.println("teste 1" + pdao.readById(id_usuario));
         pdao.readById(id_usuario).stream().forEach((r) -> {
             modelo.addRow(new Object[]{
                 r.getId_receita(),
                 r.getTitulo(),
                 r.getValor(),
+                r.getData(),
+                r.getCode()
             });
         });
     }
     
     public void readJtableCategorias() throws  ClassNotFoundException, SQLException {
-        DefaultTableModel modelo = (DefaultTableModel) TabelaExibir2.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaCategoria.getModel();
         modelo.setNumRows(0);
         CategoriaDAO pdao = new CategoriaDAO();
 
@@ -122,15 +124,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TabelaExibir = new javax.swing.JTable();
+        TabelaDespesas = new javax.swing.JTable();
         jComboBox2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabelaExibir1 = new javax.swing.JTable();
+        TabelaReceitas = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TabelaExibir2 = new javax.swing.JTable();
+        TabelaCategoria = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -165,7 +167,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaDespesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -184,63 +186,68 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabelaExibir.addKeyListener(new java.awt.event.KeyAdapter() {
+        TabelaDespesas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                TabelaExibirKeyReleased(evt);
+                TabelaDespesasKeyReleased(evt);
             }
         });
-        jScrollPane3.setViewportView(TabelaExibir);
+        jScrollPane3.setViewportView(TabelaDespesas);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, 0, 119, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(487, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 98, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Despesas", jPanel1);
 
-        TabelaExibir1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaReceitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Titulo", "Valor"
+                "ID", "Titulo", "Valor", "Data", "Cod. Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        TabelaExibir1.addKeyListener(new java.awt.event.KeyAdapter() {
+        TabelaReceitas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                TabelaExibir1KeyReleased(evt);
+                TabelaReceitasKeyReleased(evt);
             }
         });
-        jScrollPane2.setViewportView(TabelaExibir1);
+        jScrollPane2.setViewportView(TabelaReceitas);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -254,25 +261,25 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(484, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 98, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Receitas", jPanel2);
 
-        TabelaExibir2.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -280,7 +287,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID_Categoria", "Nome", "Descrição", "Code"
+                "ID", "Nome", "Descrição", "Code"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -291,7 +298,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(TabelaExibir2);
+        jScrollPane6.setViewportView(TabelaCategoria);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -513,14 +520,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
       this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void TabelaExibirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaExibirKeyReleased
+    private void TabelaDespesasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaDespesasKeyReleased
 
        
-    }//GEN-LAST:event_TabelaExibirKeyReleased
+    }//GEN-LAST:event_TabelaDespesasKeyReleased
 
-    private void TabelaExibir1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaExibir1KeyReleased
+    private void TabelaReceitasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaReceitasKeyReleased
 
-    }//GEN-LAST:event_TabelaExibir1KeyReleased
+    }//GEN-LAST:event_TabelaReceitasKeyReleased
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -529,6 +536,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         new TelaSobre().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -549,9 +560,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu PerfilMenu;
-    private javax.swing.JTable TabelaExibir;
-    private javax.swing.JTable TabelaExibir1;
-    private javax.swing.JTable TabelaExibir2;
+    private javax.swing.JTable TabelaCategoria;
+    private javax.swing.JTable TabelaDespesas;
+    private javax.swing.JTable TabelaReceitas;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JMenu jMenu1;

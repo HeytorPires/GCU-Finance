@@ -5,6 +5,7 @@
 package visao.CRUD;
 import java.lang.System.Logger;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -45,8 +46,10 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         pdao.readById(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_receita(),
-                d.getTitulo(),
+               d.getTitulo(),
                 d.getValor(),
+                d.getData(),
+                d.getCode()
             });
         });
     }
@@ -63,6 +66,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             d.getId_receita(),
                 d.getTitulo(),
                 d.getValor(),
+                d.getData(),
+                d.getCode()
         });
     });
 }
@@ -88,22 +93,27 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botaoSair = new javax.swing.JButton();
+        inputcode = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Inputdata = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 550));
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Titulo", "Valor"
+                "ID", "Titulo", "Valor", "Data", "Cod. Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -166,6 +176,12 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Data");
+
+        jLabel6.setText("Code");
+
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y-MM-dd"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,9 +198,19 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(147, 147, 147)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(243, 243, 243)
+                            .addComponent(InputValor)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(93, 93, 93)))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(inputcode, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
                         .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BotaoCadastrar)
@@ -199,7 +225,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(buttonPesquisa))
                             .addComponent(jLabel4))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -213,11 +239,15 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(botaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -234,7 +264,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addComponent(buttonPesquisa)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(356, 356, 356))
+                .addGap(308, 308, 308))
         );
 
         pack();
@@ -245,6 +275,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         if (TabelaExibir.getSelectedRow() != -1) {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
             InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
+            Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+            inputcode.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4).toString());
         }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
@@ -258,7 +290,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
             InputTitulo.setText("");
             InputValor.setText("");
-
+            Inputdata.setText("");
+            inputcode.setText("");
            
             try {
                 dao.delete(r);
@@ -282,8 +315,13 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
         r.setId_usuario(id_usuario);
+        r.setData(java.sql.Date.valueOf(Inputdata.getText()));
+       // r.setData(Date.valueOf(Inputdata.getText()));
+        r.setCode(Integer.parseInt(inputcode.getText()));
         InputTitulo.setText("");
         InputValor.setText("");
+        Inputdata.setText("");
+        inputcode.setText("");
        
         try {
             dao.Create(r);
@@ -314,7 +352,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             r.setTitulo(InputTitulo.getText());
             r.setValor(Double.parseDouble(InputValor.getText()));
             r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
+            r.setData(java.sql.Date.valueOf(Inputdata.getText()));
+            r.setCode(Integer.parseInt(inputcode.getText()));
             InputTitulo.setText("");
             InputValor.setText("");
 
@@ -378,12 +417,16 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     private javax.swing.JTextField InputPesquisa;
     private javax.swing.JTextField InputTitulo;
     private javax.swing.JTextField InputValor;
+    private javax.swing.JFormattedTextField Inputdata;
     private javax.swing.JTable TabelaExibir;
     private javax.swing.JButton botaoSair;
     private javax.swing.JButton buttonPesquisa;
+    private javax.swing.JTextField inputcode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

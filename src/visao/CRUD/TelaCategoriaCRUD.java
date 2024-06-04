@@ -24,6 +24,7 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     private int id_usuario;
      public TelaCategoriaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        this.id_usuario = id_usuario;
          try {
             readJtable();
         } catch (SQLException | ClassNotFoundException ex) {
@@ -38,7 +39,7 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
         CategoriaDAO pdao = new CategoriaDAO();
-
+        System.out.println("usaurio id cat" + id_usuario);
         pdao.readById(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
                 c.getId_categoria(),

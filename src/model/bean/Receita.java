@@ -4,6 +4,8 @@
  */
 package model.bean;
 
+import java.util.Date;
+
 /**
  *
  * @author heyto
@@ -13,12 +15,16 @@ public class Receita {
     private String titulo;
     private double valor;
     private int id_usuario;
+    private Date data;
+    private int code;
 
-    public Receita(int id_receita, String titulo, double valor, int id_usuario) {
+    public Receita(int id_receita, String titulo, double valor, int id_usuario, Date data, int code) {
         this.id_receita = id_receita;
         this.titulo = titulo;
         this.valor = valor;
         this.id_usuario = id_usuario;
+        this.data = data;
+        this.code = code;
     }
 
     public Receita() {
@@ -56,10 +62,26 @@ public class Receita {
         this.id_usuario = id_usuario;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
-        return "Receita{" + "id_despesa=" + id_receita + ", titulo=" + titulo + ", valor=" + valor + ", id_usuario=" + id_usuario + '}';
+        return "Receita{" + "id_receita=" + id_receita + ", titulo=" + titulo + ", valor=" + valor + ", id_usuario=" + id_usuario + ", data=" + data + ", code=" + code + '}';
     }
-    
+
     
 }
