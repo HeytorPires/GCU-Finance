@@ -152,7 +152,7 @@ public class DespesaDAO {
         }
         return despesas;
     }
-        public List<Despesa> readById(int id_usuario) throws ClassNotFoundException, SQLException{
+        public List<Despesa> readDepesaByIdUser(int id_usuario) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;

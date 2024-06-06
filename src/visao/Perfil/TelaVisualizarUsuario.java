@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.Usuario;
 import model.dao.UsuarioDAO;
 import visao.TelaMenuPrincipal;
 
@@ -24,7 +25,9 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
      private int id_usuario;
     public TelaVisualizarUsuario(int id_usuario) {
         initComponents();
-        id_usuario = this.id_usuario;
+        this.id_usuario = id_usuario;
+        this.setLocationRelativeTo( null );
+
         
          try {
              readInfoUSer();
@@ -38,13 +41,13 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
     
     public void readInfoUSer() throws ClassNotFoundException, SQLException  {
         
-        UsuarioDAO pdao = new UsuarioDAO();
-            
-        System.out.println("teste " +  pdao.readByID(id_usuario));
+        UsuarioDAO Userdao = new UsuarioDAO();
+         Usuario user = Userdao.readUserByID(id_usuario);
+       
         
-        VisuName.setText(pdao.readByID(id_usuario).getUsername());
-        VisuEmail.setText(pdao.readByID(id_usuario).getEmail());
-        VisuPassword.setText(pdao.readByID(id_usuario).getSenha());
+        VisuName.setText(user.getUsername());
+        VisuEmail.setText(user.getEmail());
+        VisuPassword.setText(user.getSenha());
     }
 
     /**
@@ -150,7 +153,8 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     //new TelaEditarUsuario().setVisible(true);
+     new TelaEditarUsuario(id_usuario).setVisible(true);
+     this.dispose();
      
     }//GEN-LAST:event_jButton1ActionPerformed
 

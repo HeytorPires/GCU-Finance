@@ -41,7 +41,7 @@ public class UsuarioDAO {
             }
         }
     
-    public Usuario readByID(int id_usuario) throws ClassNotFoundException, SQLException {
+    public Usuario readUserByID(int id_usuario) throws ClassNotFoundException, SQLException {
     Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -99,4 +99,28 @@ public class UsuarioDAO {
 
         return usuario;
     }
+    public void AlterarSenha(String senha ,int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                stmt = con.prepareStatement("UPDATE usuario SET senha = ?  WHERE id_usuario = ?");
+                
+                stmt.setString(1, senha);
+                stmt.setInt(2, id_usuario);
+                
+                
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Senha Atualizada com sucesso!");
+            } catch (SQLException ex) {
+                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar senha: " + ex);
+            } finally{
+                ConnectionFactory.CloseConnection(con, stmt, rs);
+
+            }
+        }
 }

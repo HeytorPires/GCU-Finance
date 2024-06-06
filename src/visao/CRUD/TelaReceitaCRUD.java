@@ -27,6 +27,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
     public TelaReceitaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        this.setLocationRelativeTo( null );
+
         this.id_usuario = id_usuario;
          try {
             readJtable();
@@ -43,7 +45,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         modelo.setNumRows(0);
         ReceitaDAO pdao = new ReceitaDAO();
 
-        pdao.readById(id_usuario).stream().forEach((d) -> {
+        pdao.readReceitaByIdUser(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_receita(),
                 d.getTitulo(),

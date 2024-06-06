@@ -17,15 +17,19 @@ public class Movimentacao {
     private double valor;
     private int id_usuario;
     private int code;
+    private String tipo;
 
-    public Movimentacao(int id_movimentacao, String titulo, Date data, double valor, int id_usuario, int code) {
+    public Movimentacao(int id_movimentacao, String titulo, Date data, double valor, int id_usuario, int code, String tipo) {
         this.id_movimentacao = id_movimentacao;
         this.titulo = titulo;
         this.data = data;
         this.valor = valor;
         this.id_usuario = id_usuario;
         this.code = code;
+        this.tipo = tipo;
     }
+
+    
 
     public Movimentacao() {
     }
@@ -78,9 +82,17 @@ public class Movimentacao {
         this.code = code;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
-        return "Movimentacao{" + "id_movimentacao=" + id_movimentacao + ", titulo=" + titulo + ", data=" + data + ", valor=" + valor + ", id_usuario=" + id_usuario + ", code=" + code + '}';
+        return "Movimentacao{" + "id_movimentacao=" + id_movimentacao + ", titulo=" + titulo + ", data=" + data + ", valor=" + valor + ", id_usuario=" + id_usuario + ", code=" + code + ", tipo=" + tipo + '}';
     }
     
     

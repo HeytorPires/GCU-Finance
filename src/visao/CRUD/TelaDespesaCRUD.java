@@ -33,6 +33,8 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     public TelaDespesaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        this.setLocationRelativeTo( null );
+
         this.id_usuario = id_usuario;
         
         listarComboBox();
@@ -49,7 +51,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     public final void listarComboBox () {
         CategoriaDAO dao = new CategoriaDAO();
         try {
-            for(Categoria d: dao.readById(id_usuario)){
+            for(Categoria d: dao.readCategoriaByIdUser(id_usuario)){
                 comboBoxCat.addItem(d.getCode()+ " - " + d.getNome());
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -66,7 +68,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         DespesaDAO pdao = new DespesaDAO();
         System.out.println("usaurio id DESPESA" + id_usuario);
 
-        pdao.readById(id_usuario).stream().forEach((d) -> {
+        pdao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_despesa(),
                 d.getTitulo(),

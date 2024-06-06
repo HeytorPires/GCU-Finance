@@ -12,10 +12,12 @@ import model.dao.CategoriaDAO;
 import model.dao.DespesaDAO;
 import model.dao.MovimentacoesDAO;
 import model.dao.ReceitaDAO;
+import visao.Acesso.TelaLoginUsuario;
 import visao.Sobre.TelaSobre;
 import visao.CRUD.TelaCategoriaCRUD;
 import visao.CRUD.TelaDespesaCRUD;
 import visao.CRUD.TelaReceitaCRUD;
+import visao.Perfil.TelaEditarSenha;
 
 
 
@@ -30,10 +32,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public TelaMenuPrincipal(int id_usuario) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        this.setLocationRelativeTo( null );
         this.id_usuario = id_usuario;
         
         
-          
+
           try {
               readJtableCategorias();
           } catch (ClassNotFoundException ex) {
@@ -70,9 +73,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public void readJtableDespesa() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaDespesas.getModel();
         modelo.setNumRows(0);
-        DespesaDAO pdao = new DespesaDAO();
+        DespesaDAO Ddao = new DespesaDAO();
 
-        pdao.readById(id_usuario).stream().forEach((d) -> {
+        Ddao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
                 d.getId_despesa(),
                 d.getTitulo(),
@@ -86,9 +89,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public void readJtableReceita() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
         modelo.setNumRows(0);
-        ReceitaDAO pdao = new ReceitaDAO();
-        System.out.println("teste 1" + pdao.readById(id_usuario));
-        pdao.readById(id_usuario).stream().forEach((r) -> {
+        ReceitaDAO Rdao = new ReceitaDAO();
+        Rdao.readReceitaByIdUser(id_usuario).stream().forEach((r) -> {
             modelo.addRow(new Object[]{
                 r.getId_receita(),
                 r.getTitulo(),
@@ -102,28 +104,29 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public void readJtableCategorias() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaCategoria.getModel();
         modelo.setNumRows(0);
-        CategoriaDAO pdao = new CategoriaDAO();
+        CategoriaDAO Cdao = new CategoriaDAO();
 
-        pdao.readById(id_usuario).stream().forEach((c) -> {
+        Cdao.readCategoriaByIdUser(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
                 c.getId_categoria(),
                 c.getNome(),
                 c.getDescricao(),
-                c.getCode()
+                c.getCode(), 
             });
         });
     }
     public void readJtableMovimentacao() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaMovi.getModel();
         modelo.setNumRows(0);
-        MovimentacoesDAO pdao = new MovimentacoesDAO();
-
-        pdao.readById(id_usuario).stream().forEach((m) -> {
+        MovimentacoesDAO movidao = new MovimentacoesDAO();
+            
+        movidao.readMoviByIdUSer(id_usuario).stream().forEach((m) -> {
             modelo.addRow(new Object[]{
                 m.getTitulo(),
                 m.getValor(),
                 m.getData(),
-                m.getCode() 
+                m.getCode(),
+                m.getTipo()
             });
         });
     }
@@ -165,6 +168,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         PerfilMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuEditarUsuario = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -436,6 +440,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         PerfilMenu.add(jMenuEditarUsuario);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_edit.png"))); // NOI18N
+        jMenuItem4.setText("Alterar Senha");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        PerfilMenu.add(jMenuItem4);
+
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_delete.png"))); // NOI18N
         jMenuItem3.setText("Excluir Dados");
         jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -532,7 +545,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 this.dispose(); 
-                }
+                new TelaLoginUsuario().setVisible(true);                
+            }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -561,6 +575,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new TelaEditarSenha(id_usuario).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -597,6 +616,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
