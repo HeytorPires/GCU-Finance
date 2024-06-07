@@ -204,11 +204,11 @@ public static boolean isValidGmail(String email) {
 
         try {
             if(isValidGmail(email)){
-                            dao.Create(u);
+                dao.Create(u);
 
             }
             else{
-                JOptionPane.showMessageDialog(null, "Email não está nos padrões de email!");
+                JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legitimo! (@gmail.com)");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao criar usuário: " + ex.getMessage());

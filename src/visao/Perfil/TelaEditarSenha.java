@@ -61,6 +61,10 @@ public class TelaEditarSenha extends javax.swing.JFrame {
         } else{
             Senhasbatendo = true;
         }
+        if(SenhaInput.equals("")){
+            JOptionPane.showMessageDialog(null, "ERRO: não é possivel alterar a senha para vazio!");
+            return false;
+        }
         if(SenhaAntigaCorreta && Senhasbatendo){
             return true;
         }

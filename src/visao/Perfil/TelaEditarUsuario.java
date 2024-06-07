@@ -41,7 +41,12 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     private TelaEditarUsuario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+    public static boolean validarEmail(String email) {
+        if (email == null) {
+            return false;
+        }
+        return email.endsWith("@gmail.com");
+    }
     public void  EditarDados(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
         boolean NomeDiferente = true;
         boolean EmailDiferente  = true;
@@ -70,10 +75,17 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
          if(EmailNovo.equals("")){
                      EmailNovo = EmailDB;
                  }
-         if(EmailDiferente && NomeDiferente){
+        if(validarEmail(EmailDB)){
+            if(EmailDiferente && NomeDiferente){
                       Userdao.AlterarUsuario(NomeNovo,EmailNovo, id_usuario);
+                       this.dispose();
+                        new TelaMenuPrincipal(id_usuario).setVisible(true);
 
          }
+        } else{
+            JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legitimo! (@gmail.com)");
+        }
+         
 
     }
     public void CarregarDados(int id_usuario) throws ClassNotFoundException, SQLException{
@@ -223,8 +235,7 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-                this.dispose();
-                new TelaMenuPrincipal(id_usuario).setVisible(true);
+        
             
 
     }//GEN-LAST:event_jButton3ActionPerformed
