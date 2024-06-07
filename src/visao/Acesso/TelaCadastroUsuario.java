@@ -28,6 +28,12 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo( null );
 
     }
+public static boolean isValidGmail(String email) {
+        if (email == null) {
+            return false;
+        }
+        return email.endsWith("@gmail.com");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -197,7 +203,13 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         System.out.println("Usuário: " + u);
 
         try {
-            dao.Create(u);
+            if(isValidGmail(email)){
+                            dao.Create(u);
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Email não está nos padrões de email!");
+            }
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao criar usuário: " + ex.getMessage());
         }

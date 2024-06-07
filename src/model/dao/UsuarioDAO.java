@@ -123,4 +123,30 @@ public class UsuarioDAO {
 
             }
         }
+    public void AlterarUsuario(String nome ,String email, int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                stmt = con.prepareStatement("UPDATE usuario SET username = ?, email = ?  WHERE id_usuario = ?");
+                
+                stmt.setString(1, nome);
+                stmt.setString(2, email);
+                stmt.setInt(3, id_usuario);
+                
+                
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Usuario Atualizado com sucesso!");
+            } catch (SQLException ex) {
+                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar usuario: " + ex);
+            } finally{
+                ConnectionFactory.CloseConnection(con, stmt, rs);
+
+            }
+        }
+    
 }

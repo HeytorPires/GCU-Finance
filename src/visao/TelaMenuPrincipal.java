@@ -18,7 +18,7 @@ import visao.CRUD.TelaCategoriaCRUD;
 import visao.CRUD.TelaDespesaCRUD;
 import visao.CRUD.TelaReceitaCRUD;
 import visao.Perfil.TelaEditarSenha;
-
+import visao.Perfil.TelaEditarUsuario;
 
 
 
@@ -131,7 +131,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
     }
     
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -527,7 +527,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadastroReceitaActionPerformed
 
     private void jMenuEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarUsuarioActionPerformed
-       
+     new TelaEditarUsuario(id_usuario).setVisible(true);
+     this.dispose();
     }//GEN-LAST:event_jMenuEditarUsuarioActionPerformed
 
     private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed

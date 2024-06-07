@@ -46,7 +46,6 @@ public class TelaEditarSenha extends javax.swing.JFrame {
      }  else{
             JOptionPane.showMessageDialog(null, "senha Antiga está incorreta");
             SenhaAntigaCorreta = false;
-            return false;
         }
         if(SenhaInput.equals(SenhaInputConfirme)){
             //JOptionPane.showMessageDialog(null, "Senhas inseridas estão diferentes");
@@ -54,19 +53,16 @@ public class TelaEditarSenha extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Senhas inseridas não batem");
             Senhasbatendo = false;
-            return false;
         }
         
         if(AntigaSenhaDB.equals(SenhaInput)){
             JOptionPane.showMessageDialog(null, "Não foi possivel alterar a senha: senha nova igual as senha antiga");
             Senhasbatendo = false;
-            return false;
         } else{
             Senhasbatendo = true;
         }
         if(SenhaAntigaCorreta && Senhasbatendo){
             return true;
-            
         }
         return true;
     }
@@ -213,6 +209,8 @@ public class TelaEditarSenha extends javax.swing.JFrame {
             if(ValidarDados(SenhaAntigaDB, senhaAntigaInput, SenhaNova, SenhaNovaConfirme)){
                 userDAO.AlterarSenha(SenhaNova, id_usuario);
                 ApagarInput();
+                this.dispose();
+                new TelaMenuPrincipal(id_usuario).setVisible(true);
             }else{
                 ApagarInput();
             }
@@ -221,6 +219,7 @@ public class TelaEditarSenha extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

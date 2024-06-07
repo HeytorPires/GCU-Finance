@@ -27,14 +27,14 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         initComponents();        
         this.id_usuario = id_usuario;
         this.setLocationRelativeTo( null );
-
         try {
-            EditarDados();
+            CarregarDados(id_usuario);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
     }
 
@@ -42,14 +42,48 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public void EditarDados() throws  ClassNotFoundException, SQLException{
+    public void  EditarDados(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
+        boolean NomeDiferente = true;
+        boolean EmailDiferente  = true;
+        
+
          UsuarioDAO Userdao = new UsuarioDAO();
          Usuario user = Userdao.readUserByID(id_usuario);
-       
-        
-        EditName.setText(user.getUsername());
-        EditEmail.setText(user.getEmail());
-        //VisuPassword.setText(user.getSenha());
+         String nomeDB = user.getUsername();
+         String EmailDB = user.getEmail();
+         
+         if(nomeDB.equals(NomeNovo) ){
+             NomeDiferente = false;
+             JOptionPane.showMessageDialog(null,"Não foi possivel alterar o Nome: Nome Novo é igual ao antigo ");
+             
+         } 
+          
+         if(EmailDB.equals(EmailNovo)){
+             EmailDiferente = false;
+             JOptionPane.showMessageDialog(null,"Não foi possivel alterar o email: Email Novo é igual ao antigo ");
+
+         } 
+         
+         if(NomeNovo.equals("")){
+                    NomeNovo = nomeDB;
+                }
+         if(EmailNovo.equals("")){
+                     EmailNovo = EmailDB;
+                 }
+         if(EmailDiferente && NomeDiferente){
+                      Userdao.AlterarUsuario(NomeNovo,EmailNovo, id_usuario);
+
+         }
+
+    }
+    public void CarregarDados(int id_usuario) throws ClassNotFoundException, SQLException{
+         UsuarioDAO Userdao = new UsuarioDAO();
+         Usuario user = Userdao.readUserByID(id_usuario);
+         
+         String nomeDB = user.getUsername();
+         String EmailDB = user.getEmail();
+         InputNomeAtual.setText(nomeDB);
+         InputEmailAtual.setText(EmailDB);
     }
 
     /**
@@ -61,24 +95,19 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EditName = new javax.swing.JTextField();
-        EditEmail = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        InputNomeAtual = new javax.swing.JTextField();
+        InputNomeNovo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        InputEmailAtual = new javax.swing.JTextField();
+        InputEmailNovo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        EditName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditNameActionPerformed(evt);
-            }
-        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         jButton2.setText("Sair");
@@ -89,10 +118,6 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nome:");
-
-        jLabel3.setText("Email:");
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_edit.png"))); // NOI18N
         jButton3.setText("Atualizar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -101,43 +126,56 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Editar Dados");
 
-        jLabel4.setText("jLabel1");
+        jLabel2.setText("Nome Atual:");
 
-        jLabel5.setText("jLabel1");
+        jLabel3.setText("Nome Novo:");
 
-        jLabel6.setText("jLabel1");
+        InputNomeAtual.setEnabled(false);
+
+        jLabel4.setText("Email Atual:");
+
+        jLabel5.setText("Email Novo: ");
+
+        InputEmailAtual.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(145, 145, 145)
+                .addGap(37, 37, 37)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EditName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EditEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(189, 189, 189)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel5)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(InputNomeNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(InputNomeAtual))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(InputEmailNovo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(17, 17, 17)
+                                .addComponent(InputEmailAtual)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,23 +185,25 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(EditName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(InputNomeAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(EditEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(InputNomeNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(InputEmailAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(InputEmailNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -172,6 +212,20 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        UsuarioDAO Userdao = new UsuarioDAO();
+        String NomeNovo = InputNomeNovo.getText();
+        String EmailNovo = InputEmailNovo.getText();
+        
+        try {
+            EditarDados(NomeNovo, EmailNovo,id_usuario);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                this.dispose();
+                new TelaMenuPrincipal(id_usuario).setVisible(true);
+            
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -182,10 +236,6 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void EditNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,8 +273,10 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EditEmail;
-    private javax.swing.JTextField EditName;
+    private javax.swing.JTextField InputEmailAtual;
+    private javax.swing.JTextField InputEmailNovo;
+    private javax.swing.JTextField InputNomeAtual;
+    private javax.swing.JTextField InputNomeNovo;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -232,6 +284,5 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }
