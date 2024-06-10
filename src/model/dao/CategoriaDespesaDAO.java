@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.bean.Categoria;
+import model.bean.CategoriaDespesa;
 /**
  *
  * @author heyto
  */
 
-public class CategoriaDAO {
+public class CategoriaDespesaDAO {
         
-        public void Create(Categoria d) throws ClassNotFoundException, SQLException{
+        public void Create(CategoriaDespesa d) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                    stmt = con.prepareStatement("INSERT INTO categoria (nome, descricao, code, id_usuario) values  (?,?,?,?)");
+                    stmt = con.prepareStatement("INSERT INTO categoria_despesa (nome, descricao, code, id_usuario) values  (?,?,?,?)");
                 
                 stmt.setString(1,d.getNome());
                 stmt.setString(2, d.getDescricao());
@@ -41,26 +41,26 @@ public class CategoriaDAO {
                 ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
-        public List<Categoria> read() throws ClassNotFoundException, SQLException{
+        public List<CategoriaDespesa> read() throws ClassNotFoundException, SQLException{
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
             
-            List<Categoria> categorias = new ArrayList<>();
+            List<CategoriaDespesa> categorias = new ArrayList<>();
             
             try{
                 
-                stmt = con.prepareStatement("SELECT * FROM categoria");
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa ");
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
-                  Categoria categoria = new Categoria();
+                  CategoriaDespesa categoria = new CategoriaDespesa();
                     
-                    categoria.setId_categoria(rs.getInt("id_categoria"));
+                    categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     categoria.setNome(rs.getString("nome"));
                     categoria.setDescricao(rs.getString("descricao"));
-                    categoria.setId_categoria(rs.getInt("code"));
+                    categoria.setCode(rs.getInt("code"));
                     
                     categorias.add(categoria);
                 }
@@ -72,18 +72,18 @@ public class CategoriaDAO {
             }
             return categorias;
         }
-        public void update(Categoria d) throws ClassNotFoundException, SQLException{
+        public void update(CategoriaDespesa d) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("UPDATE categoria SET nome = ?,descricao = ?, code = ? WHERE id_categoria = ?");
+                stmt = con.prepareStatement("UPDATE categoria_despesa  SET nome = ?,descricao = ?, code = ? WHERE id_categoria_despesa = ?");
                 
                stmt.setString(1, d.getNome());
                 stmt.setString(2, d.getDescricao());
                 stmt.setInt(3, d.getCode());
-                stmt.setInt(4, d.getId_categoria());
+                stmt.setInt(4, d.getCode());
                 
                 stmt.executeUpdate();
                 
@@ -95,15 +95,15 @@ public class CategoriaDAO {
                 ConnectionFactory.CloseConnection(con, stmt, rs);
             }
         }
-        public void delete(Categoria d) throws ClassNotFoundException, SQLException{
+        public void delete(CategoriaDespesa d) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("DELETE FROM categoria WHERE id_categoria = ?");
+                stmt = con.prepareStatement("DELETE FROM categoria_despesa  WHERE id_categoria_despesa = ?");
                 
-                stmt.setInt(1, d.getId_categoria());
+                stmt.setInt(1, d.getId_categoria_despesa());
                 
                 stmt.executeUpdate();
                 
@@ -116,22 +116,22 @@ public class CategoriaDAO {
             }
         }
         
-        public List<Categoria> readForDesc(String titulo) throws ClassNotFoundException, SQLException {
+        public List<CategoriaDespesa> readForDesc(String titulo) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Categoria> categorias = new ArrayList<>();
+        List<CategoriaDespesa> categorias = new ArrayList<>();
 
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement("SELECT * FROM categoria WHERE titulo LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM categoria_despesa  WHERE nome LIKE ?");
             stmt.setString(1, "%" + titulo + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Categoria categoria = new Categoria();
-                categoria.setId_categoria(rs.getInt("id_categoria"));
+                CategoriaDespesa categoria = new CategoriaDespesa();
+                categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                 categoria.setNome(rs.getString("nome"));
                 categoria.setDescricao(rs.getString("descricao"));
                 categoria.setCode(rs.getInt("code"));
@@ -146,25 +146,25 @@ public class CategoriaDAO {
         }
         return categorias;
     }
-        public List<Categoria> readCategoriaByIdUser(int id_usuario) throws ClassNotFoundException, SQLException{
+        public List<CategoriaDespesa> readCategoriaByIdUser(int id_usuario) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
             
-            List<Categoria> categorias = new ArrayList<>();
+            List<CategoriaDespesa> categorias = new ArrayList<>();
             
             try{
                 
-                stmt = con.prepareStatement("SELECT * FROM categoria WHERE id_usuario = ?");
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa WHERE id_usuario = ?");
                 stmt.setInt(1, id_usuario);
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
-                  Categoria categoria = new Categoria();
+                  CategoriaDespesa categoria = new CategoriaDespesa();
                     
-                    categoria.setId_categoria(rs.getInt("id_categoria"));
+                    categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     categoria.setNome(rs.getString("nome"));
                     categoria.setDescricao(rs.getString("descricao"));
                     categoria.setCode(rs.getInt("code"));
@@ -181,26 +181,26 @@ public class CategoriaDAO {
             return categorias;
         }
         
-        public List<Categoria> readByIdAndCode(int id_usuario, int code) throws ClassNotFoundException, SQLException{
+        public List<CategoriaDespesa> readByIdAndCode(int id_usuario, int code) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
             
-            List<Categoria> categorias = new ArrayList<>();
+            List<CategoriaDespesa> categorias = new ArrayList<>();
             
             try{
                 
-                stmt = con.prepareStatement("SELECT * FROM categoria WHERE id_usuario = ? and code = ?");
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa  WHERE id_usuario = ? and code = ?");
                 stmt.setInt(1, id_usuario);
                 stmt.setInt(2, code);
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
-                  Categoria categoria = new Categoria();
+                  CategoriaDespesa categoria = new CategoriaDespesa();
                     
-                    categoria.setId_categoria(rs.getInt("id_categoria"));
+                    categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     categoria.setNome(rs.getString("nome"));
                     categoria.setDescricao(rs.getString("descricao"));
                     categoria.setCode(rs.getInt("code"));

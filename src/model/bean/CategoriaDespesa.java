@@ -8,30 +8,30 @@ package model.bean;
  *
  * @author Fabiano
  */
-public class Categoria {
-    private int id_categoria;
+public class CategoriaDespesa {
+    private int id_categoria_despesa;
     private String nome;
     private String descricao; 
     private int code;
     private int id_usuario;
 
-    public Categoria(int id_categoria, String nome, String descricao, int code, int id_usuario) {
-        this.id_categoria = id_categoria;
+    public CategoriaDespesa(int id_categoria_despesa, String nome, String descricao, int code, int id_usuario) {
+        this.id_categoria_despesa = id_categoria_despesa;
         this.nome = nome;
         this.descricao = descricao;
         this.code = code;
         this.id_usuario = id_usuario;
     }
     
-    public Categoria() {
+    public CategoriaDespesa() {
     }
 
-    public int getId_categoria() {
-        return id_categoria;
+    public int getId_categoria_despesa() {
+        return id_categoria_despesa;
     }
 
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setId_categoria_despesa(int id_categoria_despesa) {
+        this.id_categoria_despesa = id_categoria_despesa;
     }
 
     public String getNome() {

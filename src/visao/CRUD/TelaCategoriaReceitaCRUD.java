@@ -9,20 +9,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Categoria;
-import model.dao.CategoriaDAO;
+import model.bean.CategoriaDespesa;
+import model.bean.CategoriaReceita;
+import model.dao.CategoriaDespesaDAO;
+import model.dao.CategoriaReceitaDAO;
 import visao.TelaMenuPrincipal;
 /**
  *
  * @author heyto
  */
-public class TelaCategoriaCRUD extends javax.swing.JFrame {
+public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaCategoriaCRUD
      */
     private int id_usuario;
-     public TelaCategoriaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
+     public TelaCategoriaReceitaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
         this.setLocationRelativeTo( null );
 
@@ -30,21 +32,21 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
          try {
             readJtable();
         } catch (SQLException | ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private TelaCategoriaCRUD() {
+    private TelaCategoriaReceitaCRUD() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
-        CategoriaDAO pdao = new CategoriaDAO();
+            CategoriaReceitaDAO pdao = new CategoriaReceitaDAO();
         System.out.println("usaurio id cat" + id_usuario);
         pdao.readCategoriaByIdUser(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
-                c.getId_categoria(),
+                c.getId_categoria_receita(),
                 c.getNome(),
                 c.getDescricao(),
                 c.getCode()
@@ -55,12 +57,12 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     public void readJtableForDesc(String titulo) throws SQLException, ClassNotFoundException  {
     DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
     modelo.setNumRows(0);
-    CategoriaDAO pdao = new CategoriaDAO();
+    CategoriaReceitaDAO pdao = new CategoriaReceitaDAO();
 
 
     pdao.readForDesc(titulo).stream().forEach((c) -> {
         modelo.addRow(new Object[]{
-            c.getId_categoria(),
+            c.getId_categoria_receita(),
                 c.getNome(),
                 c.getDescricao(),
                 c.getCode()
@@ -283,10 +285,10 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Categoria c = new Categoria();
-            CategoriaDAO dao = new CategoriaDAO();
+            CategoriaReceita c = new CategoriaReceita();
+            CategoriaReceitaDAO dao = new CategoriaReceitaDAO();
 
-            c.setId_categoria((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            c.setId_categoria_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
 
             InputTitulo.setText("");
             InputDescricao.setText("");
@@ -298,9 +300,9 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
                 dao.delete(c);
                 readJtable();
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
-                Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             
@@ -313,8 +315,8 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        Categoria c = new Categoria();
-        CategoriaDAO dao = new CategoriaDAO();
+        CategoriaReceita c = new CategoriaReceita();
+        CategoriaReceitaDAO dao = new CategoriaReceitaDAO();
 
         c.setNome(InputTitulo.getText());
         c.setDescricao(InputDescricao.getText());
@@ -347,14 +349,14 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Categoria c = new Categoria();
-            CategoriaDAO dao = new CategoriaDAO();
+            CategoriaReceita c = new CategoriaReceita();
+            CategoriaReceitaDAO dao = new CategoriaReceitaDAO();
 
             c.setNome(InputTitulo.getText());
             c.setDescricao(InputDescricao.getText());
             c.setCode(Integer.parseInt(InputCode.getText()));
 
-            c.setId_categoria((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            c.setId_categoria_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
 
             
             InputTitulo.setText("");
@@ -400,20 +402,23 @@ public class TelaCategoriaCRUD extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoriaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCategoriaReceitaCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCategoriaCRUD().setVisible(true);
+                new TelaCategoriaReceitaCRUD().setVisible(true);
             }
         });
     }

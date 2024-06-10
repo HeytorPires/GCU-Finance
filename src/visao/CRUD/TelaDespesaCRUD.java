@@ -13,10 +13,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.CategoriaDespesa;
 import model.bean.Despesa;
-import model.bean.Categoria;
+import model.bean.CategoriaReceita;
 import model.dao.DespesaDAO;
-import model.dao.CategoriaDAO;
+import model.dao.CategoriaDespesaDAO;
 import visao.TelaMenuPrincipal;
 /**
  *
@@ -49,9 +50,9 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     }
     
     public final void listarComboBox () {
-        CategoriaDAO dao = new CategoriaDAO();
+        CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
         try {
-            for(Categoria d: dao.readCategoriaByIdUser(id_usuario)){
+            for(CategoriaDespesa d: dao.readCategoriaByIdUser(id_usuario)){
                 comboBoxCat.addItem(d.getCode()+ " - " + d.getNome());
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -224,6 +225,12 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
         jLabel6.setText("Data(yyyy-mm-dd)");
 
+        comboBoxCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,8 +320,8 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private void TabelaExibirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaExibirKeyReleased
         int dados = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4);
             
-        CategoriaDAO cdao = new CategoriaDAO();
-        List<Categoria> categoria;
+        CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
+        List<CategoriaDespesa> categoriaDespesa;
         
         
 //        Integer indexCategoria = 0;
@@ -332,9 +339,10 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
            // comboBoxCat.setSelectedIndex( indexCategoria );
            try {
-            categoria = cdao.readByIdAndCode(id_usuario, dados);
-               
-            comboBoxCat.setSelectedItem( categoria.getFirst() );
+            categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
+             
+            
+            comboBoxCat.setSelectedItem( categoriaDespesa.getFirst() );
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -454,6 +462,10 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private void InputdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputdataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InputdataActionPerformed
+
+    private void comboBoxCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCatActionPerformed
 
     /**
      * @param args the command line arguments

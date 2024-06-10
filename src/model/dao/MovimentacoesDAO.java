@@ -34,7 +34,7 @@ public class MovimentacoesDAO {
                 
                 stmt = con.prepareStatement("SELECT * FROM MoviGeral WHERE id_usuario = ?");
                 stmt.setInt(1, id_usuario);
-                rs = stmt.executeQuery();
+                    rs = stmt.executeQuery();
                 
                 while(rs.next()){
                   Movimentacao moviG = new Movimentacao();

@@ -6,15 +6,17 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Categoria;
+import model.bean.CategoriaReceita;
 import model.bean.Usuario;
-import model.dao.CategoriaDAO;
+import model.dao.CategoriaDespesaDAO;
+import model.dao.CategoriaReceitaDAO;
 import model.dao.DespesaDAO;
 import model.dao.MovimentacoesDAO;
 import model.dao.ReceitaDAO;
 import visao.Acesso.TelaLoginUsuario;
 import visao.Sobre.TelaSobre;
-import visao.CRUD.TelaCategoriaCRUD;
+import visao.CRUD.TelaCategoriaDespesaCRUD;
+import visao.CRUD.TelaCategoriaReceitaCRUD;
 import visao.CRUD.TelaDespesaCRUD;
 import visao.CRUD.TelaReceitaCRUD;
 import visao.Perfil.TelaEditarSenha;
@@ -38,7 +40,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         
 
           try {
-              readJtableCategorias();
+              readJtableCategoriasDepesas();
           } catch (ClassNotFoundException ex) {
               Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           } catch (SQLException ex) {
@@ -60,6 +62,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
           }
           try {
               readJtableMovimentacao();
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          try {
+              readJtableCategoriasReceita();
           } catch (ClassNotFoundException ex) {
               Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           } catch (SQLException ex) {
@@ -101,14 +110,29 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
     }
     
-    public void readJtableCategorias() throws  ClassNotFoundException, SQLException {
-        DefaultTableModel modelo = (DefaultTableModel) TabelaCategoria.getModel();
+    public void readJtableCategoriasDepesas() throws  ClassNotFoundException, SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TabelaCategoriaDespesa.getModel();
         modelo.setNumRows(0);
-        CategoriaDAO Cdao = new CategoriaDAO();
+        CategoriaDespesaDAO Cdao = new CategoriaDespesaDAO();
 
         Cdao.readCategoriaByIdUser(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
-                c.getId_categoria(),
+                c.getId_categoria_despesa(),
+                c.getNome(),
+                c.getDescricao(),
+                c.getCode(), 
+            });
+        });
+    }
+    
+    public void readJtableCategoriasReceita() throws  ClassNotFoundException, SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TabelaCategoriaReceita.getModel();
+        modelo.setNumRows(0);
+        CategoriaReceitaDAO Cdao = new CategoriaReceitaDAO();
+
+        Cdao.readCategoriaByIdUser(id_usuario).stream().forEach((c) -> {
+            modelo.addRow(new Object[]{
+                c.getId_categoria_receita(),
                 c.getNome(),
                 c.getDescricao(),
                 c.getCode(), 
@@ -156,15 +180,19 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        TabelaCategoria = new javax.swing.JTable();
+        TabelaCategoriaDespesa = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        TabelaCategoriaReceita = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
         tabelaMovi = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
         jMenuCadastroReceita = new javax.swing.JMenuItem();
         jMenuCadastroCategoria = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         PerfilMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuEditarUsuario = new javax.swing.JMenuItem();
@@ -304,7 +332,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Receitas", jPanel2);
 
-        TabelaCategoria.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaCategoriaDespesa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -323,7 +351,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(TabelaCategoria);
+        jScrollPane6.setViewportView(TabelaCategoriaDespesa);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -340,7 +368,45 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 98, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Categorias", jPanel4);
+        jTabbedPane3.addTab("Categorias de Despesa", jPanel4);
+
+        TabelaCategoriaReceita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Descrição", "Code"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(TabelaCategoriaReceita);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 137, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 98, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Categoria de Receita", jPanel3);
 
         tabelaMovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -361,24 +427,24 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tabelaMovi);
+        jScrollPane5.setViewportView(tabelaMovi);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 137, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 98, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Movimentações Gerais", jPanel3);
+        jTabbedPane3.addTab("Movimentações Gerais", jPanel5);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/page.png"))); // NOI18N
         jMenu1.setText("Gerenciar");
@@ -405,7 +471,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuCadastroReceita);
 
         jMenuCadastroCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
-        jMenuCadastroCategoria.setText("Categoria");
+        jMenuCadastroCategoria.setText("Categoria Despesa");
         jMenuCadastroCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +479,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuCadastroCategoria);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/note_edit.png"))); // NOI18N
+        jMenuItem5.setText("Categoria Receita");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
 
@@ -534,7 +609,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
           try {
               this.dispose();
-              new TelaCategoriaCRUD(id_usuario).setVisible(true);
+              new TelaCategoriaDespesaCRUD(id_usuario).setVisible(true);
           } catch (ClassNotFoundException ex) {
               Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           } catch (SQLException ex) {
@@ -582,6 +657,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+          try {
+              new TelaCategoriaReceitaCRUD(id_usuario).setVisible(true);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
+         this.dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -601,7 +687,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu PerfilMenu;
-    private javax.swing.JTable TabelaCategoria;
+    private javax.swing.JTable TabelaCategoriaDespesa;
+    private javax.swing.JTable TabelaCategoriaReceita;
     private javax.swing.JTable TabelaDespesas;
     private javax.swing.JTable TabelaReceitas;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -618,16 +705,19 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
