@@ -40,7 +40,7 @@ public class DespesaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         public List<Despesa> read() throws ClassNotFoundException, SQLException{
@@ -72,7 +72,7 @@ public class DespesaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return despesas;
         }
@@ -97,7 +97,7 @@ public class DespesaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         public void delete(Despesa d) throws ClassNotFoundException, SQLException{
@@ -117,11 +117,11 @@ public class DespesaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         
-        public List<Despesa> readForDesc(String titulo) throws ClassNotFoundException, SQLException {
+        public List<Despesa> readForDesc(String titulo, int id_usuario) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -130,8 +130,9 @@ public class DespesaDAO {
 
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement("SELECT * FROM despesa WHERE titulo LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM despesa WHERE titulo LIKE ? AND id_usuario = ?");
             stmt.setString(1, "%" + titulo + "%");
+            stmt.setInt(2, id_usuario);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -148,7 +149,7 @@ public class DespesaDAO {
             Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
         } finally {
-            ConnectionFactory.CloseConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return despesas;
     }
@@ -157,7 +158,6 @@ public class DespesaDAO {
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            
             
             List<Despesa> despesas = new ArrayList<>();
             
@@ -183,9 +183,40 @@ public class DespesaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return despesas;
         }
         
+        public Despesa readDepesaByIdUserAndCode(int id_usuario,int code) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            Despesa despesa = null;
+            
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ? and code = ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    despesa.setId_despesa(rs.getInt("id_despesa"));
+                    despesa.setTitulo(rs.getString("titulo"));
+                    despesa.setValor(rs.getDouble("valor"));
+                    despesa.setData(rs.getDate("data"));
+                    despesa.setCode(rs.getInt("code"));
+                    despesa.setId_usuario(rs.getInt("id_usuario"));
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return despesa;
+        }
 }

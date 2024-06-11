@@ -37,7 +37,7 @@ public class UsuarioDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt);
+                ConnectionFactory.closeConnection(con, stmt);
             }
         }
     
@@ -64,7 +64,7 @@ public class UsuarioDAO {
         Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
         JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
     } finally {
-        ConnectionFactory.CloseConnection(con, stmt, rs);
+        ConnectionFactory.closeConnection(con, stmt, rs);
     }
     
     return usuario;
@@ -94,7 +94,7 @@ public class UsuarioDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
         } finally {
-            ConnectionFactory.CloseConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con, stmt, rs);
         }
 
         return usuario;
@@ -119,7 +119,7 @@ public class UsuarioDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar senha: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
 
             }
         }
@@ -144,7 +144,7 @@ public class UsuarioDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar usuario: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
 
             }
         }

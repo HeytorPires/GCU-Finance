@@ -57,13 +57,13 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     }
     
     
-    public void readJtableForDesc(String titulo) throws SQLException, ClassNotFoundException  {
+    public void readJtableForDesc(String titulo, int id_usuario) throws SQLException, ClassNotFoundException  {
     DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
     modelo.setNumRows(0);
     ReceitaDAO pdao = new ReceitaDAO();
 
 
-    pdao.readForDesc(titulo).stream().forEach((d) -> {
+    pdao.readForDesc(titulo, id_usuario).stream().forEach((d) -> {
         modelo.addRow(new Object[]{
             d.getId_receita(),
                 d.getTitulo(),
@@ -338,7 +338,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
         try {
-            readJtableForDesc(InputPesquisa.getText());
+            readJtableForDesc(InputPesquisa.getText(), id_usuario);
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }        

@@ -38,7 +38,7 @@ public class CategoriaReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         public List<CategoriaReceita> read() throws ClassNotFoundException, SQLException{
@@ -68,7 +68,7 @@ public class CategoriaReceitaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return categorias;
         }
@@ -78,13 +78,12 @@ public class CategoriaReceitaDAO {
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("UPDATE categoria SET nome = ?,descricao = ?, code = ? WHERE id_categoriaid_categoria_receita = ?");
+                stmt = con.prepareStatement("UPDATE categoria_receita SET nome = ?,descricao = ?, code = ? WHERE id_categoria_receita = ?");
                 
                stmt.setString(1, d.getNome());
                 stmt.setString(2, d.getDescricao());
                 stmt.setInt(3, d.getCode());
-                stmt.setInt(4, d.getCode());
-                
+                stmt.setInt(4, d.getId_categoria_receita());
                 stmt.executeUpdate();
                 
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
@@ -92,7 +91,7 @@ public class CategoriaReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         public void delete(CategoriaReceita d) throws ClassNotFoundException, SQLException{
@@ -112,11 +111,11 @@ public class CategoriaReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         
-        public List<CategoriaReceita> readForDesc(String titulo) throws ClassNotFoundException, SQLException {
+        public List<CategoriaReceita> readForDesc(String titulo, int id_usuario) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -125,8 +124,9 @@ public class CategoriaReceitaDAO {
 
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement("SELECT * FROM categoria_receita WHERE nome LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM categoria_receita WHERE nome LIKE ? and id_usuario = ?");
             stmt.setString(1, "%" + titulo + "%");
+            stmt.setInt(2, id_usuario);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -142,7 +142,7 @@ public class CategoriaReceitaDAO {
             Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
         } finally {
-            ConnectionFactory.CloseConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return categorias;
     }
@@ -176,7 +176,7 @@ public class CategoriaReceitaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return categorias;
         }
@@ -212,7 +212,7 @@ public class CategoriaReceitaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return categorias;
         }

@@ -52,7 +52,7 @@ public class MovimentacoesDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return Movis;
         }

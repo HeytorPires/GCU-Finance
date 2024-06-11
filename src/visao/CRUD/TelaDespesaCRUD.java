@@ -86,7 +86,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     DespesaDAO pdao = new DespesaDAO();
 
 
-    pdao.readForDesc(titulo).stream().forEach((d) -> {
+    pdao.readForDesc(titulo, id_usuario).stream().forEach((d) -> {
         modelo.addRow(new Object[]{
             d.getId_despesa(),
                 d.getTitulo(),
@@ -323,21 +323,22 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
         List<CategoriaDespesa> categoriaDespesa;
         
-        
-//        Integer indexCategoria = 0;
-//        for( int i = 0; i < comboBoxCat.getSelectedObjects().length; i++){
-//            System.out.println( dados + " : " + comboBoxCat.getSelectedItem() );
+        System.out.println(dados);
+        Integer indexCategoria = 0;
+        for( int i = 0; i < comboBoxCat.getSelectedObjects().length; i++){
+            System.out.println( dados + " : " + comboBoxCat.getSelectedItem() );
 //            comboBoxCat.setSelectedIndex( i );
-//            if( Objects.equals(dados, Integer.valueOf( comboBoxCat.getSelectedItem().toString().split("-")[0].trim())) ){
-//                indexCategoria = i;
-//                break;
-//            }
-//        }
+            if( Objects.equals(dados, Integer.valueOf( comboBoxCat.getSelectedItem().toString().split("-")[0].trim())) ){
+                indexCategoria = i;
+                break;
+            }
+        }
         if (TabelaExibir.getSelectedRow() != -1) {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
             InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
             Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
-           // comboBoxCat.setSelectedIndex( indexCategoria );
+            System.out.println(indexCategoria);
+           comboBoxCat.setSelectedIndex( indexCategoria );
            try {
             categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
              

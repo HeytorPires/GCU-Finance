@@ -3,30 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.Acesso;
+import ConnectBanco.DatabaseInitializer;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import model.bean.Usuario;
 import visao.TelaMenuPrincipal;
-
 import java.sql.PreparedStatement; 
 import java.sql.ResultSet; 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.dao.UsuarioDAO;
 
-/**
- *
- * @author Fabiano
- */
-@SuppressWarnings("static-access")
 public class TelaLoginUsuario extends javax.swing.JFrame {
 
     public TelaLoginUsuario() {
+        DatabaseInitializer.initializeDatabase();   
         initComponents();
         this.setLocationRelativeTo( null );
+        
+
     }
     
-
+    
+    public void tete(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

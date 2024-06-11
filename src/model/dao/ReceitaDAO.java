@@ -40,7 +40,7 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         public List<Receita> read() throws ClassNotFoundException, SQLException{
@@ -73,7 +73,7 @@ public class ReceitaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return receitas;
         }
@@ -99,7 +99,7 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
 
             }
         }
@@ -120,11 +120,11 @@ public class ReceitaDAO {
                 Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
         
-        public List<Receita> readForDesc(String titulo) throws ClassNotFoundException, SQLException {
+        public List<Receita> readForDesc(String titulo, int id_usuario) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -133,8 +133,9 @@ public class ReceitaDAO {
 
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement("SELECT * FROM receita WHERE titulo LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM receita WHERE titulo LIKE ? and id_usuario = ?");
             stmt.setString(1, "%" + titulo + "%");
+            stmt.setInt(2, id_usuario);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -152,7 +153,7 @@ public class ReceitaDAO {
             Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
         } finally {
-            ConnectionFactory.CloseConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return receitas;
     }
@@ -187,7 +188,7 @@ public class ReceitaDAO {
               Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
-                ConnectionFactory.CloseConnection(con, stmt, rs);
+                ConnectionFactory.closeConnection(con, stmt, rs);
             }
             return receitas;
         }
