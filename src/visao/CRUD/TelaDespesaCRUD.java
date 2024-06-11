@@ -318,38 +318,55 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TabelaExibirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaExibirKeyReleased
-        int dados = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4);
-            
-        CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
-        List<CategoriaDespesa> categoriaDespesa;
-        
-        System.out.println(dados);
-        Integer indexCategoria = 0;
-        for( int i = 0; i < comboBoxCat.getSelectedObjects().length; i++){
-            System.out.println( dados + " : " + comboBoxCat.getSelectedItem() );
-//            comboBoxCat.setSelectedIndex( i );
-            if( Objects.equals(dados, Integer.valueOf( comboBoxCat.getSelectedItem().toString().split("-")[0].trim())) ){
-                indexCategoria = i;
-                break;
-            }
+         if (TabelaExibir.getSelectedRow() == -1) {
+        return; // Se nenhuma linha estiver selecionada, não faz nada
+    }
+
+    int dados;
+    try {
+        dados = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4);
+    } catch (Exception e) {
+        System.err.println("Erro ao obter dados da tabela: " + e.getMessage());
+        return;
+    }
+
+    CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
+    List<CategoriaDespesa> categoriaDespesa;
+    
+    System.out.println(dados);
+
+    // Encontrar o índice correto do comboBox
+    Integer indexCategoria = null;
+    for (int i = 0; i < comboBoxCat.getItemCount(); i++) {
+        String item = comboBoxCat.getItemAt(i).toString();
+        int itemCode = Integer.parseInt(item.split("-")[0].trim());
+        if (dados == itemCode) {
+            indexCategoria = i;
+            break;
         }
-        if (TabelaExibir.getSelectedRow() != -1) {
-            InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
-            InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
-            Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
-            System.out.println(indexCategoria);
-           comboBoxCat.setSelectedIndex( indexCategoria );
-           try {
-            categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
-             
-            
-            comboBoxCat.setSelectedItem( categoriaDespesa.getFirst() );
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+    }
+
+    // Atualizar campos de texto
+    InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
+    InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
+    Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+
+    // Atualizar comboBox
+    if (indexCategoria != null) {
+        comboBoxCat.setSelectedIndex(indexCategoria);
+    }
+
+    // Pesquisar a categoria de despesa
+    try {
+        categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
+        System.out.println("pesquisa code: " + categoriaDespesa);
+
+        if (!categoriaDespesa.isEmpty()) {
+            comboBoxCat.setSelectedItem(categoriaDespesa.get(0)); // Assumindo que a lista tenha pelo menos um item
         }
+    } catch (ClassNotFoundException | SQLException ex) {
+        java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
