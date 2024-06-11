@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.CategoriaDespesa;
 import model.bean.Despesa;
-import model.bean.CategoriaReceita;
 import model.dao.DespesaDAO;
 import model.dao.CategoriaDespesaDAO;
 import visao.TelaMenuPrincipal;

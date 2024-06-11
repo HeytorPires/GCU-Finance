@@ -4,12 +4,16 @@
  */
 package visao.CRUD;
 import java.lang.System.Logger;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.CategoriaReceita;
 import model.bean.Receita;
+import model.dao.CategoriaReceitaDAO;
 import model.dao.ReceitaDAO;
 import visao.TelaMenuPrincipal;
 /**
@@ -35,8 +39,19 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
+         listarComboBox();
     }
 
+    public final void listarComboBox () {
+        CategoriaReceitaDAO dao = new CategoriaReceitaDAO();
+        try {
+            for(CategoriaReceita d: dao.readCategoriaByIdUser(id_usuario)){
+                comboBoxCat.addItem(d.getCode()+ " - " + d.getNome());
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private TelaReceitaCRUD() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -73,6 +88,19 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         });
     });
 }
+    
+    public String converterDataParaMySQL(String texto) {
+        String regex = "\\b(\\d{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        
+        if (matcher.find()) {
+            String dataMySQL = matcher.group(1) + "-" + matcher.group(2) + "-" + matcher.group(3);
+            return dataMySQL;
+        } else {
+            return null; // Retorna null se não encontrar uma data no formato especificado
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,10 +123,10 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botaoSair = new javax.swing.JButton();
-        inputcode = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Inputdata = new javax.swing.JFormattedTextField();
+        comboBoxCat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 550));
@@ -178,11 +206,11 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Data");
+        jLabel5.setText("Data(yyyy-mm-dd)");
 
         jLabel6.setText("Code");
 
-        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("Y-MM-dd"))));
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,15 +232,15 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(93, 93, 93)))
-                        .addGap(6, 6, 6)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addGap(42, 42, 42)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(inputcode, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
+                            .addComponent(comboBoxCat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
                         .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BotaoCadastrar)
@@ -248,8 +276,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(botaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -278,7 +306,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
             InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
             Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
-            inputcode.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4).toString());
+            
         }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
@@ -293,7 +321,6 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");
-            inputcode.setText("");
            
             try {
                 dao.delete(r);
@@ -313,17 +340,24 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
         Receita r = new Receita();
         ReceitaDAO dao = new ReceitaDAO();
-
+        String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+        Integer code = Integer.valueOf( dados[0].trim() );
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
         r.setId_usuario(id_usuario);
-        r.setData(java.sql.Date.valueOf(Inputdata.getText()));
-       // r.setData(Date.valueOf(Inputdata.getText()));
-        r.setCode(Integer.parseInt(inputcode.getText()));
+        String dataMySQL = converterDataParaMySQL(Inputdata.getText());
+        if (dataMySQL != null) {
+            r.setData(Date.valueOf(dataMySQL));
+        } else {
+            // Tratar caso a data não esteja no formato esperado
+            JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
+            return; // Abortar a operação
+        };
+        r.setCode(code);
+       
         InputTitulo.setText("");
         InputValor.setText("");
         Inputdata.setText("");
-        inputcode.setText("");
        
         try {
             dao.Create(r);
@@ -349,18 +383,26 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         if (TabelaExibir.getSelectedRow() != -1) {
             Receita r = new Receita();
             ReceitaDAO dao = new ReceitaDAO();
-
+            String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+            Integer code = Integer.valueOf( dados[0].trim() );
+            
             r.setTitulo(InputTitulo.getText());
             r.setValor(Double.parseDouble(InputValor.getText()));
             r.setId_usuario(id_usuario);
             r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-            r.setData(java.sql.Date.valueOf(Inputdata.getText()));
-            r.setCode(Integer.parseInt(inputcode.getText()));
+            String dataMySQL = converterDataParaMySQL(Inputdata.getText());
+            if (dataMySQL != null) {
+                r.setData(Date.valueOf(dataMySQL));
+            } else {
+                // Tratar caso a data não esteja no formato esperado
+                JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
+                return; // Abortar a operação
+            };
+            r.setCode(code);
             
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");
-            inputcode.setText("");
             InputPesquisa.setText("");
 
             try {
@@ -427,7 +469,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     private javax.swing.JTable TabelaExibir;
     private javax.swing.JButton botaoSair;
     private javax.swing.JButton buttonPesquisa;
-    private javax.swing.JTextField inputcode;
+    private javax.swing.JComboBox<Object> comboBoxCat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
