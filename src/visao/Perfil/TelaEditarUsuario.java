@@ -4,6 +4,7 @@
  */
 package visao.Perfil;
 
+import Controller.UserController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,47 +48,7 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         }
         return email.endsWith("@gmail.com");
     }
-    public void  EditarDados(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
-        boolean NomeDiferente = true;
-        boolean EmailDiferente  = true;
-        
-
-         UsuarioDAO Userdao = new UsuarioDAO();
-         Usuario user = Userdao.readUserByID(id_usuario);
-         String nomeDB = user.getUsername();
-         String EmailDB = user.getEmail();
-         
-         if(nomeDB.equals(NomeNovo) ){
-             NomeDiferente = false;
-             JOptionPane.showMessageDialog(null,"Não foi possivel alterar o Nome: Nome Novo é igual ao antigo ");
-             
-         } 
-          
-         if(EmailDB.equals(EmailNovo)){
-             EmailDiferente = false;
-             JOptionPane.showMessageDialog(null,"Não foi possivel alterar o email: Email Novo é igual ao antigo ");
-
-         } 
-         
-         if(NomeNovo.equals("")){
-                    NomeNovo = nomeDB;
-                }
-         if(EmailNovo.equals("")){
-                     EmailNovo = EmailDB;
-                 }
-        if(validarEmail(EmailDB)){
-            if(EmailDiferente && NomeDiferente){
-                      Userdao.AlterarUsuario(NomeNovo,EmailNovo, id_usuario);
-                       this.dispose();
-                        new TelaMenuPrincipal(id_usuario).setVisible(true);
-
-         }
-        } else{
-            JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legitimo! (@gmail.com)");
-        }
-         
-
-    }
+    
     public void CarregarDados(int id_usuario) throws ClassNotFoundException, SQLException{
          UsuarioDAO Userdao = new UsuarioDAO();
          Usuario user = Userdao.readUserByID(id_usuario);
@@ -224,20 +185,13 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UsuarioDAO Userdao = new UsuarioDAO();
         String NomeNovo = InputNomeNovo.getText();
         String EmailNovo = InputEmailNovo.getText();
-        
         try {
-            EditarDados(NomeNovo, EmailNovo,id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            UserController.validateuserUpdate(NomeNovo, EmailNovo, id_usuario);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-            
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

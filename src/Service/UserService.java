@@ -51,5 +51,20 @@ public class UserService {
         u.setSenha(senha);
         userdao.Create(u);
     }
+    
+    public static Usuario findUserByUser(int id_usuario) throws ClassNotFoundException, SQLException{
+        Usuario u = new Usuario();
+        UsuarioDAO userdao = new UsuarioDAO();
+        u = userdao.readUserByID(id_usuario);
+        return u;
+    }
+    public static void alterarDadosUsuario(String nome ,String email, int id_usuario) throws ClassNotFoundException, SQLException{
+        Usuario u = new Usuario();
+        UsuarioDAO userdao = new UsuarioDAO();
+        u.setLogin(nome);
+        u.setEmail(email);
+        u.setId_usuario(id_usuario);
+        userdao.AlterarUsuario(nome, email, id_usuario);
+    }
         
 }
