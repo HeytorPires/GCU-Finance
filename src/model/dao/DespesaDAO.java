@@ -219,4 +219,25 @@ public class DespesaDAO {
             }
             return despesa;
         }
+        
+        public void deleteAll(int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+             ResultSet rs = null;
+            try {
+                stmt = con.prepareStatement("DELETE FROM despesa WHERE id_usuario = ?");
+                
+                stmt.setInt(1, id_usuario);
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Todas as despesas foram deletadas com sucesso");
+            } catch (SQLException ex) {
+                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+        }
 }

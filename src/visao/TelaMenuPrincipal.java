@@ -19,6 +19,7 @@ import visao.CRUD.TelaCategoriaDespesaCRUD;
 import visao.CRUD.TelaCategoriaReceitaCRUD;
 import visao.CRUD.TelaDespesaCRUD;
 import visao.CRUD.TelaReceitaCRUD;
+import visao.Perfil.TelaApagarDadosUsuario;
 import visao.Perfil.TelaEditarSenha;
 import visao.Perfil.TelaEditarUsuario;
 
@@ -187,6 +188,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tabelaMovi = new javax.swing.JTable();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroDespesas = new javax.swing.JMenuItem();
@@ -429,19 +431,32 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tabelaMovi);
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 137, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox3, 0, 119, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 98, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Movimentações Gerais", jPanel5);
@@ -527,6 +542,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_delete.png"))); // NOI18N
         jMenuItem3.setText("Excluir Dados");
         jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         PerfilMenu.add(jMenuItem3);
 
         jMenuBar1.add(PerfilMenu);
@@ -668,6 +688,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
          this.dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+     this.dispose();
+     new TelaApagarDadosUsuario(id_usuario).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -693,6 +722,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable TabelaReceitas;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;

@@ -216,5 +216,25 @@ public class CategoriaReceitaDAO {
             }
             return categorias;
         }
+        public void deleteAll(int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+             ResultSet rs = null;
+            try {
+                stmt = con.prepareStatement("DELETE FROM categoria_receita WHERE id_usuario = ?");
+                
+                stmt.setInt(1, id_usuario);
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Todas as categorias receitas foram deletadas com sucesso");
+            } catch (SQLException ex) {
+                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+        }
         
 }

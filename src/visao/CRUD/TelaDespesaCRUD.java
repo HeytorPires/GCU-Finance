@@ -416,6 +416,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         };
         
         
+        
         //categoria
         InputTitulo.setText("");
         InputValor.setText("");

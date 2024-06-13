@@ -164,6 +164,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -667,7 +670,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="137" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jComboBox3" pref="119" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -676,6 +681,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="98" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -735,6 +745,32 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JComboBox" name="jComboBox3">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="12">
+                    <StringItem index="0" value="1 - Janeiro"/>
+                    <StringItem index="1" value="2 - Fevereiro"/>
+                    <StringItem index="2" value="3 - Mar&#xe7;o"/>
+                    <StringItem index="3" value="4 - Abril"/>
+                    <StringItem index="4" value="5 - Maio"/>
+                    <StringItem index="5" value="6 - Junho"/>
+                    <StringItem index="6" value="7 - Julho"/>
+                    <StringItem index="7" value="8 - Agosto"/>
+                    <StringItem index="8" value="9 - Setembro"/>
+                    <StringItem index="9" value="10 - Outubro"/>
+                    <StringItem index="10" value="11 - Novembro"/>
+                    <StringItem index="11" value="12 - Dezembro."/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox3ActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
