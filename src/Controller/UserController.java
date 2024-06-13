@@ -17,7 +17,7 @@ public class UserController {
             Service.UserService.create(nome, email, senha);
         }
     }
-    public static void validateuserUpdate(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
+    public static void AlterarInfo(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
        if(ValidationService.validateUserUpdate(NomeNovo, EmailNovo, id_usuario)){
         Service.UserService.chargeUserInfo(NomeNovo, EmailNovo, id_usuario);
     }

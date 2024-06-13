@@ -30,9 +30,7 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo( null );
         try {
             CarregarDados(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -42,12 +40,12 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     private TelaEditarUsuario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public static boolean validarEmail(String email) {
-        if (email == null) {
-            return false;
-        }
-        return email.endsWith("@gmail.com");
-    }
+//    public static boolean validarEmail(String email) {
+//        if (email == null) {
+//            return false;
+//        }
+//        return email.endsWith("@gmail.com");
+//    }
     
     public void CarregarDados(int id_usuario) throws ClassNotFoundException, SQLException{
          UsuarioDAO Userdao = new UsuarioDAO();
@@ -187,8 +185,10 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String NomeNovo = InputNomeNovo.getText();
         String EmailNovo = InputEmailNovo.getText();
+        
+
         try {
-            UserController.validateuserUpdate(NomeNovo, EmailNovo, id_usuario);
+            UserController.AlterarInfo(NomeNovo, EmailNovo, id_usuario);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelaEditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

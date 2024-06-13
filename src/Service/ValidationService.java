@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.bean.Usuario;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -66,10 +67,13 @@ public class ValidationService {
     public static boolean validateUserUpdate(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException {
     boolean differentName = true;
     boolean differentEmail = true;
-
     // Buscar o usuário do banco de dados
-    Usuario User = UserService.findUserByUser(id_usuario);
+    Usuario User = new Usuario();
+    UsuarioDAO Userdao = new UsuarioDAO();
+    User = Userdao.readUserByID(id_usuario);
+    System.out.println("teste  "+User.getUsername());
     String nameDB = User.getUsername();
+    System.out.println("getusername: " + User.getUsername());
     String EmailDB = User.getEmail();
 
     // Verificar se o nome novo é igual ao nome antigo
