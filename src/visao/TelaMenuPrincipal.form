@@ -274,9 +274,21 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane3" min="-2" pref="458" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox2" pref="119" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="comboMounts" pref="119" max="32767" attributes="0"/>
+                                  <Component id="comboYears" alignment="1" pref="119" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="ButtonFiltro" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -288,8 +300,12 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboMounts" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="comboYears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ButtonFiltro" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -352,31 +368,59 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="comboMounts">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="12">
-                    <StringItem index="0" value="1 - Janeiro"/>
-                    <StringItem index="1" value="2 - Fevereiro"/>
-                    <StringItem index="2" value="3 - Mar&#xe7;o"/>
-                    <StringItem index="3" value="4 - Abril"/>
-                    <StringItem index="4" value="5 - Maio"/>
-                    <StringItem index="5" value="6 - Junho"/>
-                    <StringItem index="6" value="7 - Julho"/>
-                    <StringItem index="7" value="8 - Agosto"/>
-                    <StringItem index="8" value="9 - Setembro"/>
-                    <StringItem index="9" value="10 - Outubro"/>
-                    <StringItem index="10" value="11 - Novembro"/>
-                    <StringItem index="11" value="12 - Dezembro."/>
+                  <StringArray count="13">
+                    <StringItem index="0" value="0 - Todos"/>
+                    <StringItem index="1" value="1 - Janeiro"/>
+                    <StringItem index="2" value="2 - Fevereiro"/>
+                    <StringItem index="3" value="3 - Mar&#xe7;o"/>
+                    <StringItem index="4" value="4 - Abril"/>
+                    <StringItem index="5" value="5 - Maio"/>
+                    <StringItem index="6" value="6 - Junho"/>
+                    <StringItem index="7" value="7 - Julho"/>
+                    <StringItem index="8" value="8 - Agosto"/>
+                    <StringItem index="9" value="9 - Setembro"/>
+                    <StringItem index="10" value="10 - Outubro"/>
+                    <StringItem index="11" value="11 - Novembro"/>
+                    <StringItem index="12" value="12 - Dezembro."/>
                   </StringArray>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboMountsActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboYears">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="5">
+                    <StringItem index="0" value="All"/>
+                    <StringItem index="1" value="2021"/>
+                    <StringItem index="2" value="2022"/>
+                    <StringItem index="3" value="2023"/>
+                    <StringItem index="4" value="2024"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboYearsActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="ButtonFiltro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Filtrar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonFiltroActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -395,8 +439,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane2" pref="456" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="121" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="comboYearsReceita" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="comboMountsReceita" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -407,8 +459,10 @@
                       <EmptySpace min="0" pref="98" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="comboMountsReceita" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="comboYearsReceita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -472,27 +526,44 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="comboYearsReceita">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="12">
-                    <StringItem index="0" value="1 - Janeiro"/>
-                    <StringItem index="1" value="2 - Fevereiro"/>
-                    <StringItem index="2" value="3 - Mar&#xe7;o"/>
-                    <StringItem index="3" value="4 - Abril"/>
-                    <StringItem index="4" value="5 - Maio"/>
-                    <StringItem index="5" value="6 - Junho"/>
-                    <StringItem index="6" value="7 - Julho"/>
-                    <StringItem index="7" value="8 - Agosto"/>
-                    <StringItem index="8" value="9 - Setembro"/>
-                    <StringItem index="9" value="10 - Outubro"/>
-                    <StringItem index="10" value="11 - Novembro"/>
-                    <StringItem index="11" value="12 - Dezembro."/>
+                  <StringArray count="5">
+                    <StringItem index="0" value="All"/>
+                    <StringItem index="1" value="2021"/>
+                    <StringItem index="2" value="2022"/>
+                    <StringItem index="3" value="2023"/>
+                    <StringItem index="4" value="2024"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboMountsReceita">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="13">
+                    <StringItem index="0" value="0 - Todos"/>
+                    <StringItem index="1" value="1 - Janeiro"/>
+                    <StringItem index="2" value="2 - Fevereiro"/>
+                    <StringItem index="3" value="3 - Mar&#xe7;o"/>
+                    <StringItem index="4" value="4 - Abril"/>
+                    <StringItem index="5" value="5 - Maio"/>
+                    <StringItem index="6" value="6 - Junho"/>
+                    <StringItem index="7" value="7 - Julho"/>
+                    <StringItem index="8" value="8 - Agosto"/>
+                    <StringItem index="9" value="9 - Setembro"/>
+                    <StringItem index="10" value="10 - Outubro"/>
+                    <StringItem index="11" value="11 - Novembro"/>
+                    <StringItem index="12" value="12 - Dezembro."/>
                   </StringArray>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboMountsReceitaActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

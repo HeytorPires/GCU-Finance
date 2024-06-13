@@ -240,4 +240,61 @@ public class DespesaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
+          public List<Despesa> filterByYearAndMonth(String year, String month) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Despesa> despesas = new ArrayList<>();
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            
+            String query = "SELECT * FROM despesa";
+            boolean hasYear = !year.equals("All");
+            boolean hasMonth = !month.equals("All");
+            
+            if (hasYear || hasMonth) {
+                query += " WHERE";
+                if (hasYear) {
+                    query += " YEAR(data) = ?";
+                }
+                if (hasMonth) {
+                    if (hasYear) {
+                        query += " AND";
+                    } 
+                    query += " MONTH(data) = ?";
+                }
+            }
+            
+            stmt = con.prepareStatement(query);
+            
+            int paramIndex = 1;
+            if (hasYear) {
+                stmt.setString(paramIndex++, year);
+            }
+            if (hasMonth) {
+                stmt.setString(paramIndex++, month);
+            }
+            
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Despesa despesa = new Despesa();
+                despesa.setId_despesa(rs.getInt("id_despesa"));
+                despesa.setTitulo(rs.getString("titulo"));
+                despesa.setData(rs.getDate("data"));
+                despesa.setValor(rs.getDouble("valor"));
+                despesa.setCode(rs.getInt("code"));  // Assumindo que há um campo code
+                despesas.add(despesa);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Filtrar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return despesas;
+    }
+    
 }

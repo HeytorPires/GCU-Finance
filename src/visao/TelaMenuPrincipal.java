@@ -1,12 +1,14 @@
 package visao;
 import visao.Perfil.TelaVisualizarUsuario;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.CategoriaReceita;
+import model.bean.Despesa;
 import model.bean.Usuario;
 import model.dao.CategoriaDespesaDAO;
 import model.dao.CategoriaReceitaDAO;
@@ -95,6 +97,23 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             });
         });
     }
+    public void filterJtableDespesa(String year, String month) throws ClassNotFoundException, SQLException {
+    DefaultTableModel modelo = (DefaultTableModel) TabelaDespesas.getModel();
+    modelo.setNumRows(0);
+    DespesaDAO ddao = new DespesaDAO();
+
+    List<Despesa> despesas = ddao.filterByYearAndMonth(year, month);
+
+    despesas.stream().forEach((d) -> {
+        modelo.addRow(new Object[]{
+            d.getId_despesa(),
+            d.getTitulo(),
+            d.getValor(),
+            d.getData(),
+            d.getCode()
+        });
+    });
+}
     
     public void readJtableReceita() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
@@ -174,11 +193,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TabelaDespesas = new javax.swing.JTable();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboMounts = new javax.swing.JComboBox<>();
+        comboYears = new javax.swing.JComboBox<>();
+        ButtonFiltro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboYearsReceita = new javax.swing.JComboBox<>();
+        comboMountsReceita = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         TabelaCategoriaDespesa = new javax.swing.JTable();
@@ -248,10 +270,24 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(TabelaDespesas);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        comboMounts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Todos", "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
+        comboMounts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                comboMountsActionPerformed(evt);
+            }
+        });
+
+        comboYears.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2021", "2022", "2023", "2024" }));
+        comboYears.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboYearsActionPerformed(evt);
+            }
+        });
+
+        ButtonFiltro.setText("Filtrar");
+        ButtonFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonFiltroActionPerformed(evt);
             }
         });
 
@@ -261,9 +297,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, 0, 119, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboMounts, 0, 119, Short.MAX_VALUE)
+                            .addComponent(comboYears, javax.swing.GroupLayout.Alignment.TRAILING, 0, 119, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ButtonFiltro)
+                        .addGap(21, 21, 21))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,8 +316,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 98, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(comboMounts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(comboYears, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonFiltro)
+                .addGap(112, 112, 112))
         );
 
         jTabbedPane3.addTab("Despesas", jPanel1);
@@ -304,10 +352,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TabelaReceitas);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboYearsReceita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2021", "2022", "2023", "2024" }));
+
+        comboMountsReceita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Todos", "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
+        comboMountsReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboMountsReceitaActionPerformed(evt);
             }
         });
 
@@ -318,8 +368,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(comboYearsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(comboMountsReceita, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,8 +382,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 98, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(comboMountsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboYearsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -660,17 +717,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TabelaReceitasKeyReleased
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         new TelaSobre().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void comboMountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMountsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_comboMountsActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         new TelaEditarSenha(id_usuario).setVisible(true);
@@ -697,6 +750,30 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
      new TelaApagarDadosUsuario(id_usuario).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void comboYearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboYearsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboYearsActionPerformed
+
+    private void ButtonFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFiltroActionPerformed
+    String mesSelecionado = comboMounts.getSelectedItem().toString();
+    String anoSelecionado = comboYears.getSelectedItem().toString();
+    
+    // Extrair a parte numérica do mês
+    String mes = mesSelecionado.split(" - ")[0];
+    System.out.println(mes + " mês");
+    
+    try {
+        filterJtableDespesa(anoSelecionado, mes);
+    } catch (ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_ButtonFiltroActionPerformed
+
+    private void comboMountsReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMountsReceitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboMountsReceitaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -715,13 +792,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonFiltro;
     private javax.swing.JMenu PerfilMenu;
     private javax.swing.JTable TabelaCategoriaDespesa;
     private javax.swing.JTable TabelaCategoriaReceita;
     private javax.swing.JTable TabelaDespesas;
     private javax.swing.JTable TabelaReceitas;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboMounts;
+    private javax.swing.JComboBox<String> comboMountsReceita;
+    private javax.swing.JComboBox<String> comboYears;
+    private javax.swing.JComboBox<String> comboYearsReceita;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
