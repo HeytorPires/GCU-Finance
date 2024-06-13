@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Service.ValidationService;
+import Service.ValidationUserService;
 import java.sql.SQLException;
 /**
  *
@@ -13,17 +13,17 @@ import java.sql.SQLException;
 public class UserController {
     
     public static void validateUserRegistration(String nome, String email, String senha, String confirmarSenha) throws ClassNotFoundException, SQLException{
-        if(Service.ValidationService.validateCreateUser(nome, email, senha, confirmarSenha)){
+        if(Service.ValidationUserService.validateCreateUser(nome, email, senha, confirmarSenha)){
             Service.UserService.create(nome, email, senha);
         }
     }
     public static void AlterarInfo(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
-       if(ValidationService.validateUserUpdate(NomeNovo, EmailNovo, id_usuario)){
+       if(ValidationUserService.validateUserUpdate(NomeNovo, EmailNovo, id_usuario)){
         Service.UserService.chargeUserInfo(NomeNovo, EmailNovo, id_usuario);
     }
     }
     public static void AlterarSenha(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws SQLException, ClassNotFoundException{
-       if(ValidationService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme)){
+       if(ValidationUserService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme)){
            Service.UserService.chargePassword(SenhaInput, id_usuario);
        }
     }

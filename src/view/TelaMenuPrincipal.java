@@ -102,7 +102,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     modelo.setNumRows(0);
     DespesaDAO ddao = new DespesaDAO();
 
-    List<Despesa> despesas = ddao.filterByYearAndMonth(year, month);
+    List<Despesa> despesas = ddao.filterByYearAndMonth(year, month, id_usuario);
 
     despesas.stream().forEach((d) -> {
         modelo.addRow(new Object[]{

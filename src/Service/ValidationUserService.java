@@ -15,7 +15,7 @@ import model.dao.UsuarioDAO;
  *
  * @author Usuario
  */
-public class ValidationService {
+public class ValidationUserService {
      public static boolean validEmailUser(String email) {
         if (email == null) {
             return false;
@@ -63,60 +63,61 @@ public class ValidationService {
 
     // Se todas as verificações passarem, retorna true
     return SenhaAntigaCorreta && SenhasBatendo;
-}
+    }
+
     public static boolean validateUserUpdate(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException {
-    boolean differentName = true;
-    boolean differentEmail = true;
-    // Buscar o usuário do banco de dados
-    Usuario User = new Usuario();
+    boolean NomeDiferente = true;
+    boolean EmailDiferente = true;
+
     UsuarioDAO Userdao = new UsuarioDAO();
-    User = Userdao.readUserByID(id_usuario);
-    System.out.println("teste  "+User.getUsername());
-    String nameDB = User.getUsername();
-    System.out.println("getusername: " + User.getUsername());
-    String EmailDB = User.getEmail();
+    Usuario user = Userdao.readUserByID(id_usuario);
+   
+
+    String nomeDB = user.getUsername();
+    String EmailDB = user.getEmail();
+
+    if (NomeNovo.isEmpty() && EmailNovo.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido!");
+        return false;
+    }
 
     // Verificar se o nome novo é igual ao nome antigo
-    if (nameDB.equals(NomeNovo)) {
-        differentName = false;
-        JOptionPane.showMessageDialog(null, "Não foi possível alterar o nome: Nome novo é igual ao antigo.");
+    if (!NomeNovo.isEmpty() && nomeDB.equals(NomeNovo)) {
+        NomeDiferente = false;
+        JOptionPane.showMessageDialog(null, "Não foi possível alterar o Nome: Nome novo é igual ao antigo.");
     }
 
     // Verificar se o email novo é igual ao email antigo
-    if (EmailDB.equals(EmailNovo)) {
-        differentEmail = false;
-        JOptionPane.showMessageDialog(null, "Não foi possível alterar o email: Email novo é igual ao antigo.");
+    if (!EmailNovo.isEmpty() && EmailDB.equals(EmailNovo)) {
+        EmailDiferente = false;
+        JOptionPane.showMessageDialog(null, "Não foi possível alterar o Email: Email novo é igual ao antigo.");
     }
 
     // Verificar se os campos de nome e email não estão vazios, senão mantêm os valores antigos
     if (NomeNovo.isEmpty()) {
-        NomeNovo = nameDB;
+        NomeNovo = nomeDB;
     }
     if (EmailNovo.isEmpty()) {
         EmailNovo = EmailDB;
     }
 
     // Validar se o email segue o padrão correto
-    if (!ValidationService.validEmailUser(EmailNovo)) {
+    if (!ValidationUserService.validEmailUser(EmailNovo)) {
         JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legítimo! (@gmail.com)");
-        return false;
+       return false;
     }
 
-    // Se ambos nome e email são diferentes dos valores antigos, retorna true
-    if (differentEmail && differentName) {
-        return true;
+    // Se pelo menos um dos campos for diferente, realizar a atualização
+    if (NomeDiferente || EmailDiferente) {
+        Userdao.AlterarUsuario(NomeNovo, EmailNovo, id_usuario);
     } else {
-        // Mensagem genérica caso os dois campos não tenham sido atualizados corretamente
-        if (!differentName && !differentEmail) {
-            JOptionPane.showMessageDialog(null, "Nome e email não foram alterados.");
-        } else if (!differentName) {
-            JOptionPane.showMessageDialog(null, "Nome não foi alterado.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Email não foi alterado.");
-        }
-        return false;
+        JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.");
     }
-}
+         return false;
+    }
+
+
+
     public static boolean validateCreateUser(String nome, String email, String senha, String confirmarSenha) {
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
@@ -128,7 +129,7 @@ public class ValidationService {
             return false; 
         }
 
-        if (!ValidationService.validEmailUser(email)) {
+        if (!ValidationUserService.validEmailUser(email)) {
             JOptionPane.showMessageDialog(null, "E-mail inválido.");
             return false;
         }
