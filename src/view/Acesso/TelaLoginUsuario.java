@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.Acesso;
+package view.Acesso;
 import ConnectBanco.DatabaseInitializer;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import model.bean.Usuario;
-import visao.TelaMenuPrincipal;
+import view.TelaMenuPrincipal;
 import java.sql.PreparedStatement; 
 import java.sql.ResultSet; 
 import java.sql.SQLException;

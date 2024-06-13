@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.Perfil;
+package view.Perfil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import visao.TelaMenuPrincipal;
+import view.TelaMenuPrincipal;
 import model.bean.Usuario;
 import model.dao.UsuarioDAO;
 /**
@@ -225,9 +225,7 @@ public class TelaEditarSenha extends javax.swing.JFrame {
                 } else {
                     ApagarInput();
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_jButton4ActionPerformed

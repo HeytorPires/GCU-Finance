@@ -1,5 +1,5 @@
-package visao;
-import visao.Perfil.TelaVisualizarUsuario;
+package view;
+import view.Perfil.TelaVisualizarUsuario;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,15 +15,15 @@ import model.dao.CategoriaReceitaDAO;
 import model.dao.DespesaDAO;
 import model.dao.MovimentacoesDAO;
 import model.dao.ReceitaDAO;
-import visao.Acesso.TelaLoginUsuario;
-import visao.Sobre.TelaSobre;
-import visao.CRUD.TelaCategoriaDespesaCRUD;
-import visao.CRUD.TelaCategoriaReceitaCRUD;
-import visao.CRUD.TelaDespesaCRUD;
-import visao.CRUD.TelaReceitaCRUD;
-import visao.Perfil.TelaApagarDadosUsuario;
-import visao.Perfil.TelaEditarSenha;
-import visao.Perfil.TelaEditarUsuario;
+import view.Acesso.TelaLoginUsuario;
+import view.Sobre.TelaSobre;
+import view.CRUD.TelaCategoriaDespesaCRUD;
+import view.CRUD.TelaCategoriaReceitaCRUD;
+import view.CRUD.TelaDespesaCRUD;
+import view.CRUD.TelaReceitaCRUD;
+import view.Perfil.TelaApagarDadosUsuario;
+import view.Perfil.TelaEditarSenha;
+import view.Perfil.TelaEditarUsuario;
 
 
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.Acesso;
+package view.Acesso;
 
 import Controller.UserController;
 import java.lang.System.Logger.Level;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Usuario;
 import model.dao.UsuarioDAO;
-import visao.Acesso.TelaLoginUsuario;
+import view.Acesso.TelaLoginUsuario;
 
 
 /**
@@ -46,7 +46,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 450));
         setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Logotipo sem fundo.png"))); // NOI18N

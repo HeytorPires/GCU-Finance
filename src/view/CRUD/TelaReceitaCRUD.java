@@ -2,27 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.CRUD;
+package view.CRUD;
 import java.lang.System.Logger;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.CategoriaDespesa;
-import model.bean.Despesa;
-import model.dao.DespesaDAO;
-import model.dao.CategoriaDespesaDAO;
-import visao.TelaMenuPrincipal;
+import model.bean.CategoriaReceita;
+import model.bean.Receita;
+import model.dao.CategoriaReceitaDAO;
+import model.dao.ReceitaDAO;
+import view.TelaMenuPrincipal;
 /**
  *
  * @author heyto
  */
-public class TelaDespesaCRUD extends javax.swing.JFrame {
+public class TelaReceitaCRUD extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaReceitaCRUD
@@ -31,46 +29,40 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
      */
     private int id_usuario;
 
-    public TelaDespesaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
+    public TelaReceitaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
         this.setLocationRelativeTo( null );
 
         this.id_usuario = id_usuario;
-        
-        listarComboBox();
-
          try {
             readJtable();
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-        
+         listarComboBox();
     }
-    
+
     public final void listarComboBox () {
-        CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
+        CategoriaReceitaDAO dao = new CategoriaReceitaDAO();
         try {
-            for(CategoriaDespesa d: dao.readCategoriaByIdUser(id_usuario)){
+            for(CategoriaReceita d: dao.readCategoriaByIdUser(id_usuario)){
                 comboBoxCat.addItem(d.getCode()+ " - " + d.getNome());
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private TelaDespesaCRUD() {
+    private TelaReceitaCRUD() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
-        DespesaDAO pdao = new DespesaDAO();
-        System.out.println("usaurio id DESPESA" + id_usuario);
+        ReceitaDAO pdao = new ReceitaDAO();
 
-        pdao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
+        pdao.readReceitaByIdUser(id_usuario).stream().forEach((d) -> {
             modelo.addRow(new Object[]{
-                d.getId_despesa(),
+                d.getId_receita(),
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
@@ -79,15 +71,16 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         });
     }
     
-    public void readJtableForDesc(String titulo) throws SQLException, ClassNotFoundException  {
+    
+    public void readJtableForDesc(String titulo, int id_usuario) throws SQLException, ClassNotFoundException  {
     DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
     modelo.setNumRows(0);
-    DespesaDAO pdao = new DespesaDAO();
+    ReceitaDAO pdao = new ReceitaDAO();
 
 
     pdao.readForDesc(titulo, id_usuario).stream().forEach((d) -> {
         modelo.addRow(new Object[]{
-            d.getId_despesa(),
+            d.getId_receita(),
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
@@ -95,6 +88,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         });
     });
 }
+    
     public String converterDataParaMySQL(String texto) {
         String regex = "\\b(\\d{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])\\b";
         Pattern pattern = Pattern.compile(regex);
@@ -107,8 +101,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             return null; // Retorna null se não encontrar uma data no formato especificado
         }
     }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,9 +123,9 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botaoSair = new javax.swing.JButton();
-        Inputdata = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        Inputdata = new javax.swing.JFormattedTextField();
         comboBoxCat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -213,22 +205,11 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Data(yyyy-mm-dd)");
+
+        jLabel6.setText("Code");
+
         Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
-        Inputdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InputdataActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Categoria");
-
-        jLabel6.setText("Data(yyyy-mm-dd)");
-
-        comboBoxCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxCatActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,68 +217,70 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(BotaoCadastrar)
-                .addGap(18, 18, 18)
-                .addComponent(BotaoExcluir)
-                .addGap(30, 30, 30)
-                .addComponent(BotaoAtualizar)
-                .addGap(18, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(buttonPesquisa)
-                .addGap(121, 121, 121))
-            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(147, 147, 147)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(InputValor)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(93, 93, 93)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(comboBoxCat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BotaoCadastrar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotaoExcluir)
+                        .addGap(30, 30, 30)
+                        .addComponent(BotaoAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonPesquisa))
+                            .addComponent(jLabel4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(147, 147, 147)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InputValor, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(108, 108, 108))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(comboBoxCat, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(InputTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(InputValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Inputdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(22, 22, 22)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -305,81 +288,38 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                         .addComponent(BotaoExcluir)
                         .addComponent(BotaoAtualizar)
                         .addComponent(BotaoCadastrar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonPesquisa)
-                        .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(InputPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonPesquisa)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGap(308, 308, 308))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void TabelaExibirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaExibirKeyReleased
-         if (TabelaExibir.getSelectedRow() == -1) {
-        return; // Se nenhuma linha estiver selecionada, não faz nada
-    }
 
-    int dados;
-    try {
-        dados = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 4);
-    } catch (Exception e) {
-        System.err.println("Erro ao obter dados da tabela: " + e.getMessage());
-        return;
-    }
-
-    CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
-    List<CategoriaDespesa> categoriaDespesa;
-    
-    System.out.println(dados);
-
-    // Encontrar o índice correto do comboBox
-    Integer indexCategoria = null;
-    for (int i = 0; i < comboBoxCat.getItemCount(); i++) {
-        String item = comboBoxCat.getItemAt(i).toString();
-        int itemCode = Integer.parseInt(item.split("-")[0].trim());
-        if (dados == itemCode) {
-            indexCategoria = i;
-            break;
+        if (TabelaExibir.getSelectedRow() != -1) {
+            InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
+            InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
+            Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+            
         }
-    }
-
-    // Atualizar campos de texto
-    InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
-    InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
-    Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
-
-    // Atualizar comboBox
-    if (indexCategoria != null) {
-        comboBoxCat.setSelectedIndex(indexCategoria);
-    }
-
-    // Pesquisar a categoria de despesa
-    try {
-        categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
-        System.out.println("pesquisa code: " + categoriaDespesa);
-
-        if (!categoriaDespesa.isEmpty()) {
-            comboBoxCat.setSelectedItem(categoriaDespesa.get(0)); // Assumindo que a lista tenha pelo menos um item
-        }
-    } catch (ClassNotFoundException | SQLException ex) {
-        java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Despesa r = new Despesa();
-            DespesaDAO dao = new DespesaDAO();
+            Receita r = new Receita();
+            ReceitaDAO dao = new ReceitaDAO();
 
-            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
 
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");
-
            
             try {
                 dao.delete(r);
@@ -397,15 +337,13 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        Despesa r = new Despesa();
-        DespesaDAO dao = new DespesaDAO();
+        Receita r = new Receita();
+        ReceitaDAO dao = new ReceitaDAO();
         String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
         Integer code = Integer.valueOf( dados[0].trim() );
-
         r.setTitulo(InputTitulo.getText());
         r.setValor(Double.parseDouble(InputValor.getText()));
         r.setId_usuario(id_usuario);
-        r.setCode( code );
         String dataMySQL = converterDataParaMySQL(Inputdata.getText());
         if (dataMySQL != null) {
             r.setData(Date.valueOf(dataMySQL));
@@ -414,13 +352,12 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
             return; // Abortar a operação
         };
-        
-        
-        
-        //categoria
+        r.setCode(code);
+       
         InputTitulo.setText("");
         InputValor.setText("");
         Inputdata.setText("");
+       
         try {
             dao.Create(r);
             readJtable();
@@ -433,32 +370,40 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-        System.out.println(id_usuario);
         try {
-            readJtableForDesc(InputPesquisa.getText());
+            readJtableForDesc(InputPesquisa.getText(), id_usuario);
         } catch (SQLException | ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }        
-        System.out.println("id usuario "+ id_usuario);;
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Despesa r = new Despesa();
-            DespesaDAO dao = new DespesaDAO();
+            Receita r = new Receita();
+            ReceitaDAO dao = new ReceitaDAO();
             String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
             Integer code = Integer.valueOf( dados[0].trim() );
             
             r.setTitulo(InputTitulo.getText());
             r.setValor(Double.parseDouble(InputValor.getText()));
-            r.setData(Date.valueOf(Inputdata.getText()));
-            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            r.setId_usuario(id_usuario);
+            r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+            String dataMySQL = converterDataParaMySQL(Inputdata.getText());
+            if (dataMySQL != null) {
+                r.setData(Date.valueOf(dataMySQL));
+            } else {
+                // Tratar caso a data não esteja no formato esperado
+                JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
+                return; // Abortar a operação
+            };
             r.setCode(code);
             
             InputTitulo.setText("");
             InputValor.setText("");
             Inputdata.setText("");
+            InputPesquisa.setText("");
+
             try {
                 dao.update(r);
                 readJtable();
@@ -471,19 +416,11 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
         int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (resposta == JOptionPane.YES_OPTION) {
-            new TelaMenuPrincipal(id_usuario).setVisible(true);
-            this.dispose();
-        }
+            if (resposta == JOptionPane.YES_OPTION) {
+                new TelaMenuPrincipal(id_usuario).setVisible(true);
+                this.dispose(); 
+                }
     }//GEN-LAST:event_botaoSairActionPerformed
-
-    private void InputdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputdataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InputdataActionPerformed
-
-    private void comboBoxCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxCatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,7 +452,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaDespesaCRUD().setVisible(true);
+                new TelaReceitaCRUD().setVisible(true);
             }
         });
     }

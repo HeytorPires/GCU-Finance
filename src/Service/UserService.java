@@ -35,16 +35,7 @@ public class UserService {
 
         userdao.AlterarUsuario(nome, email, id_usuario);
     }
-    public void changePassword(String senha, int id_usuario) throws ClassNotFoundException, SQLException{
-        Usuario u = new Usuario();
-        UsuarioDAO userdao = new UsuarioDAO();
-
-        u.setSenha(senha);
-        u.setId_usuario(id_usuario);
-        userdao.AlterarSenha(senha, id_usuario);
-
-    }
-    public void checkUsuario(String email, String senha) throws ClassNotFoundException, SQLException{
+    public static void checkUsuario(String email, String senha) throws ClassNotFoundException, SQLException{
         Usuario u = new Usuario();
         UsuarioDAO userdao = new UsuarioDAO();
         u.setEmail(email);
@@ -55,10 +46,10 @@ public class UserService {
     public static Usuario findUserByUser(int id_usuario) throws ClassNotFoundException, SQLException{
         Usuario u = new Usuario();
         UsuarioDAO userdao = new UsuarioDAO();
-        u = userdao.readUserByID(id_usuario);
+        userdao.readUserByID(id_usuario);
         return u;
     }
-    public static void alterarDadosUsuario(String nome ,String email, int id_usuario) throws ClassNotFoundException, SQLException{
+    public static void chargeUserInfo(String nome ,String email, int id_usuario) throws ClassNotFoundException, SQLException{
         Usuario u = new Usuario();
         UsuarioDAO userdao = new UsuarioDAO();
         u.setLogin(nome);
@@ -66,5 +57,8 @@ public class UserService {
         u.setId_usuario(id_usuario);
         userdao.AlterarUsuario(nome, email, id_usuario);
     }
-        
+     public static void chargePassword(String novaSenha, int id_usuario) throws ClassNotFoundException, SQLException{
+         UsuarioDAO userdao = new UsuarioDAO();
+         userdao.AlterarSenha(novaSenha, id_usuario);
+     }
 }
