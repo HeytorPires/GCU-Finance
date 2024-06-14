@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import view.TelaMenuPrincipal;
 import model.bean.Usuario;
 import model.dao.UsuarioDAO;
+
 /**
  *
  * @author heyto
@@ -37,47 +38,7 @@ public class TelaEditarSenha extends javax.swing.JFrame {
         inputConfirmSenha.setText("");
     }
     
-    public boolean ValidarDados(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme){
-    // Variáveis de inicialização
-    boolean SenhaAntigaCorreta = false;
-    boolean SenhasBatendo = false;
-    List<String> erros = new ArrayList<>();
-
-    // Verificação da senha antiga
-    if (AntigaSenhaDB.equals(AntigaSenhaInput)) {
-        SenhaAntigaCorreta = true;
-    } else {
-        erros.add("Senha antiga está incorreta");
-    }
-
-    // Verificação de correspondência das novas senhas
-    if (SenhaInput.equals(SenhaInputConfirme)) {
-        SenhasBatendo = true;
-    } else {
-        erros.add("Senhas inseridas não batem");
-    }
-
-    // Verificação se a nova senha é igual à senha antiga
-    if (AntigaSenhaDB.equals(SenhaInput)) {
-        erros.add("Não foi possível alterar a senha: a nova senha é igual à antiga");
-    }
-
-    // Verificação se a nova senha é vazia
-    if (SenhaInput.isEmpty()) {
-        erros.add("ERRO: não é possível alterar a senha para vazio!");
-    }
-
-    // Exibição das mensagens de erro, se houverem
-    if (!erros.isEmpty()) {
-        for (String erro : erros) {
-            JOptionPane.showMessageDialog(null, erro);
-        }
-        return false;
-    }
-
-    // Se todas as verificações passarem, retorna true
-    return SenhaAntigaCorreta && SenhasBatendo;
-}
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -208,26 +169,19 @@ public class TelaEditarSenha extends javax.swing.JFrame {
     }//GEN-LAST:event_inputSenhaAntigaActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-           UsuarioDAO userDAO = new UsuarioDAO();
-            Usuario Usuario;
-            try {
-                Usuario = userDAO.readUserByID(id_usuario);
-                String SenhaAntigaDB = Usuario.getSenha();
+                
+                String SenhaAntigaDB = "";
                 String senhaAntigaInput = new String(inputSenhaAntiga.getPassword());
                 String SenhaNova = new String(inputSenha.getPassword());
                 String SenhaNovaConfirme = new String(inputConfirmSenha.getPassword());
-
-                if (ValidarDados(SenhaAntigaDB, senhaAntigaInput, SenhaNova, SenhaNovaConfirme)) {
-                    userDAO.AlterarSenha(SenhaNova, id_usuario);
-                    ApagarInput();
-                    this.dispose();
-                    new TelaMenuPrincipal(id_usuario).setVisible(true);
-                } else {
-                    ApagarInput();
-                }
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            Controller.UserController.AlterarSenha(SenhaAntigaDB, senhaAntigaInput, SenhaNova, SenhaNovaConfirme, id_usuario);
+            ApagarInput();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

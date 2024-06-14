@@ -23,7 +23,7 @@ public class UserController {
     }
     }
     public static void AlterarSenha(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws SQLException, ClassNotFoundException{
-       if(ValidationUserService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme)){
+        if(ValidationUserService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme, id_usuario)){
            Service.UserService.chargePassword(SenhaInput, id_usuario);
        }
     }

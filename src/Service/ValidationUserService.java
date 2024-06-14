@@ -21,10 +21,13 @@ public class ValidationUserService {
             return false;
         }
         return email.endsWith("@gmail.com");
-    }
-     
-    public static boolean validatePasswordUpdate(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme){
-    // Variáveis de inicialização
+    }       
+    public static boolean validatePasswordUpdate(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws ClassNotFoundException, SQLException{
+        UsuarioDAO udao = new UsuarioDAO();
+        Usuario user = udao.readUserByID(id_usuario);
+        
+        AntigaSenhaDB = user.getSenha();
+
     boolean SenhaAntigaCorreta = false;
     boolean SenhasBatendo = false;
     List<String> erros = new ArrayList<>();
@@ -136,5 +139,46 @@ public class ValidationUserService {
 
         return true;
     }
+    
+    public static boolean validateUpdatePasswordUser(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme){
+    // Variáveis de inicialização
+    boolean SenhaAntigaCorreta = false;
+    boolean SenhasBatendo = false;
+    List<String> erros = new ArrayList<>();
 
+    // Verificação da senha antiga
+    if (AntigaSenhaDB.equals(AntigaSenhaInput)) {
+        SenhaAntigaCorreta = true;
+    } else {
+        erros.add("Senha antiga está incorreta");
+    }
+
+    // Verificação de correspondência das novas senhas
+    if (SenhaInput.equals(SenhaInputConfirme)) {
+        SenhasBatendo = true;
+    } else {
+        erros.add("Senhas inseridas não batem");
+    }
+
+    // Verificação se a nova senha é igual à senha antiga
+    if (AntigaSenhaDB.equals(SenhaInput)) {
+        erros.add("Não foi possível alterar a senha: a nova senha é igual à antiga");
+    }
+
+    // Verificação se a nova senha é vazia
+    if (SenhaInput.isEmpty()) {
+        erros.add("ERRO: não é possível alterar a senha para vazio!");
+    }
+
+    // Exibição das mensagens de erro, se houverem
+    if (!erros.isEmpty()) {
+        for (String erro : erros) {
+            JOptionPane.showMessageDialog(null, erro);
+        }
+        return false;
+    }
+
+    // Se todas as verificações passarem, retorna true
+    return SenhaAntigaCorreta && SenhasBatendo;
+}
 }

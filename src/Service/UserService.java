@@ -43,7 +43,7 @@ public class UserService {
         userdao.Create(u);
     }
     
-    public static Usuario findUserByUser(int id_usuario) throws ClassNotFoundException, SQLException{
+    public static Usuario findUserById(int id_usuario) throws ClassNotFoundException, SQLException{
         Usuario u = new Usuario();
         UsuarioDAO userdao = new UsuarioDAO();
         userdao.readUserByID(id_usuario);
@@ -57,8 +57,8 @@ public class UserService {
         u.setId_usuario(id_usuario);
         userdao.AlterarUsuario(nome, email, id_usuario);
     }
-     public static void chargePassword(String novaSenha, int id_usuario) throws ClassNotFoundException, SQLException{
+     public static void chargePassword (String SenhaInput, int id_usuario) throws ClassNotFoundException, SQLException{
          UsuarioDAO userdao = new UsuarioDAO();
-         userdao.AlterarSenha(novaSenha, id_usuario);
+         userdao.AlterarSenha(SenhaInput, id_usuario);
      }
 }
