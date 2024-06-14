@@ -4,7 +4,7 @@
  */
 package view.Acesso;
 
-import Controller.UserController;
+import Controller.UsuarioController;
 import java.lang.System.Logger.Level;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -163,7 +163,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         String confirmarSenha = new String(inputConfirmeSenha.getPassword());
         
         try {
-            UserController.validateUserRegistration(nome, email, senha, confirmarSenha);
+            UsuarioController.validateUserRegistration(nome, email, senha, confirmarSenha);
             inputNome.setText("");
             InputEmail.setText("");
             InputSenha.setText("");

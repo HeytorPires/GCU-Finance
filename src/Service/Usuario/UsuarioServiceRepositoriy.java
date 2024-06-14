@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package Service.Usuario;
 
 import java.sql.SQLException;
 import model.bean.Usuario;
@@ -12,7 +12,7 @@ import model.dao.UsuarioDAO;
  *
  * @author Usuario
  */
-public class UserService {
+public class UsuarioServiceRepositoriy {
 
 
     public static void create(String nome, String email, String senha) throws ClassNotFoundException, SQLException{

@@ -175,7 +175,7 @@ public class TelaEditarSenha extends javax.swing.JFrame {
                 String SenhaNova = new String(inputSenha.getPassword());
                 String SenhaNovaConfirme = new String(inputConfirmSenha.getPassword());
         try {
-            Controller.UserController.AlterarSenha(SenhaAntigaDB, senhaAntigaInput, SenhaNova, SenhaNovaConfirme, id_usuario);
+            Controller.UsuarioController.AlterarSenha(SenhaAntigaDB, senhaAntigaInput, SenhaNova, SenhaNovaConfirme, id_usuario);
             ApagarInput();
         } catch (SQLException ex) {
             Logger.getLogger(TelaEditarSenha.class.getName()).log(Level.SEVERE, null, ex);

@@ -4,7 +4,7 @@
  */
 package view.Perfil;
 
-import Controller.UserController;
+import Controller.UsuarioController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -188,7 +188,7 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         
 
         try {
-            UserController.AlterarInfo(NomeNovo, EmailNovo, id_usuario);
+            UsuarioController.AlterarInfo(NomeNovo, EmailNovo, id_usuario);
             InputNomeNovo.setText("");
             InputEmailNovo.setText("");
         } catch (ClassNotFoundException | SQLException ex) {
