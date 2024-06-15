@@ -401,34 +401,21 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         DespesaDAO dao = new DespesaDAO();
         String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
         Integer code = Integer.valueOf( dados[0].trim() );
-
-        r.setTitulo(InputTitulo.getText());
-        r.setValor(Double.parseDouble(InputValor.getText()));
-        r.setId_usuario(id_usuario);
-        r.setCode( code );
-        String dataMySQL = converterDataParaMySQL(Inputdata.getText());
-        if (dataMySQL != null) {
-            r.setData(Date.valueOf(dataMySQL));
-        } else {
-            // Tratar caso a data não esteja no formato esperado
-            JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
-            return; // Abortar a operação
-        };
-        
-        
-        
+        String titulo = InputTitulo.getText();
+        double valor = Integer.parseInt(InputValor.getText());
+        String data = Inputdata.getText();
+        try {
+            Controller.DespesaController.validateDespesaRegistration(titulo, valor, data, code, id_usuario);
+            readJtable();
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //categoria
         InputTitulo.setText("");
         InputValor.setText("");
         Inputdata.setText("");
-        try {
-            dao.Create(r);
-            readJtable();
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
         
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
