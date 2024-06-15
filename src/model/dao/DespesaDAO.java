@@ -1,7 +1,7 @@
 
 package model.dao;
 import model.bean.Despesa;
-import Connection.ConnectionFactory;
+import Database.Connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;

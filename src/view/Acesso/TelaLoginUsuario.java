@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view.Acesso;
-import ConnectBanco.DatabaseInitializer;
+import Database.ConnectBanco.DatabaseInitializer;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import model.bean.Usuario;

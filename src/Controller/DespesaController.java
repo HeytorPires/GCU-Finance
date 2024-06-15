@@ -14,7 +14,7 @@ public class DespesaController {
      public static boolean validateDespesaCreate(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException {
         if(Service.Validations.Despesa.ValidateCreateDespesaService.validateCreateDespesa(titulo, valor, data)){
             String Data = Service.Validations.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
-            Service.RepositoryService.DespesaServiceRepository.create(titulo, valor, Data, code, id_usuario);
+            Service.RepositoryService.DespesaRepositoryService.create(titulo, valor, Data, code, id_usuario);
             return true;
         } 
         return false;
@@ -22,13 +22,13 @@ public class DespesaController {
      public static boolean validateDespesaUpdate(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException {
         if(Service.Validations.Despesa.ValidateUpdateDespesaService.validateUpdateUser(titulo, valor, data)){
             String Data = Service.Validations.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
-            Service.RepositoryService.DespesaServiceRepository.update(titulo, valor, Data, code, id_usuario, id_despesa);
+            Service.RepositoryService.DespesaRepositoryService.update(titulo, valor, Data, code, id_usuario, id_despesa);
             return true;
         }
         return false;
     }
      public static boolean validateDespesaDelete(int id_despesa) throws ClassNotFoundException, SQLException{
-         Service.RepositoryService.DespesaServiceRepository.delete(id_despesa);
+         Service.RepositoryService.DespesaRepositoryService.delete(id_despesa);
          return true;
      }
 }

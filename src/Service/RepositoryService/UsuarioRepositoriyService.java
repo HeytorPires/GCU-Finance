@@ -12,7 +12,7 @@ import model.dao.UsuarioDAO;
  *
  * @author Usuario
  */
-public class UsuarioServiceRepositoriy {
+public class UsuarioRepositoriyService {
 
 
     public static void create(String nome, String email, String senha) throws ClassNotFoundException, SQLException{

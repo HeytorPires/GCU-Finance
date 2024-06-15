@@ -1,6 +1,6 @@
 
 package model.dao;
-import Connection.ConnectionFactory;
+import Database.Connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;

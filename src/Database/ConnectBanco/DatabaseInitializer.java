@@ -1,4 +1,4 @@
-package ConnectBanco;
+package Database.ConnectBanco;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

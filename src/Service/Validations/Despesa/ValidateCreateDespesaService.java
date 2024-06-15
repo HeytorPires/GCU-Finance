@@ -5,14 +5,16 @@
 package Service.Validations.Despesa;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import view.CRUD.TelaCategoriaDespesaCRUD;
 
 /**
  *
  * @author heyto
  */
 public class ValidateCreateDespesaService {
-     public static boolean validateCreateDespesa(String titulo, double valor, String data) {
+     public static boolean validateCreateDespesa(String titulo, double valor, String data) throws ClassNotFoundException, SQLException {
         if ( titulo.isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, preencha o campo titulo");
             return false;
