@@ -137,6 +137,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         comboBoxCat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciar Despesas");
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -370,20 +371,14 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Despesa r = new Despesa();
-            DespesaDAO dao = new DespesaDAO();
-
-            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
-            InputTitulo.setText("");
-            InputValor.setText("");
-            Inputdata.setText("");
-
-           
+            int id_despesa = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             try {
-                dao.delete(r);
-                readJtable();
-
+                if(Controller.DespesaController.validateDespesaDelete(id_despesa)){
+                      InputTitulo.setText("");
+                        InputValor.setText("");
+                        Inputdata.setText("");
+                        readJtable();
+                }
             } catch (ClassNotFoundException | SQLException ex) {
                 java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             }           

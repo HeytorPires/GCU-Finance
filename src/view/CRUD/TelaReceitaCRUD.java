@@ -129,6 +129,8 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         comboBoxCat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciar Receitas");
+        setPreferredSize(new java.awt.Dimension(681, 460));
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,7 +192,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Pesquisa");
+        jLabel4.setText("Pesquisa (titulo)");
 
         jLabel1.setText("titulo");
 
@@ -293,7 +295,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addComponent(buttonPesquisa)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(308, 308, 308))
+                .addGap(299, 299, 299))
         );
 
         pack();
@@ -310,16 +312,15 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaExibirKeyReleased
 
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
-
-        if (TabelaExibir.getSelectedRow() != -1) {
-           int id_despesa = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0);
+    if (TabelaExibir.getSelectedRow() != -1) {
+            int id_receita = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             try {
-                if(Controller.DespesaController.validateDespesaDelete(id_despesa)){
-                    InputTitulo.setText("");
-                    InputValor.setText("");
-                    Inputdata.setText("");
+                if(Controller.ReceitaController.validateDespesaDelete(id_receita)){
+                      InputTitulo.setText("");
+                        InputValor.setText("");
+                        Inputdata.setText("");
+                        readJtable();
                 }
-                readJtable();
             } catch (ClassNotFoundException | SQLException ex) {
                 java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             }           
@@ -332,35 +333,32 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        Receita r = new Receita();
-        ReceitaDAO dao = new ReceitaDAO();
-        String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
-        Integer code = Integer.valueOf( dados[0].trim() );
-        r.setTitulo(InputTitulo.getText());
-        r.setValor(Double.parseDouble(InputValor.getText()));
-        r.setId_usuario(id_usuario);
-        String dataMySQL = converterDataParaMySQL(Inputdata.getText());
-        if (dataMySQL != null) {
-            r.setData(Date.valueOf(dataMySQL));
-        } else {
-            // Tratar caso a data não esteja no formato esperado
-            JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
-            return; // Abortar a operação
-        };
-        r.setCode(code);
-       
-        InputTitulo.setText("");
-        InputValor.setText("");
-        Inputdata.setText("");
-       
-        try {
-            dao.Create(r);
-            readJtable();
+     String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+        Integer code = Integer.valueOf(dados[0].trim());
+        String titulo = InputTitulo.getText();
+        double valor;
+        String data = Inputdata.getText();
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            valor = Double.parseDouble(InputValor.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um valor válido");
+            return; 
         }
-       
+
+        try {
+            if(Controller.ReceitaController.validateDespesaCreate(titulo, valor, data, code, id_usuario)){
+                InputTitulo.setText("");
+                InputValor.setText("");
+                Inputdata.setText("");
+            }
+            readJtable();
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
@@ -373,40 +371,34 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
+ if (TabelaExibir.getSelectedRow() != -1) {
+        String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+        Integer code = Integer.valueOf(dados[0].trim());
+        String titulo = InputTitulo.getText();
+        double valor;
+        String data = Inputdata.getText();
+        int id_despesa = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0);
 
-        if (TabelaExibir.getSelectedRow() != -1) {
-            Receita r = new Receita();
-            ReceitaDAO dao = new ReceitaDAO();
-            String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
-            Integer code = Integer.valueOf( dados[0].trim() );
-            
-            r.setTitulo(InputTitulo.getText());
-            r.setValor(Double.parseDouble(InputValor.getText()));
-            r.setId_usuario(id_usuario);
-            r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-            String dataMySQL = converterDataParaMySQL(Inputdata.getText());
-            if (dataMySQL != null) {
-                r.setData(Date.valueOf(dataMySQL));
-            } else {
-                // Tratar caso a data não esteja no formato esperado
-                JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato yyyy-MM-dd");
-                return; // Abortar a operação
-            };
-            r.setCode(code);
-            
-            InputTitulo.setText("");
-            InputValor.setText("");
-            Inputdata.setText("");
-            InputPesquisa.setText("");
-
-            try {
-                dao.update(r);
-                readJtable();
-
-            } catch (ClassNotFoundException | SQLException ex) {
-                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            valor = Double.parseDouble(InputValor.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um valor válido");
+            return; 
         }
+
+        try {
+            if (Controller.ReceitaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario, id_despesa)) {
+                InputTitulo.setText("");
+                InputValor.setText("");
+                Inputdata.setText("");
+            }
+            readJtable();
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     }//GEN-LAST:event_BotaoAtualizarActionPerformed
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
