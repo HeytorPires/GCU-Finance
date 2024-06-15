@@ -198,7 +198,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Pesquisa");
+        jLabel4.setText("Pesquisa(titulo)");
 
         jLabel1.setText("titulo");
 
@@ -397,26 +397,31 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        Despesa r = new Despesa();
-        DespesaDAO dao = new DespesaDAO();
         String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
-        Integer code = Integer.valueOf( dados[0].trim() );
+        Integer code = Integer.valueOf(dados[0].trim());
         String titulo = InputTitulo.getText();
-        double valor = Integer.parseInt(InputValor.getText());
+        double valor;
         String data = Inputdata.getText();
+
         try {
-            Controller.DespesaController.validateDespesaRegistration(titulo, valor, data, code, id_usuario);
+            valor = Double.parseDouble(InputValor.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um valor válido");
+            return; 
+        }
+
+        try {
+            if(Controller.DespesaController.validateDespesaCreate(titulo, valor, data, code, id_usuario)){
+                InputTitulo.setText("");
+                InputValor.setText("");
+                Inputdata.setText("");
+            }
             readJtable();
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //categoria
-        InputTitulo.setText("");
-        InputValor.setText("");
-        Inputdata.setText("");
-        
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
@@ -432,28 +437,32 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Despesa r = new Despesa();
-            DespesaDAO dao = new DespesaDAO();
-            String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
-            Integer code = Integer.valueOf( dados[0].trim() );
-            
-            r.setTitulo(InputTitulo.getText());
-            r.setValor(Double.parseDouble(InputValor.getText()));
-            r.setData(Date.valueOf(Inputdata.getText()));
-            r.setId_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-            r.setCode(code);
-            
-            InputTitulo.setText("");
-            InputValor.setText("");
-            Inputdata.setText("");
-            try {
-                dao.update(r);
-                readJtable();
+        String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+        Integer code = Integer.valueOf(dados[0].trim());
+        String titulo = InputTitulo.getText();
+        double valor;
+        String data = Inputdata.getText();
 
-            } catch (ClassNotFoundException | SQLException ex) {
-                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            valor = Double.parseDouble(InputValor.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um valor válido");
+            return; 
         }
+
+        try {
+            if (Controller.DespesaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario)) {
+                InputTitulo.setText("");
+                InputValor.setText("");
+                Inputdata.setText("");
+            }
+            readJtable();
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     }//GEN-LAST:event_BotaoAtualizarActionPerformed
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed

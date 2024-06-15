@@ -27,16 +27,18 @@ public class DespesaServiceRepository {
         
         despesadao.Create(d);
     }
-//    public void update(String nome, String email, int id_usuario) throws ClassNotFoundException, SQLException{
-//        Despesa u = new Despesa();
-//        DespesaDAO userdao = new DespesaDAO();
-//                
-//        u.setLogin(nome);
-//        u.setEmail(email);
-//        u.setId_usuario(id_usuario);
-//
-//        userdao.AlterarUsuario(nome, email, id_usuario);
-//    }
+    public static void update(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException{
+        Despesa d = new Despesa();
+        DespesaDAO despesadao = new DespesaDAO();
+
+        d.setTitulo(titulo);
+        d.setValor(valor);
+        d.setData(java.sql.Date.valueOf(data));
+        d.setCode(code);
+        d.setId_usuario(id_usuario);
+
+        despesadao.update(d);
+    }
 //    public static void checkUsuario(String email, String senha) throws ClassNotFoundException, SQLException{
 //        Despesa u = new Despesa();
 //        DespesaDAO userdao = new DespesaDAO();

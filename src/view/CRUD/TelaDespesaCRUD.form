@@ -221,7 +221,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pesquisa"/>
+        <Property name="text" type="java.lang.String" value="Pesquisa(titulo)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="InputTitulo">
