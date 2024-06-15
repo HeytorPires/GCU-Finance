@@ -312,19 +312,14 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            Receita r = new Receita();
-            ReceitaDAO dao = new ReceitaDAO();
-
-            r.setId_receita((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
-            InputTitulo.setText("");
-            InputValor.setText("");
-            Inputdata.setText("");
-           
+           int id_despesa = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0);
             try {
-                dao.delete(r);
+                if(Controller.DespesaController.validateDespesaDelete(id_despesa)){
+                    InputTitulo.setText("");
+                    InputValor.setText("");
+                    Inputdata.setText("");
+                }
                 readJtable();
-
             } catch (ClassNotFoundException | SQLException ex) {
                 java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             }           

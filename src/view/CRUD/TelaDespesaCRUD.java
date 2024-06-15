@@ -358,7 +358,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     // Pesquisar a categoria de despesa
     try {
         categoriaDespesa = cdao.readByIdAndCode(id_usuario, dados);
-        System.out.println("pesquisa code: " + categoriaDespesa);
 
         if (!categoriaDespesa.isEmpty()) {
             comboBoxCat.setSelectedItem(categoriaDespesa.get(0)); // Assumindo que a lista tenha pelo menos um item
@@ -442,6 +441,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         String titulo = InputTitulo.getText();
         double valor;
         String data = Inputdata.getText();
+        int id_despesa = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0);
 
         try {
             valor = Double.parseDouble(InputValor.getText()); // Converter o input para double
@@ -451,7 +451,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         }
 
         try {
-            if (Controller.DespesaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario)) {
+            if (Controller.DespesaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario, id_despesa)) {
                 InputTitulo.setText("");
                 InputValor.setText("");
                 Inputdata.setText("");

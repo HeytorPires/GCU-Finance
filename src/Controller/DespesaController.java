@@ -12,19 +12,23 @@ import java.sql.SQLException;
  */
 public class DespesaController {
      public static boolean validateDespesaCreate(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException {
-        if(Service.Despesa.ValidateCreateDespesaService.validateCreateDespesa(titulo, valor, data)){
-            String Data = Service.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
-            Service.Despesa.DespesaServiceRepository.create(titulo, valor, Data, code, id_usuario);
+        if(Service.Validations.Despesa.ValidateCreateDespesaService.validateCreateDespesa(titulo, valor, data)){
+            String Data = Service.Validations.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
+            Service.RepositoryService.DespesaServiceRepository.create(titulo, valor, Data, code, id_usuario);
             return true;
         } 
         return false;
      }
-     public static boolean validateDespesaUpdate(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException {
-        if(Service.Despesa.ValidateUpdateDespesaService.validateUpdateUser(titulo, valor, data)){
-            String Data = Service.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
-            Service.Despesa.DespesaServiceRepository.update(titulo, valor, Data, code, id_usuario);
+     public static boolean validateDespesaUpdate(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException {
+        if(Service.Validations.Despesa.ValidateUpdateDespesaService.validateUpdateUser(titulo, valor, data)){
+            String Data = Service.Validations.Despesa.ConvertStringDateService.converterDataParaMySQL(data);
+            Service.RepositoryService.DespesaServiceRepository.update(titulo, valor, Data, code, id_usuario, id_despesa);
             return true;
         }
         return false;
     }
+     public static boolean validateDespesaDelete(int id_despesa) throws ClassNotFoundException, SQLException{
+         Service.RepositoryService.DespesaServiceRepository.delete(id_despesa);
+         return true;
+     }
 }

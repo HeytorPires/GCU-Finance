@@ -2,18 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service.Despesa;
+package Service.Validations.Despesa;
 
-import java.sql.Date;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author heyto
  */
-public class ValidateCreateDespesaService {
-     public static boolean validateCreateDespesa(String titulo, double valor, String data) {
-        if ( titulo.isEmpty()){
+public class ValidateUpdateDespesaService {
+     public static boolean validateUpdateUser(String titulo, double valor, String data) {
+         if ( titulo.isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, preencha o campo titulo");
             return false;
         }
@@ -24,6 +23,6 @@ public class ValidateCreateDespesaService {
              JOptionPane.showMessageDialog(null, "Por favor, preencha o campo data");
             return false;
          }
-     return true;
-     }
+        return true;
+    }
 }
