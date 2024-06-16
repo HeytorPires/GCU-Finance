@@ -315,7 +315,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     if (TabelaExibir.getSelectedRow() != -1) {
             int id_receita = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             try {
-                if(Controller.ReceitaController.validateDespesaDelete(id_receita)){
+                if(Controller.ReceitaController.validateReceitaDelete(id_receita)){
                       InputTitulo.setText("");
                         InputValor.setText("");
                         Inputdata.setText("");
@@ -347,7 +347,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         }
 
         try {
-            if(Controller.ReceitaController.validateDespesaCreate(titulo, valor, data, code, id_usuario)){
+            if(Controller.ReceitaController.validateReceitaCreate(titulo, valor, data, code, id_usuario)){
                 InputTitulo.setText("");
                 InputValor.setText("");
                 Inputdata.setText("");
@@ -387,7 +387,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         }
 
         try {
-            if (Controller.ReceitaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario, id_despesa)) {
+            if (Controller.ReceitaController.validateReceitaUpdate(titulo, valor, data, code, id_usuario, id_despesa)) {
                 InputTitulo.setText("");
                 InputValor.setText("");
                 Inputdata.setText("");

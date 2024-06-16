@@ -216,6 +216,42 @@ public class CategoriaDespesaDAO {
             }
             return categorias;
         }
+        public List<CategoriaDespesa> readByIdAndCodeAndId(int id_usuario, int code, int id_categoriaDespesa) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            
+            List<CategoriaDespesa> categorias = new ArrayList<>();
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa  WHERE id_usuario = ? and code = ? and id_categoria_despesa != ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                stmt.setInt(3, id_categoriaDespesa);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                  CategoriaDespesa categoria = new CategoriaDespesa();
+                    
+                    categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
+                    categoria.setNome(rs.getString("nome"));
+                    categoria.setDescricao(rs.getString("descricao"));
+                    categoria.setCode(rs.getInt("code"));
+                    categoria.setId_usuario(rs.getInt("id_usuario"));
+                    
+                    categorias.add(categoria);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return categorias;
+        }
         public void deleteAll(int id_usuario) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();

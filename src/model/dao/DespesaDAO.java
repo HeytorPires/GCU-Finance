@@ -219,6 +219,39 @@ public class DespesaDAO {
             }
             return despesa;
         }
+        public List <Despesa> readDepesaByIdUserAndCodeList(int id_usuario,int code) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Despesa> despesas = new ArrayList<>();
+            
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ? and code = ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Despesa despesa = new Despesa();
+                    despesa.setId_despesa(rs.getInt("id_despesa"));
+                    despesa.setTitulo(rs.getString("titulo"));
+                    despesa.setValor(rs.getDouble("valor"));
+                    despesa.setData(rs.getDate("data"));
+                    despesa.setCode(rs.getInt("code"));
+                    despesa.setId_usuario(rs.getInt("id_usuario"));
+                    despesas.add(despesa);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return despesas;
+        }
         
         public void deleteAll(int id_usuario) throws ClassNotFoundException, SQLException{
             

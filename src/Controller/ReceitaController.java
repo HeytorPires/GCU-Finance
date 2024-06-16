@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @author heyto
  */
 public class ReceitaController {
-    public static boolean validateDespesaCreate(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException  {
+    public static boolean validateReceitaCreate(String titulo, double valor, String data, int code, int id_usuario) throws ClassNotFoundException, SQLException  {
         if(Service.Validations.Receita.ValidateCreateReceitaService.validateCreateDespesa(titulo, valor, data)){
             String Data = Service.Validations.Receita.ConvertStringDateService.converterDataParaMySQL(data);
             Service.RepositoryService.ReceitaRepositoryService.create(titulo, valor, Data, code, id_usuario);
@@ -19,7 +19,7 @@ public class ReceitaController {
         } 
         return false;
      }
-     public static boolean validateDespesaUpdate(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException {
+     public static boolean validateReceitaUpdate(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException {
         if(Service.Validations.Receita.ValidateCreateReceitaService.validateCreateDespesa(titulo, valor, data)){
             String Data = Service.Validations.Receita.ConvertStringDateService.converterDataParaMySQL(data);
             Service.RepositoryService.ReceitaRepositoryService.update(titulo, valor, Data, code, id_usuario, id_despesa);
@@ -27,7 +27,7 @@ public class ReceitaController {
         }
         return false;
     }
-     public static boolean validateDespesaDelete(int id_despesa) throws ClassNotFoundException, SQLException{
+     public static boolean validateReceitaDelete(int id_despesa) throws ClassNotFoundException, SQLException{
          Service.RepositoryService.ReceitaRepositoryService.delete(id_despesa);
          return true;
      }

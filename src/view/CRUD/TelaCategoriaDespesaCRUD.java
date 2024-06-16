@@ -168,7 +168,7 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
 
         jLabel4.setText("Pesquisa");
 
-        jLabel5.setText("Code");
+        jLabel5.setText("Código");
 
         botaoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         botaoSair.setText("Sair");
@@ -284,27 +284,20 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            CategoriaDespesa c = new CategoriaDespesa();
-            CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
+           int id_categoriaDespesa = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+           int antigoCode = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3);
 
-            c.setId_categoria_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
-            InputTitulo.setText("");
-            InputDescricao.setText("");
-            InputCode.setText("");
-            
-
-          
             try {
-                dao.delete(c);
-                readJtable();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            
+                if(Controller.CategoriaDespesaController.validateCategoriaDespesaDelete(id_categoriaDespesa, id_usuario, antigoCode)){
+                      InputTitulo.setText("");
+                        InputDescricao.setText("");
+                        InputPesquisa.setText("");
+                        InputCode.setText("");
+                        readJtable();
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
     }//GEN-LAST:event_BotaoExcluirActionPerformed
 
@@ -314,26 +307,28 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
 
-        CategoriaDespesa c = new CategoriaDespesa();
-        CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
-
-        c.setNome(InputTitulo.getText());
-        c.setDescricao(InputDescricao.getText());
-        c.setCode(Integer.parseInt(InputCode.getText()));
-        c.setId_usuario(id_usuario);
-        InputTitulo.setText("");
-        InputTitulo.setText("");
-        InputDescricao.setText("");
-        InputCode.setText("");
+         String Titulo = InputTitulo.getText();
+        String Descricao = InputDescricao.getText();
+        int code ;
 
         try {
-            dao.Create(c);
-            readJtable();
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            code = Integer.parseInt(InputCode.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um código válido");
+            return; 
         }
-
+        try {
+            if(Controller.CategoriaDespesaController.validateCategoriaDespesaCreate(Titulo, Descricao, code, id_usuario)){
+                InputTitulo.setText("");
+                InputDescricao.setText("");
+                InputCode.setText("");
+                readJtable();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BotaoCadastrarActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
@@ -348,27 +343,28 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
     private void BotaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAtualizarActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-            CategoriaDespesa c = new CategoriaDespesa();
-            CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
-
-            c.setNome(InputTitulo.getText());
-            c.setDescricao(InputDescricao.getText());
-            c.setCode(Integer.parseInt(InputCode.getText()));
-
-            c.setId_categoria_despesa((int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
-
-            
-            InputTitulo.setText("");
-            InputDescricao.setText("");
-            InputCode.setText("");
-
-            try {
-                dao.update(c);
+        int antigoCode = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3);
+        String Titulo = InputTitulo.getText();
+        String Descricao = InputDescricao.getText();
+        int code ;
+        try {
+            code = Integer.parseInt(InputCode.getText()); // Converter o input para double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira um código válido");
+            return; 
+        }
+        try {
+            if(Controller.CategoriaDespesaController.validateCategoriaDespesaUpdate(Titulo, Descricao, code, antigoCode, id_usuario)){
+                InputTitulo.setText("");
+                InputDescricao.setText("");
+                InputCode.setText("");
                 readJtable();
-
-            } catch (ClassNotFoundException | SQLException ex) {
-                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCategoriaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_BotaoAtualizarActionPerformed
 
