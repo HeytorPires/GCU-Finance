@@ -259,7 +259,7 @@ public class ReceitaDAO {
         if (!year.equals("All")) {
             query.append(" AND YEAR(data) = ?");
         }
-        if (!month.equals("0")) {  // Considerando que "0" é "Todos" para meses
+        if (!month.equals("0")) { 
             query.append(" AND MONTH(data) = ?");
         }
         
@@ -282,7 +282,7 @@ public class ReceitaDAO {
             receita.setTitulo(rs.getString("titulo"));
             receita.setData(rs.getDate("data"));
             receita.setValor(rs.getDouble("valor"));
-            receita.setCode(rs.getInt("code")); // Assumindo que há um campo code
+            receita.setCode(rs.getInt("code")); 
             receitas.add(receita);
         }
     } catch (SQLException ex) {

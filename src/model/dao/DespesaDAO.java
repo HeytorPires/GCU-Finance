@@ -287,7 +287,7 @@ public class DespesaDAO {
         if (!year.equals("All")) {
             query.append(" AND YEAR(data) = ?");
         }
-        if (!month.equals("0")) {  // Considerando que "0" é "Todos" para meses
+        if (!month.equals("0")) {  
             query.append(" AND MONTH(data) = ?");
         }
         
@@ -310,7 +310,7 @@ public class DespesaDAO {
             despesa.setTitulo(rs.getString("titulo"));
             despesa.setData(rs.getDate("data"));
             despesa.setValor(rs.getDouble("valor"));
-            despesa.setCode(rs.getInt("code")); // Assumindo que há um campo code
+            despesa.setCode(rs.getInt("code"));
             despesas.add(despesa);
         }
     } catch (SQLException ex) {
