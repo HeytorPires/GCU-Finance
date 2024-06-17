@@ -61,4 +61,7 @@ public class UsuarioRepositoriyService {
          UsuarioDAO userdao = new UsuarioDAO();
          userdao.AlterarSenha(SenhaInput, id_usuario);
      }
+     public static void DeleteAllRegisters(int id_usuario) throws ClassNotFoundException, SQLException{
+         UsuarioDAO.ApagarAllRegisters(id_usuario);
+     }
 }

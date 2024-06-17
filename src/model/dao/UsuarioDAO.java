@@ -249,5 +249,52 @@ public class UsuarioDAO {
 
             }
         }
-    
+    public static void ApagarAllRegisters(int idUsuario) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stmt1 = null;
+        PreparedStatement stmt2 = null;
+        PreparedStatement stmt3 = null;
+        PreparedStatement stmt4 = null;
+        
+        try {
+            con = ConnectionFactory.getConnection();
+            con.setAutoCommit(false); 
+            String deleteDespesa = "DELETE FROM despesa WHERE id_usuario = ?";
+            stmt3 = con.prepareStatement(deleteDespesa);
+            stmt3.setInt(1, idUsuario);
+            stmt3.executeUpdate();
+            
+            String deleteReceita = "DELETE FROM receita WHERE id_usuario = ?";
+            stmt4 = con.prepareStatement(deleteReceita);
+            stmt4.setInt(1, idUsuario);
+            stmt4.executeUpdate();
+            String deleteCategoriaReceita = "DELETE FROM categoria_receita WHERE id_usuario = ?";
+            stmt1 = con.prepareStatement(deleteCategoriaReceita);
+            stmt1.setInt(1, idUsuario);
+            stmt1.executeUpdate();
+            
+            String deleteCategoriaDespesa = "DELETE FROM categoria_despesa WHERE id_usuario = ?";
+            stmt2 = con.prepareStatement(deleteCategoriaDespesa);
+            stmt2.setInt(1, idUsuario);
+            stmt2.executeUpdate();
+            con.commit();
+            System.out.println("Registros deletados com sucesso.");
+
+        } catch (SQLException ex) {
+            if (con != null) {
+                try {
+                    con.rollback(); 
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            ex.printStackTrace();
+        } finally {
+            if (stmt1 != null) stmt1.close();
+            if (stmt2 != null) stmt2.close();
+            if (stmt3 != null) stmt3.close();
+            if (con != null) con.setAutoCommit(true);
+            if (con != null) con.close();
+        }
+    }
 }

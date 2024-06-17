@@ -7,6 +7,7 @@ package view.Perfil;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.dao.CategoriaDespesaDAO;
 import model.dao.CategoriaReceitaDAO;
 import model.dao.DespesaDAO;
@@ -40,15 +41,7 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         botaoSair = new javax.swing.JButton();
-        ApagarDespesas = new javax.swing.JButton();
-        ApagarReceitas = new javax.swing.JButton();
-        apagarCatDespesas = new javax.swing.JButton();
-        ApagarCatReceita = new javax.swing.JButton();
         ApagarTodosRegistros = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,34 +56,7 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
             }
         });
 
-        ApagarDespesas.setText("Apagar");
-        ApagarDespesas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApagarDespesasActionPerformed(evt);
-            }
-        });
-
-        ApagarReceitas.setText("Apagar");
-        ApagarReceitas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApagarReceitasActionPerformed(evt);
-            }
-        });
-
-        apagarCatDespesas.setText("Apagar");
-        apagarCatDespesas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apagarCatDespesasActionPerformed(evt);
-            }
-        });
-
-        ApagarCatReceita.setText("Apagar");
-        ApagarCatReceita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApagarCatReceitaActionPerformed(evt);
-            }
-        });
-
+        ApagarTodosRegistros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/user_delete.png"))); // NOI18N
         ApagarTodosRegistros.setText("Apagar");
         ApagarTodosRegistros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,170 +64,59 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Apagar Todas as despesas");
-
-        jLabel2.setText("Apagar Todas as Categoria de receita");
-
-        jLabel3.setText("Apagar Todas as Receitas");
-
-        jLabel4.setText("Apagar Todas as categorias de despesa");
-
-        jLabel5.setText("Apagar todos os dados da gestão do usuairo");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Apagar todos os dados do Usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(307, 307, 307)
+                .addComponent(botaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ApagarTodosRegistros)
-                                    .addComponent(ApagarReceitas)
-                                    .addComponent(apagarCatDespesas)
-                                    .addComponent(ApagarCatReceita)
-                                    .addComponent(ApagarDespesas)))
-                            .addComponent(jLabel1))
-                        .addGap(101, 101, 101)
-                        .addComponent(botaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
+                        .addGap(143, 143, 143)
+                        .addComponent(ApagarTodosRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ApagarDespesas)))
+                .addGap(18, 18, 18)
+                .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ApagarReceitas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(apagarCatDespesas)
-                .addGap(13, 13, 13)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ApagarCatReceita)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ApagarTodosRegistros)
-                .addGap(25, 25, 25))
+                .addComponent(ApagarTodosRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ApagarTodosRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarTodosRegistrosActionPerformed
-       DespesaDAO ddao = new DespesaDAO();
-       ReceitaDAO rdao = new ReceitaDAO();
-       CategoriaReceitaDAO cdao = new CategoriaReceitaDAO();
-       CategoriaDespesaDAO cDdao = new CategoriaDespesaDAO();
-       
-        try {
-            ddao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            rdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            cdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            cDdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+             try {
+                 Controller.UsuarioController.ApagarTodososdados(id_usuario);
+             } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (SQLException ex) {
+                 Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            }
     }//GEN-LAST:event_ApagarTodosRegistrosActionPerformed
-
-    private void ApagarDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarDespesasActionPerformed
-        DespesaDAO ddao = new DespesaDAO();
-        
-        try {
-            ddao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    }//GEN-LAST:event_ApagarDespesasActionPerformed
-
-    private void ApagarReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarReceitasActionPerformed
-      ReceitaDAO rdao = new ReceitaDAO();
-      
-        try {
-            rdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-    }//GEN-LAST:event_ApagarReceitasActionPerformed
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
         this.dispose();
         new TelaMenuPrincipal(id_usuario).setVisible(true);
     }//GEN-LAST:event_botaoSairActionPerformed
-
-    private void apagarCatDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarCatDespesasActionPerformed
-       CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
-       
-        try {
-            cdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_apagarCatDespesasActionPerformed
-
-    private void ApagarCatReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarCatReceitaActionPerformed
-    
-        CategoriaReceitaDAO cdao = new CategoriaReceitaDAO();
-        
-        try {
-            cdao.deleteAll(id_usuario);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_ApagarCatReceitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,16 +150,8 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ApagarCatReceita;
-    private javax.swing.JButton ApagarDespesas;
-    private javax.swing.JButton ApagarReceitas;
     private javax.swing.JButton ApagarTodosRegistros;
-    private javax.swing.JButton apagarCatDespesas;
     private javax.swing.JButton botaoSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,9 @@
 package Controller;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author heyto
@@ -25,5 +28,13 @@ public class UsuarioController {
         if(Service.Validations.Usuario.ValidationPassawordService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme, id_usuario)){
            Service.RepositoryService.UsuarioRepositoriyService.chargePassword(SenhaInput, id_usuario);
        }
+    }
+    public static void ApagarTodososdados(int id_usuario) throws ClassNotFoundException, SQLException{
+        try {
+            JOptionPane.showMessageDialog(null,"Todos os registros foram apagados com sucesso!");
+            Service.RepositoryService.UsuarioRepositoriyService.DeleteAllRegisters(id_usuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

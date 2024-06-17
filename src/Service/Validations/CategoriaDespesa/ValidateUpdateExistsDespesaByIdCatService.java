@@ -7,7 +7,6 @@ package Service.Validations.CategoriaDespesa;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.bean.CategoriaDespesa;
 import model.bean.Despesa;
 import model.dao.DespesaDAO;
 
