@@ -72,6 +72,7 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Visualizar Usuario");
 
         jLabel2.setText("Nome:");
 

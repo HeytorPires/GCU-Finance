@@ -37,7 +37,7 @@ public class ReceitaDAO {
                 
                 JOptionPane.showMessageDialog(null, "Receita salva com sucesso");
             } catch (SQLException ex) {
-                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
@@ -70,7 +70,7 @@ public class ReceitaDAO {
                     receitas.add(receita);
                 }
             } catch(SQLException ex) {
-              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
@@ -96,7 +96,7 @@ public class ReceitaDAO {
                 
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
             } catch (SQLException ex) {
-                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
@@ -117,7 +117,7 @@ public class ReceitaDAO {
                 
                 JOptionPane.showMessageDialog(null, "Deletado com sucesso");
             } catch (SQLException ex) {
-                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
@@ -150,7 +150,7 @@ public class ReceitaDAO {
                 receitas.add(receita);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -185,7 +185,40 @@ public class ReceitaDAO {
                     receitas.add(receita);
                 }
             } catch(SQLException ex) {
-              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return receitas;
+        }
+        public List <Receita> readDepesaByIdUserAndCodeList(int id_usuario,int code) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Receita> receitas = new ArrayList<>();
+            
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM receita WHERE id_usuario = ? and code = ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                    Receita receita = new Receita();
+                    receita.setId_receita(rs.getInt("id_receita"));
+                    receita.setTitulo(rs.getString("titulo"));
+                    receita.setValor(rs.getDouble("valor"));
+                    receita.setData(rs.getDate("data"));
+                    receita.setCode(rs.getInt("code"));
+                    receita.setId_usuario(rs.getInt("id_usuario"));
+                    receitas.add(receita);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);
@@ -206,7 +239,7 @@ public class ReceitaDAO {
                 
                 JOptionPane.showMessageDialog(null, "Todas as receitas foram deletadas com sucesso");
             } catch (SQLException ex) {
-                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ReceitaDAO.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
             } finally{
                 ConnectionFactory.closeConnection(con, stmt, rs);

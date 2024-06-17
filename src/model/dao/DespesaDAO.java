@@ -229,7 +229,7 @@ public class DespesaDAO {
             
             try{
                 
-                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ? and code = ?");
+                stmt = con.prepareStatement("SELECT * FROM receita WHERE id_usuario = ? and code = ?");
                 stmt.setInt(1, id_usuario);
                 stmt.setInt(2, code);
                 rs = stmt.executeQuery();

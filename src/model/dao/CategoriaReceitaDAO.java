@@ -100,7 +100,7 @@ public class CategoriaReceitaDAO {
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("DELETE FROM categoria WHERE id_categoria_receita = ?");
+                stmt = con.prepareStatement("DELETE FROM categoria_receita WHERE id_categoria_receita = ?");
                 
                 stmt.setInt(1, d.getId_categoria_receita());
                 
@@ -146,6 +146,42 @@ public class CategoriaReceitaDAO {
         }
         return categorias;
     }
+        public List<CategoriaReceita> readByIdAndCodeAndId(int id_usuario, int code, int id_categoriaReceita) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            
+            List<CategoriaReceita> categorias = new ArrayList<>();
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa  WHERE id_usuario = ? and code = ? and id_categoria_despesa != ?");
+                stmt.setInt(1, id_usuario);
+                stmt.setInt(2, code);
+                stmt.setInt(3, id_categoriaReceita);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                  CategoriaReceita categoria = new CategoriaReceita();
+                    
+                    categoria.setId_categoria_receita(rs.getInt("id_categoria_despesa"));
+                    categoria.setNome(rs.getString("nome"));
+                    categoria.setDescricao(rs.getString("descricao"));
+                    categoria.setCode(rs.getInt("code"));
+                    categoria.setId_usuario(rs.getInt("id_usuario"));
+                    
+                    categorias.add(categoria);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return categorias;
+        }
         public List<CategoriaReceita> readCategoriaByIdUser(int id_usuario) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();

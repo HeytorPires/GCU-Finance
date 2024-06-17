@@ -36,7 +36,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     public TelaMenuPrincipal(int id_usuario) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo( null );
+        this.setLocationRelativeTo(null);
         initComponents();
         this.id_usuario = id_usuario;
         
