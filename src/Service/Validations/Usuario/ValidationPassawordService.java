@@ -31,6 +31,7 @@ public class ValidationPassawordService {
         SenhaAntigaCorreta = true;
     } else {
         erros.add("Senha antiga está incorreta");
+        SenhaAntigaCorreta = false;
     }
 
     // Verificação de correspondência das novas senhas
@@ -38,6 +39,7 @@ public class ValidationPassawordService {
         SenhasBatendo = true;
     } else {
         erros.add("Senhas inseridas não batem");
+        SenhasBatendo = false;
     }
 
     // Verificação se a nova senha é igual à senha antiga
