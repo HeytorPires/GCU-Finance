@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.CategoriaReceita;
 import model.bean.Despesa;
+import model.bean.Receita;
 import model.bean.Usuario;
 import model.dao.CategoriaDespesaDAO;
 import model.dao.CategoriaReceitaDAO;
@@ -114,6 +115,23 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
     });
 }
+    public void filterJtableReceita(String year, String month) throws ClassNotFoundException, SQLException {
+    DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
+    modelo.setNumRows(0);
+    ReceitaDAO ddao = new ReceitaDAO();
+
+    List<Receita> receitas = ddao.filterByYearAndMonth(year, month, id_usuario);
+
+    receitas.stream().forEach((d) -> {
+        modelo.addRow(new Object[]{
+            d.getId_receita(),
+            d.getTitulo(),
+            d.getValor(),
+            d.getData(),
+            d.getCode()
+        });
+    });
+}
     
     public void readJtableReceita() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
@@ -198,11 +216,18 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         ButtonFiltro = new javax.swing.JButton();
         filtroDespesas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
         comboYearsReceita = new javax.swing.JComboBox<>();
         comboMountsReceita = new javax.swing.JComboBox<>();
+        ButtonFiltro1 = new javax.swing.JButton();
+        FiltroReceitas = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         TabelaCategoriaDespesa = new javax.swing.JTable();
@@ -279,7 +304,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        comboYears.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2020", "2021", "2022", "2023", "2024" }));
+        comboYears.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "2020", "2021", "2022", "2023", "2024" }));
         comboYears.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboYearsActionPerformed(evt);
@@ -303,6 +328,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("FILTRO");
 
+        jLabel3.setText("Mês");
+
+        jLabel4.setText("Ano");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -310,19 +339,28 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboMounts, 0, 119, Short.MAX_VALUE)
-                            .addComponent(comboYears, javax.swing.GroupLayout.Alignment.TRAILING, 0, 119, Short.MAX_VALUE))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(filtroDespesas)
                             .addComponent(ButtonFiltro)
                             .addComponent(jLabel1))
-                        .addGap(18, 18, 18))))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboYears, 0, 119, Short.MAX_VALUE)
+                            .addComponent(comboMounts, javax.swing.GroupLayout.Alignment.TRAILING, 0, 119, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel4)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,8 +369,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 98, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
                 .addComponent(comboMounts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(3, 3, 3)
                 .addComponent(comboYears, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -371,7 +413,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TabelaReceitas);
 
-        comboYearsReceita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2021", "2022", "2023", "2024" }));
+        comboYearsReceita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "2020", "2021", "2022", "2023", "2024" }));
 
         comboMountsReceita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Todos", "1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro." }));
         comboMountsReceita.addActionListener(new java.awt.event.ActionListener() {
@@ -380,32 +422,79 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        ButtonFiltro1.setText("Filtrar");
+        ButtonFiltro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonFiltro1ActionPerformed(evt);
+            }
+        });
+
+        FiltroReceitas.setText("Limpar");
+        FiltroReceitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FiltroReceitasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("FILTRO");
+
+        jLabel5.setText("Mês");
+
+        jLabel6.setText("Ano");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboYearsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboYearsReceita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboMountsReceita, javax.swing.GroupLayout.Alignment.TRAILING, 0, 121, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabel5))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(jLabel6)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboMountsReceita, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FiltroReceitas)
+                            .addComponent(ButtonFiltro1)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboMountsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addGap(3, 3, 3)
+                        .addComponent(comboYearsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(216, 216, 216)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(FiltroReceitas)
+                        .addGap(18, 18, 18)
+                        .addComponent(ButtonFiltro1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 98, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(comboMountsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(comboYearsReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Receitas", jPanel2);
@@ -802,6 +891,30 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_filtroDespesasActionPerformed
 
+    private void ButtonFiltro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFiltro1ActionPerformed
+        try {
+              readJtableReceita();
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    }//GEN-LAST:event_ButtonFiltro1ActionPerformed
+
+    private void FiltroReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroReceitasActionPerformed
+       
+    String mesSelecionado = comboMountsReceita.getSelectedItem().toString();
+    String anoSelecionado = comboYearsReceita.getSelectedItem().toString();
+    
+    String mes = mesSelecionado.split(" - ")[0];
+    
+    try {
+        filterJtableReceita(anoSelecionado, mes);
+    } catch (ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_FiltroReceitasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -821,6 +934,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonFiltro;
+    private javax.swing.JButton ButtonFiltro1;
+    private javax.swing.JButton FiltroReceitas;
     private javax.swing.JMenu PerfilMenu;
     private javax.swing.JTable TabelaCategoriaDespesa;
     private javax.swing.JTable TabelaCategoriaReceita;
@@ -833,6 +948,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton filtroDespesas;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;

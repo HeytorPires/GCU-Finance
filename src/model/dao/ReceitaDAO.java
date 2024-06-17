@@ -245,5 +245,53 @@ public class ReceitaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
+        public List<Receita> filterByYearAndMonth(String year, String month, int id_usuario) throws ClassNotFoundException, SQLException {
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    List<Receita> receitas = new ArrayList<>();
+    
+    try {
+        con = ConnectionFactory.getConnection();
         
+        StringBuilder query = new StringBuilder("SELECT * FROM receita WHERE id_usuario = ?");
+        
+        if (!year.equals("All")) {
+            query.append(" AND YEAR(data) = ?");
+        }
+        if (!month.equals("0")) {  // Considerando que "0" é "Todos" para meses
+            query.append(" AND MONTH(data) = ?");
+        }
+        
+        stmt = con.prepareStatement(query.toString());
+        
+        int paramIndex = 1;
+        stmt.setInt(paramIndex++, id_usuario);
+        if (!year.equals("All")) {
+            stmt.setInt(paramIndex++, Integer.parseInt(year));
+        }
+        if (!month.equals("0")) {
+            stmt.setInt(paramIndex++, Integer.parseInt(month));
+        }
+        
+        rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            Receita receita = new Receita();
+            receita.setId_receita(rs.getInt("id_receita"));
+            receita.setTitulo(rs.getString("titulo"));
+            receita.setData(rs.getDate("data"));
+            receita.setValor(rs.getDouble("valor"));
+            receita.setCode(rs.getInt("code")); // Assumindo que há um campo code
+            receitas.add(receita);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(null, "Erro ao Filtrar: " + ex.getMessage());
+    } finally {
+        ConnectionFactory.closeConnection(con, stmt, rs);
+    }
+    
+    return receitas;
+}
 }
