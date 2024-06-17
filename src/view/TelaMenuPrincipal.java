@@ -130,7 +130,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
     }
     
-    public void readJtableCategoriasDepesas() throws  ClassNotFoundException, SQLException {
+    public  void readJtableCategoriasDepesas() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaCategoriaDespesa.getModel();
         modelo.setNumRows(0);
         CategoriaDespesaDAO Cdao = new CategoriaDespesaDAO();
@@ -196,6 +196,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         comboMounts = new javax.swing.JComboBox<>();
         comboYears = new javax.swing.JComboBox<>();
         ButtonFiltro = new javax.swing.JButton();
+        filtroDespesas = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
@@ -277,7 +279,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        comboYears.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2021", "2022", "2023", "2024" }));
+        comboYears.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2020", "2021", "2022", "2023", "2024" }));
         comboYears.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboYearsActionPerformed(evt);
@@ -290,6 +292,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 ButtonFiltroActionPerformed(evt);
             }
         });
+
+        filtroDespesas.setText("Limpar");
+        filtroDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtroDespesasActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("FILTRO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,8 +318,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonFiltro)
-                        .addGap(21, 21, 21))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtroDespesas)
+                            .addComponent(ButtonFiltro)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,6 +335,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(comboYears, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(filtroDespesas)
+                .addGap(18, 18, 18)
                 .addComponent(ButtonFiltro)
                 .addGap(112, 112, 112))
         );
@@ -755,12 +774,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_comboYearsActionPerformed
 
     private void ButtonFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFiltroActionPerformed
+    
     String mesSelecionado = comboMounts.getSelectedItem().toString();
     String anoSelecionado = comboYears.getSelectedItem().toString();
     
-    // Extrair a parte numérica do mês
     String mes = mesSelecionado.split(" - ")[0];
-    System.out.println(mes + " mês");
     
     try {
         filterJtableDespesa(anoSelecionado, mes);
@@ -773,6 +791,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private void comboMountsReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMountsReceitaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboMountsReceitaActionPerformed
+
+    private void filtroDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroDespesasActionPerformed
+          try {
+              readJtableDespesa();
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    }//GEN-LAST:event_filtroDespesasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -802,7 +830,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboMountsReceita;
     private javax.swing.JComboBox<String> comboYears;
     private javax.swing.JComboBox<String> comboYearsReceita;
+    private javax.swing.JButton filtroDespesas;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;

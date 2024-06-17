@@ -285,8 +285,12 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="ButtonFiltro" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="filtroDespesas" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ButtonFiltro" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -304,6 +308,10 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="comboYears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="filtroDespesas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="ButtonFiltro" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
@@ -398,12 +406,13 @@
             <Component class="javax.swing.JComboBox" name="comboYears">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
+                  <StringArray count="6">
                     <StringItem index="0" value="All"/>
-                    <StringItem index="1" value="2021"/>
-                    <StringItem index="2" value="2022"/>
-                    <StringItem index="3" value="2023"/>
-                    <StringItem index="4" value="2024"/>
+                    <StringItem index="1" value="2020"/>
+                    <StringItem index="2" value="2021"/>
+                    <StringItem index="3" value="2022"/>
+                    <StringItem index="4" value="2023"/>
+                    <StringItem index="5" value="2024"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -421,6 +430,22 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonFiltroActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="filtroDespesas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limpar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroDespesasActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="FILTRO"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

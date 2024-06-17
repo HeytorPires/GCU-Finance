@@ -283,13 +283,11 @@ public class DespesaDAO {
         con = ConnectionFactory.getConnection();
         
         StringBuilder query = new StringBuilder("SELECT * FROM despesa WHERE id_usuario = ?");
-        boolean hasYear = !year.equals("All");
-        boolean hasMonth = !month.equals("All");
         
-        if (hasYear) {
+        if (!year.equals("All")) {
             query.append(" AND YEAR(data) = ?");
         }
-        if (hasMonth) {
+        if (!month.equals("0")) {  // Considerando que "0" é "Todos" para meses
             query.append(" AND MONTH(data) = ?");
         }
         
@@ -297,11 +295,11 @@ public class DespesaDAO {
         
         int paramIndex = 1;
         stmt.setInt(paramIndex++, id_usuario);
-        if (hasYear) {
-            stmt.setString(paramIndex++, year);
+        if (!year.equals("All")) {
+            stmt.setInt(paramIndex++, Integer.parseInt(year));
         }
-        if (hasMonth) {
-            stmt.setString(paramIndex++, month);
+        if (!month.equals("0")) {
+            stmt.setInt(paramIndex++, Integer.parseInt(month));
         }
         
         rs = stmt.executeQuery();
@@ -324,6 +322,5 @@ public class DespesaDAO {
     
     return despesas;
 }
-
     
 }
