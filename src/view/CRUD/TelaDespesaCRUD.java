@@ -33,6 +33,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
     public TelaDespesaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
         this.id_usuario = id_usuario;

@@ -26,7 +26,8 @@ public class TelaEditarSenha extends javax.swing.JFrame {
     private int id_usuario;
     public TelaEditarSenha(int id_usuario) {
         initComponents();
-        this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo( null );
 
         this.id_usuario = id_usuario;
         

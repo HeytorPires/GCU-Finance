@@ -26,6 +26,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
      */
     public TelaCadastroUsuario() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
     }

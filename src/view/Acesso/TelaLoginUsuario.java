@@ -19,6 +19,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
     public TelaLoginUsuario() {
         DatabaseInitializer.initializeDatabase();   
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
         
 

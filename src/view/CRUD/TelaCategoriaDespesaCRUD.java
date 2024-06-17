@@ -25,6 +25,7 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
     private int id_usuario;
      public TelaCategoriaDespesaCRUD(int id_usuario) throws ClassNotFoundException, SQLException {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
         this.id_usuario = id_usuario;
