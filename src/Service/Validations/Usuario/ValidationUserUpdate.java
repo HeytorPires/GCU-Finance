@@ -15,55 +15,48 @@ import model.dao.UsuarioDAO;
  * @author heyto
  */
 public class ValidationUserUpdate {
+    
+
     public static boolean validateUserUpdate(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException {
-    boolean NomeDiferente = true;
-    boolean EmailDiferente = true;
+        boolean NomeDiferente = false;
+        boolean EmailDiferente = false;
 
-    UsuarioDAO Userdao = new UsuarioDAO();
-    Usuario user = Userdao.readUserByID(id_usuario);
-   
+        UsuarioDAO userDAO = new UsuarioDAO();
+        Usuario user = userDAO.readUserByID(id_usuario);
 
-    String nomeDB = user.getUsername();
-    String EmailDB = user.getEmail();
+        String nomeDB = user.getUsername();
+        String emailDB = user.getEmail();
 
-    if (NomeNovo.isEmpty() && EmailNovo.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Nenhum dado foi inserido!");
-        return false;
+        // Verificar se o nome novo é diferente do nome antigo
+        if (!NomeNovo.isEmpty() && !nomeDB.equals(NomeNovo)) {
+            NomeDiferente = true;
+        }
+
+        // Verificar se o email novo é diferente do email antigo
+        if (!EmailNovo.isEmpty() && !emailDB.equals(EmailNovo)) {
+            if (!ValidationEmailService.validEmailUser(EmailNovo)) {
+                JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legítimo! (@gmail.com)");
+                return false;
+            }
+            EmailDiferente = true;
+        } else if (EmailNovo.isEmpty()) {
+            // Se não foi informado um novo email, manter o email existente
+            EmailNovo = emailDB;
+            EmailDiferente = false; // Não houve diferença no email
+        }
+
+        // Se houve diferença no nome ou email, atualiza no banco de dados
+        if (NomeDiferente || EmailDiferente) {
+            // Validar se o novo nome não está vazio
+            if (NomeNovo.isEmpty()) {
+                NomeNovo = nomeDB; // Manter o nome existente
+            }
+            
+            userDAO.AlterarUsuario(NomeNovo, EmailNovo, id_usuario);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.");
+            return false;
+        }
     }
-
-    // Verificar se o nome novo é igual ao nome antigo
-    if (!NomeNovo.isEmpty() && nomeDB.equals(NomeNovo)) {
-        NomeDiferente = false;
-        JOptionPane.showMessageDialog(null, "Não foi possível alterar o Nome: Nome novo é igual ao antigo.");
-    }
-
-    // Verificar se o email novo é igual ao email antigo
-    if (!EmailNovo.isEmpty() && EmailDB.equals(EmailNovo)) {
-        EmailDiferente = false;
-        JOptionPane.showMessageDialog(null, "Não foi possível alterar o Email: Email novo é igual ao antigo.");
-    }
-
-    // Verificar se os campos de nome e email não estão vazios, senão mantêm os valores antigos
-    if (NomeNovo.isEmpty()) {
-        NomeNovo = nomeDB;
-    }
-    if (EmailNovo.isEmpty()) {
-        EmailNovo = EmailDB;
-    }
-
-    // Validar se o email segue o padrão correto
-    if (!ValidationEmailService.validEmailUser(EmailNovo)) {
-        JOptionPane.showMessageDialog(null, "Email não está nos padrões de email, use um email legítimo! (@gmail.com)");
-       return false;
-    }
-
-    // Se pelo menos um dos campos for diferente, realizar a atualização
-    if (NomeDiferente || EmailDiferente) {
-        Userdao.AlterarUsuario(NomeNovo, EmailNovo, id_usuario);
-    } else {
-        JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada.");
-    }
-         return false;
-    }
-
 }

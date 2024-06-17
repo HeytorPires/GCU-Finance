@@ -21,7 +21,7 @@ public class UsuarioController {
     }
     public static void AlterarInfo(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
        if(Service.Validations.Usuario.ValidationUserUpdate.validateUserUpdate(NomeNovo, EmailNovo, id_usuario)){
-        Service.RepositoryService.UsuarioRepositoriyService.chargeUserInfo(NomeNovo, EmailNovo, id_usuario);
+        //Service.RepositoryService.UsuarioRepositoriyService.chargeUserInfo(NomeNovo, EmailNovo, id_usuario);
     }
     }
     public static void AlterarSenha(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws SQLException, ClassNotFoundException{
@@ -31,7 +31,6 @@ public class UsuarioController {
     }
     public static void ApagarTodososdados(int id_usuario) throws ClassNotFoundException, SQLException{
         try {
-            JOptionPane.showMessageDialog(null,"Todos os registros foram apagados com sucesso!");
             Service.RepositoryService.UsuarioRepositoriyService.DeleteAllRegisters(id_usuario);
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
