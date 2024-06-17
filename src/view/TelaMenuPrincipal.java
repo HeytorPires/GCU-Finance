@@ -911,7 +911,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaReceitasKeyReleased
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new TelaSobre().setVisible(true);
+        new TelaSobre(id_usuario).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void comboMountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMountsActionPerformed

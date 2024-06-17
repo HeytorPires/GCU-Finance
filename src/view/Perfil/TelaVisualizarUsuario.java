@@ -26,6 +26,7 @@ public class TelaVisualizarUsuario extends javax.swing.JFrame {
     public TelaVisualizarUsuario(int id_usuario) {
         initComponents();
         this.id_usuario = id_usuario;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
         

@@ -27,6 +27,7 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
     public TelaApagarDadosUsuario(int id_usuario) {
         initComponents();
         this.id_usuario = id_usuario;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
     }
