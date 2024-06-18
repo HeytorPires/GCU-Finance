@@ -11,8 +11,8 @@ import java.sql.SQLException;
  * @author heyto
  */
 public class ValidateDeleteService {
-    public static boolean ValidateDeleteCatDespesas(int id_usuario, int code) throws ClassNotFoundException, SQLException{
-        if(Service.Validations.CategoriaDespesa.ValidateDeleteExistsDespesaByIdCatService.validateExitsDespesaByIdcat(id_usuario, code)){
+    public static boolean ValidateDeleteCatDespesas(int id_usuario, int antigocode) throws ClassNotFoundException, SQLException{
+        if(Service.Validations.CategoriaDespesa.ValidateDeleteExistsDespesaByIdCatService.validateExitsDespesaByIdcat(id_usuario, antigocode)){
             return false;
         }
         return true;

@@ -286,11 +286,11 @@ public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
     private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
 
         if (TabelaExibir.getSelectedRow() != -1) {
-              int id_categoriaDespesa = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
+              int id_categoriaReceita = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
            int antigoCode = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3);
 
             try {
-                if(Controller.CategoriaReceitaController.validateCategoriaReceitaDelete(id_categoriaDespesa, id_usuario, antigoCode)){
+                if(Controller.CategoriaReceitaController.validateCategoriaReceitaDelete(id_categoriaReceita, id_usuario, antigoCode)){
                       InputTitulo.setText("");
                         InputDescricao.setText("");
                         InputPesquisa.setText("");

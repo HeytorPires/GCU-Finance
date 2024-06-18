@@ -32,8 +32,9 @@ public class CategoriaDespesaController {
         }
         return false;
     }
-     public static boolean validateCategoriaDespesaDelete(int id_cat_despesa, int id_usuario, int code) throws ClassNotFoundException, SQLException{
-         if(Service.Validations.CategoriaDespesa.ValidateDeleteService.ValidateDeleteCatDespesas(id_usuario, code)){
+     public static boolean validateCategoriaDespesaDelete(int id_cat_despesa, int id_usuario, int antigocode) throws ClassNotFoundException, SQLException{
+         if(Service.Validations.CategoriaDespesa.ValidateDeleteService.ValidateDeleteCatDespesas(id_usuario, antigocode)){
+             System.out.println("passa aqui");
              Service.RepositoryService.CategoriaDespesaRepositoryService.delete(id_cat_despesa);
 
          }
