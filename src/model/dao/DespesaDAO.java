@@ -273,6 +273,28 @@ public class DespesaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
+        public void updateCode(int codeAntigo,int codenovo, int id_usuario) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+             ResultSet rs = null;
+            try {
+                stmt = con.prepareStatement("update despesa set code = ? where code = ? and id_usuario = ?");
+                
+                stmt.setInt(1, codenovo);
+                stmt.setInt(2, codeAntigo);
+                stmt.setInt(3, id_usuario);
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Todas as despesas foram atualizadas com sucesso");
+            } catch (SQLException ex) {
+                Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+        }
         public List<Despesa> filterByYearAndMonth(String year, String month, int id_usuario) throws ClassNotFoundException, SQLException {
     Connection con = null;
     PreparedStatement stmt = null;

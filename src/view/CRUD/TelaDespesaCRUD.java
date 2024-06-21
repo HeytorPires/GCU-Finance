@@ -391,7 +391,10 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_InputPesquisaActionPerformed
 
     private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
-
+        if(comboBoxCat.getSelectedItem() == null){
+                    JOptionPane.showMessageDialog(null, "Erro: não é possivel criar uma despesa sem uma categoria");
+                    return;
+                }
         String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
         Integer code = Integer.valueOf(dados[0].trim());
         String titulo = InputTitulo.getText();
