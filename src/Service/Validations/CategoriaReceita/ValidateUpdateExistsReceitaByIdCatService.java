@@ -22,7 +22,7 @@ public class ValidateUpdateExistsReceitaByIdCatService {
         System.out.println("code existente :" + categoriaReceita);
         if(code != antigocode){
         if(!categoriaReceita.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Não foi possivel alterar quando a categoria está presente em uma receita! " );
+            JOptionPane.showMessageDialog(null, "Não foi possivel alterar código da categoria, porque a categoria está presente em uma receita! " );
             return false;
         }    
         }

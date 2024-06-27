@@ -98,6 +98,8 @@ public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
         InputDescricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciar Categoria Receita");
+        setResizable(false);
 
         jLabel1.setText("titulo");
 

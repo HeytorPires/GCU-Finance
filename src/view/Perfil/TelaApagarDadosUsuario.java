@@ -47,6 +47,7 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Apagar Dados");
+        setResizable(false);
 
         botaoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Icones/door_out.png"))); // NOI18N
         botaoSair.setText("Sair");

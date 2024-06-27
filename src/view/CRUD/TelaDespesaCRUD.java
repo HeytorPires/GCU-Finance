@@ -139,6 +139,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Despesas");
+        setResizable(false);
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

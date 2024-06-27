@@ -97,6 +97,8 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
         InputDescricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciar Categoria Despesa");
+        setResizable(false);
 
         jLabel1.setText("titulo");
 

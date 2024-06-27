@@ -22,7 +22,7 @@ public class ValidateUpdateExistsDespesaByIdCatService {
         System.out.println("code existente :" + categoriaDespesa);
         if(code != antigocode){
         if(!categoriaDespesa.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Não foi possivel alterar quando a categoria está presente em uma despesa! " );
+            JOptionPane.showMessageDialog(null, "Não foi possivel alterar código da categoria, porque a categoria está presente em uma despesa! " );
             return false;
         }    
         }

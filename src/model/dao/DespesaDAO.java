@@ -295,6 +295,7 @@ public class DespesaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
+
         public List<Despesa> filterByYearAndMonth(String year, String month, int id_usuario) throws ClassNotFoundException, SQLException {
     Connection con = null;
     PreparedStatement stmt = null;
@@ -306,10 +307,13 @@ public class DespesaDAO {
         
         StringBuilder query = new StringBuilder("SELECT * FROM despesa WHERE id_usuario = ?");
         
-        if (!year.equals("All")) {
+        boolean filterByYear = !year.equals("Todos");
+        boolean filterByMonth = !month.equals("0");
+
+        if (filterByYear) {
             query.append(" AND YEAR(data) = ?");
         }
-        if (!month.equals("0")) {  
+        if (filterByMonth) {  
             query.append(" AND MONTH(data) = ?");
         }
         
@@ -317,22 +321,21 @@ public class DespesaDAO {
         
         int paramIndex = 1;
         stmt.setInt(paramIndex++, id_usuario);
-        if (!year.equals("All")) {
+        if (filterByYear) {
             stmt.setInt(paramIndex++, Integer.parseInt(year));
         }
-        if (!month.equals("0")) {
+        if (filterByMonth) {
             stmt.setInt(paramIndex++, Integer.parseInt(month));
         }
-        
+
         rs = stmt.executeQuery();
         
         while (rs.next()) {
             Despesa despesa = new Despesa();
-            despesa.setId_despesa(rs.getInt("id_despesa"));
             despesa.setTitulo(rs.getString("titulo"));
             despesa.setData(rs.getDate("data"));
             despesa.setValor(rs.getDouble("valor"));
-            despesa.setCode(rs.getInt("code"));
+            despesa.setCode(rs.getInt("code")); 
             despesas.add(despesa);
         }
     } catch (SQLException ex) {
