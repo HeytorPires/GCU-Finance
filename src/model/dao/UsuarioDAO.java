@@ -26,7 +26,8 @@ public class UsuarioDAO {
     
     try {
         con = ConnectionFactory.getConnection();
-        
+        con.setAutoCommit(false);  // Iniciar transação
+
         // Inserção do usuário
         String sqlUsuario = "INSERT INTO usuario (username, email, senha) VALUES (?, ?, ?)";
         stmtUsuario = con.prepareStatement(sqlUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -49,11 +50,19 @@ public class UsuarioDAO {
             // Chamada para inserir categorias
             inserirCategoriasPadrao(con, idUsuario);
             
+            con.commit();  // Commit da transação
             JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso");
         } else {
             throw new SQLException("Falha ao obter ID gerado para usuário.");
         }
     } catch (SQLException ex) {
+        if (con != null) {
+            try {
+                con.rollback();  // Rollback em caso de erro
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
         JOptionPane.showMessageDialog(null, "Erro ao salvar usuário: " + ex);
     } finally {
@@ -64,13 +73,16 @@ public class UsuarioDAO {
         if (stmtUsuario != null) {
             stmtUsuario.close();
         }
-        ConnectionFactory.closeConnection(con);
+        if (con != null) {
+            con.setAutoCommit(true);  // Restaurar estado de auto-commit
+            ConnectionFactory.closeConnection(con);
+        }
     }
 }
-    private void inserirCategoriasPadrao(Connection con, int idUsuario) throws SQLException {
+
+private void inserirCategoriasPadrao(Connection con, int idUsuario) throws SQLException {
     PreparedStatement stmtCategoriaReceita = null;
     PreparedStatement stmtCategoriaDespesa = null;
-    ResultSet rs = null;
     
     try {
         // Inserção na tabela categoria_receita
@@ -82,23 +94,11 @@ public class UsuarioDAO {
         int[] codesReceita = {1001, 1002, 1003, 1004, 1005};
         
         for (int i = 0; i < nomesReceita.length; i++) {
-            // Verificar se o code já existe
-            String sqlCheck = "SELECT COUNT(*) AS count FROM categoria_receita WHERE code = ?";
-            PreparedStatement stmtCheck = con.prepareStatement(sqlCheck);
-            stmtCheck.setInt(1, codesReceita[i]);
-            rs = stmtCheck.executeQuery();
-            
-            if (rs.next() && rs.getInt("count") == 0) {
-                // Código não existe, então inserir
-                stmtCategoriaReceita.setString(1, nomesReceita[i]);
-                stmtCategoriaReceita.setString(2, descricoesReceita[i]);
-                stmtCategoriaReceita.setInt(3, codesReceita[i]);
-                stmtCategoriaReceita.setInt(4, idUsuario);
-                stmtCategoriaReceita.executeUpdate();
-            }
-            
-            rs.close();
-            stmtCheck.close();
+            stmtCategoriaReceita.setString(1, nomesReceita[i]);
+            stmtCategoriaReceita.setString(2, descricoesReceita[i]);
+            stmtCategoriaReceita.setInt(3, codesReceita[i]);
+            stmtCategoriaReceita.setInt(4, idUsuario);
+            stmtCategoriaReceita.executeUpdate();
         }
         
         // Inserção na tabela categoria_despesa
@@ -110,30 +110,15 @@ public class UsuarioDAO {
         int[] codesDespesa = {4001, 4002, 4003, 4004, 4005};
         
         for (int i = 0; i < nomesDespesa.length; i++) {
-            // Verificar se o code já existe
-            String sqlCheck = "SELECT COUNT(*) AS count FROM categoria_despesa WHERE code = ?";
-            PreparedStatement stmtCheck = con.prepareStatement(sqlCheck);
-            stmtCheck.setInt(1, codesDespesa[i]);
-            rs = stmtCheck.executeQuery();
-            
-            if (rs.next() && rs.getInt("count") == 0) {
-                // Código não existe, então inserir
-                stmtCategoriaDespesa.setString(1, nomesDespesa[i]);
-                stmtCategoriaDespesa.setString(2, descricoesDespesa[i]);
-                stmtCategoriaDespesa.setInt(3, codesDespesa[i]);
-                stmtCategoriaDespesa.setInt(4, idUsuario);
-                stmtCategoriaDespesa.executeUpdate();
-            }
-            
-            rs.close();
-            stmtCheck.close();
+            stmtCategoriaDespesa.setString(1, nomesDespesa[i]);
+            stmtCategoriaDespesa.setString(2, descricoesDespesa[i]);
+            stmtCategoriaDespesa.setInt(3, codesDespesa[i]);
+            stmtCategoriaDespesa.setInt(4, idUsuario);
+            stmtCategoriaDespesa.executeUpdate();
         }
         
     } finally {
         // Fechar recursos
-        if (rs != null) {
-            rs.close();
-        }
         if (stmtCategoriaReceita != null) {
             stmtCategoriaReceita.close();
         }
