@@ -26,7 +26,6 @@ public class ValidateUpdateExistsDespesaByIdCatService {
             return false;
         }    
         }
-        System.out.println("não foi no if");
         return true;
     }
 }

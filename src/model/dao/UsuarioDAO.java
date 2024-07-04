@@ -48,7 +48,7 @@ public class UsuarioDAO {
             idUsuario = generatedKeys.getInt(1);
             
             // Chamada para inserir categorias
-            inserirCategoriasPadrao(con, idUsuario);
+            //inserirCategoriasPadrao(con, idUsuario);
             
             con.commit();  // Commit da transação
             JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso");
@@ -79,54 +79,54 @@ public class UsuarioDAO {
         }
     }
 }
-
-private void inserirCategoriasPadrao(Connection con, int idUsuario) throws SQLException {
-    PreparedStatement stmtCategoriaReceita = null;
-    PreparedStatement stmtCategoriaDespesa = null;
-    
-    try {
-        // Inserção na tabela categoria_receita
-        String sqlCategoriaReceita = "INSERT INTO categoria_receita (nome, descricao, code, id_usuario) VALUES (?, ?, ?, ?)";
-        stmtCategoriaReceita = con.prepareStatement(sqlCategoriaReceita);
-        
-        String[] nomesReceita = {"Salário", "Investimento", "Bônus", "Freelance", "Outros"};
-        String[] descricoesReceita = {"Salário mensal", "Retorno de investimentos", "Bônus anual", "Trabalhos freelance", "Outras receitas"};
-        int[] codesReceita = {1001, 1002, 1003, 1004, 1005};
-        
-        for (int i = 0; i < nomesReceita.length; i++) {
-            stmtCategoriaReceita.setString(1, nomesReceita[i]);
-            stmtCategoriaReceita.setString(2, descricoesReceita[i]);
-            stmtCategoriaReceita.setInt(3, codesReceita[i]);
-            stmtCategoriaReceita.setInt(4, idUsuario);
-            stmtCategoriaReceita.executeUpdate();
-        }
-        
-        // Inserção na tabela categoria_despesa
-        String sqlCategoriaDespesa = "INSERT INTO categoria_despesa (nome, descricao, code, id_usuario) VALUES (?, ?, ?, ?)";
-        stmtCategoriaDespesa = con.prepareStatement(sqlCategoriaDespesa);
-        
-        String[] nomesDespesa = {"Alimentação", "Transporte", "Moradia", "Lazer", "Outros"};
-        String[] descricoesDespesa = {"Despesas com alimentação", "Despesas com transporte", "Despesas com moradia", "Despesas com lazer", "Outras despesas"};
-        int[] codesDespesa = {4001, 4002, 4003, 4004, 4005};
-        
-        for (int i = 0; i < nomesDespesa.length; i++) {
-            stmtCategoriaDespesa.setString(1, nomesDespesa[i]);
-            stmtCategoriaDespesa.setString(2, descricoesDespesa[i]);
-            stmtCategoriaDespesa.setInt(3, codesDespesa[i]);
-            stmtCategoriaDespesa.setInt(4, idUsuario);
-            stmtCategoriaDespesa.executeUpdate();
-        }
-        
-    } finally {
-        // Fechar recursos
-        if (stmtCategoriaReceita != null) {
-            stmtCategoriaReceita.close();
-        }
-        if (stmtCategoriaDespesa != null) {
-            stmtCategoriaDespesa.close();
-        }
-    }
-}
+//
+//private void inserirCategoriasPadrao(Connection con, int idUsuario) throws SQLException {
+//    PreparedStatement stmtCategoriaReceita = null;
+//    PreparedStatement stmtCategoriaDespesa = null;
+//    
+//    try {
+//        // Inserção na tabela categoria_receita
+//        String sqlCategoriaReceita = "INSERT INTO categoria_receita (nome, descricao, code, id_usuario) VALUES (?, ?, ?, ?)";
+//        stmtCategoriaReceita = con.prepareStatement(sqlCategoriaReceita);
+//        
+//        String[] nomesReceita = {"Salário", "Investimento", "Bônus", "Freelance", "Outros"};
+//        String[] descricoesReceita = {"Salário mensal", "Retorno de investimentos", "Bônus anual", "Trabalhos freelance", "Outras receitas"};
+//        int[] codesReceita = {1001, 1002, 1003, 1004, 1005};
+//        
+//        for (int i = 0; i < nomesReceita.length; i++) {
+//            stmtCategoriaReceita.setString(1, nomesReceita[i]);
+//            stmtCategoriaReceita.setString(2, descricoesReceita[i]);
+//            stmtCategoriaReceita.setInt(3, codesReceita[i]);
+//            stmtCategoriaReceita.setInt(4, idUsuario);
+//            stmtCategoriaReceita.executeUpdate();
+//        }
+//        
+//        // Inserção na tabela categoria_despesa
+//        String sqlCategoriaDespesa = "INSERT INTO categoria_despesa (nome, descricao, code, id_usuario) VALUES (?, ?, ?, ?)";
+//        stmtCategoriaDespesa = con.prepareStatement(sqlCategoriaDespesa);
+//        
+//        String[] nomesDespesa = {"Alimentação", "Transporte", "Moradia", "Lazer", "Outros"};
+//        String[] descricoesDespesa = {"Despesas com alimentação", "Despesas com transporte", "Despesas com moradia", "Despesas com lazer", "Outras despesas"};
+//        int[] codesDespesa = {4001, 4002, 4003, 4004, 4005};
+//        
+//        for (int i = 0; i < nomesDespesa.length; i++) {
+//            stmtCategoriaDespesa.setString(1, nomesDespesa[i]);
+//            stmtCategoriaDespesa.setString(2, descricoesDespesa[i]);
+//            stmtCategoriaDespesa.setInt(3, codesDespesa[i]);
+//            stmtCategoriaDespesa.setInt(4, idUsuario);
+//            stmtCategoriaDespesa.executeUpdate();
+//        }
+//        
+//    } finally {
+//        // Fechar recursos
+//        if (stmtCategoriaReceita != null) {
+//            stmtCategoriaReceita.close();
+//        }
+//        if (stmtCategoriaDespesa != null) {
+//            stmtCategoriaDespesa.close();
+//        }
+//    }
+//}
     public Usuario readUserByID(int id_usuario) throws ClassNotFoundException, SQLException {
     Connection con = null;
     PreparedStatement stmt = null;
