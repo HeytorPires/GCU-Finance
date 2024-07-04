@@ -17,14 +17,16 @@ public class Receita {
     private int id_usuario;
     private Date data;
     private int code;
+    private int id_categoria_receita;
 
-    public Receita(int id_receita, String titulo, double valor, int id_usuario, Date data, int code) {
+    public Receita(int id_receita, String titulo, double valor, int id_usuario, Date data, int code, int id_categoria_receita) {
         this.id_receita = id_receita;
         this.titulo = titulo;
         this.valor = valor;
         this.id_usuario = id_usuario;
         this.data = data;
         this.code = code;
+        this.id_categoria_receita = id_categoria_receita;
     }
 
     public Receita() {
@@ -78,6 +80,15 @@ public class Receita {
         this.code = code;
     }
 
+    public int getId_categoria_receita() {
+        return id_categoria_receita;
+    }
+
+    public void setId_categoria_receita(int id_categoria_receita) {
+        this.id_categoria_receita = id_categoria_receita;
+    }
+
+    
     @Override
     public String toString() {
         return "Receita{" + "id_receita=" + id_receita + ", titulo=" + titulo + ", valor=" + valor + ", id_usuario=" + id_usuario + ", data=" + data + ", code=" + code + '}';

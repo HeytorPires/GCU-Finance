@@ -16,14 +16,16 @@ public class Despesa {
     private double valor;
     private int id_usuario;
     private int code;
+    private int id_categoria_despesa;
 
-    public Despesa(int id_despesa, String titulo, Date data, double valor, int id_usuario, int code) {
+    public Despesa(int id_despesa, String titulo, Date data, double valor, int id_usuario, int code, int id_categoria_despesa) {
         this.id_despesa = id_despesa;
         this.titulo = titulo;
         this.data = data;
         this.valor = valor;
         this.id_usuario = id_usuario;
         this.code = code;
+        this.id_categoria_despesa = id_categoria_despesa;
     }
 
     public Despesa() {
@@ -77,6 +79,15 @@ public class Despesa {
     public void setCode(int code) {
         this.code = code;
     }
+
+    public int getId_categoria_despesa() {
+        return id_categoria_despesa;
+    }
+
+    public void setId_categoria_despesa(int id_categoria_despesa) {
+        this.id_categoria_despesa = id_categoria_despesa;
+    }
+    
     
     @Override
     public String toString() {
