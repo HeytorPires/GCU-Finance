@@ -180,6 +180,40 @@ public class CategoriaDespesaDAO {
             }
             return categorias;
         }
+        public List<CategoriaDespesa> readCategoriaById(int id_categoria_despesa) throws ClassNotFoundException, SQLException{
+            
+            Connection con = (Connection) ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            
+            List<CategoriaDespesa> categorias = new ArrayList<>();
+            
+            try{
+                
+                stmt = con.prepareStatement("SELECT * FROM categoria_despesa WHERE id_categoria_despesa = ?");
+                stmt.setInt(1, id_categoria_despesa);
+                rs = stmt.executeQuery();
+                
+                while(rs.next()){
+                  CategoriaDespesa categoria = new CategoriaDespesa();
+                    
+                    categoria.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
+                    categoria.setNome(rs.getString("nome"));
+                    categoria.setDescricao(rs.getString("descricao"));
+                    categoria.setCode(rs.getInt("code"));
+                    categoria.setId_usuario(rs.getInt("id_usuario"));
+                    
+                    categorias.add(categoria);
+                }
+            } catch(SQLException ex) {
+              Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex);
+            } finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+            return categorias;
+        }
         
         public List<CategoriaDespesa> readByIdAndCode(int id_usuario, int code) throws ClassNotFoundException, SQLException{
             

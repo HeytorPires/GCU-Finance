@@ -29,7 +29,7 @@ public class DespesaRepositoryService {
         d.setTitulo(titulo);
         d.setValor(valor);
         d.setData(java.sql.Date.valueOf(data));
-        d.setCode(desp.getId_categoria_despesa());
+        d.setId_categoria_despesa(desp.getId_categoria_despesa());
         d.setId_usuario(id_usuario);
         
         despesadao.Create(d);

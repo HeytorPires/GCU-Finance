@@ -174,7 +174,7 @@ public class DespesaDAO {
                     despesa.setTitulo(rs.getString("titulo"));
                     despesa.setValor(rs.getDouble("valor"));
                     despesa.setData(rs.getDate("data"));
-                    despesa.setCode(rs.getInt("code"));
+                    despesa.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     //despesa.setCode(rs.getInt("code"));
                     despesa.setId_usuario(rs.getInt("id_usuario"));
                     despesas.add(despesa);

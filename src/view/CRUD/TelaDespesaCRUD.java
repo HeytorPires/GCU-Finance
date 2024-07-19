@@ -66,16 +66,33 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
+        
         DespesaDAO pdao = new DespesaDAO();
+        
+        CategoriaDespesaDAO Catdesp = new CategoriaDespesaDAO();
         System.out.println("usaurio id DESPESA" + id_usuario);
 
         pdao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
+            
+            CategoriaDespesa cat = new CategoriaDespesa();
+            int id_cat = d.getId_categoria_despesa();
+            
+            
+            try {
+                cat = Catdesp.readCategoriaById(id_cat).getFirst();
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
             modelo.addRow(new Object[]{
                 d.getId_despesa(),
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
-                d.getCode()
+                cat.getCode()
             });
         });
     }
@@ -397,6 +414,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
                     return;
                 }
         String[] dados = comboBoxCat.getSelectedItem().toString().split("-");
+        System.out.println(dados[0].trim());
         Integer code = Integer.valueOf(dados[0].trim());
         String titulo = InputTitulo.getText();
         double valor;
