@@ -122,14 +122,26 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     DespesaDAO ddao = new DespesaDAO();
 
     List<Despesa> despesas = ddao.filterByYearAndMonth(year, month, id_usuario);
+    CategoriaDespesaDAO Catdesp = new CategoriaDespesaDAO();
 
     despesas.stream().forEach((d) -> {
+         CategoriaDespesa cat = new CategoriaDespesa();
+            int id_cat = d.getId_categoria_despesa();
+            
+            
+            try {
+                cat = Catdesp.readCategoriaById(id_cat).getFirst();
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
         modelo.addRow(new Object[]{
             d.getId_despesa(),
             d.getTitulo(),
             d.getValor(),
             d.getData(),
-            d.getCode()
+            cat.getCode()
         });
     });
 }

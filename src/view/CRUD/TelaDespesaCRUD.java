@@ -70,8 +70,6 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         DespesaDAO pdao = new DespesaDAO();
         
         CategoriaDespesaDAO Catdesp = new CategoriaDespesaDAO();
-        System.out.println("usaurio id DESPESA" + id_usuario);
-
         pdao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
             
             CategoriaDespesa cat = new CategoriaDespesa();

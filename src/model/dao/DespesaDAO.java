@@ -335,7 +335,7 @@ public class DespesaDAO {
             despesa.setTitulo(rs.getString("titulo"));
             despesa.setData(rs.getDate("data"));
             despesa.setValor(rs.getDouble("valor"));
-            despesa.setCode(rs.getInt("code")); 
+            despesa.setId_categoria_despesa(rs.getInt("id_categoria_despesa")); 
             despesas.add(despesa);
         }
     } catch (SQLException ex) {
