@@ -69,7 +69,6 @@ public class MovimentacoesDAO {
         
         boolean filterByYear = !year.equals("Todos");
         boolean filterByMonth = !month.equals("0");
-                System.out.println("está vindo aqui");
 
         if (filterByYear) {
             query.append(" AND YEAR(data) = ?");
@@ -88,7 +87,6 @@ public class MovimentacoesDAO {
         if (filterByMonth) {
             stmt.setInt(paramIndex++, Integer.parseInt(month));
         }
-        System.out.println("está vindo aqui3");
 
         rs = stmt.executeQuery();
         
@@ -97,12 +95,9 @@ public class MovimentacoesDAO {
             movimentacao.setTitulo(rs.getString("titulo"));
             movimentacao.setData(rs.getDate("data"));
             movimentacao.setValor(rs.getDouble("valor"));
-            movimentacao.setCode(rs.getInt("code")); 
             movimentacao.setTipo(rs.getString("tipo"));
             movimentacaos.add(movimentacao);
-                    System.out.println("está vindo aqui4");
         }
-        System.out.println("está vindo aqui5");
 
     } catch (SQLException ex) {
         Logger.getLogger(DespesaDAO.class.getName()).log(Level.SEVERE, null, ex);
