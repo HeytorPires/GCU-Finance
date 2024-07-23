@@ -35,22 +35,24 @@ public class DespesaRepositoryService {
         despesadao.Create(d);
     }
     public static void update(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException{
+        //bean
         Despesa d = new Despesa();
         DespesaDAO despesadao = new DespesaDAO();
-        
+        //dao
         CategoriaDespesa desp = new CategoriaDespesa();
         CategoriaDespesaDAO desps = new CategoriaDespesaDAO();
-        
+        //operator
         desp = desps.readByIdAndCode(id_usuario, code).getFirst();
-        System.out.println("repositorio id pelo code: " + desp.getCode() + " id: "+ + desp.getId_categoria_despesa());
+        int id_cat_desp = desp.getId_categoria_despesa();
         
+        //Database
         d.setTitulo(titulo);
         d.setValor(valor);
         d.setData(java.sql.Date.valueOf(data));
         d.setId_usuario(id_usuario);
-        d.setId_categoria_despesa(desp.getId_categoria_despesa());
+        d.setId_despesa(id_despesa);
+        d.setId_categoria_despesa(id_cat_desp);
         despesadao.update(d);
-        System.out.println("log no repositorio de criaçao");
     }
     public static void delete(int id_despesa) throws ClassNotFoundException, SQLException{
          Despesa d = new Despesa();

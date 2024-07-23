@@ -64,7 +64,7 @@ public class DespesaDAO {
                     despesa.setTitulo(rs.getString("titulo"));
                     despesa.setValor(rs.getDouble("valor"));
                     despesa.setData(rs.getDate("data"));
-                    despesa.setCode(rs.getInt("code"));
+                    despesa.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     
                     despesas.add(despesa);
                 }
@@ -84,7 +84,7 @@ public class DespesaDAO {
             try {
                 stmt = con.prepareStatement("UPDATE despesa SET titulo = ?, valor = ?, data = ?, id_categoria_despesa = ? WHERE id_despesa = ?");
                 
-               stmt.setString(1, d.getTitulo());
+                stmt.setString(1, d.getTitulo());
                 stmt.setDouble(2, d.getValor());
                 stmt.setDate(3, d.getData()); 
                 stmt.setInt(4, d.getId_categoria_despesa()); 
@@ -252,7 +252,7 @@ public class DespesaDAO {
             }
             return despesas;
         }
-        
+
         public void deleteAll(int id_usuario) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
@@ -295,7 +295,7 @@ public class DespesaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
-
+    
         public List<Despesa> filterByYearAndMonth(String year, String month, int id_usuario) throws ClassNotFoundException, SQLException {
     Connection con = null;
     PreparedStatement stmt = null;

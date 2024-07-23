@@ -87,11 +87,13 @@ public class Despesa {
     public void setId_categoria_despesa(int id_categoria_despesa) {
         this.id_categoria_despesa = id_categoria_despesa;
     }
-    
-    
+
     @Override
     public String toString() {
-        return "Despesa{" + "titulo=" + titulo + '}';
+        return "Despesa{" + "id_despesa=" + id_despesa + ", titulo=" + titulo + ", data=" + data + ", valor=" + valor + ", id_usuario=" + id_usuario + ", code=" + code + ", id_categoria_despesa=" + id_categoria_despesa + '}';
     }
+    
+    
+   
     
 }
