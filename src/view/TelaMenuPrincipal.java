@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.CategoriaDespesa;
 import model.bean.CategoriaReceita;
 import model.bean.Despesa;
 import model.bean.Movimentacao;
@@ -46,7 +47,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         
 
           try {
-              readJtableCategoriasDepesas();
+              readJtableCategoriasDespesas();
           } catch (ClassNotFoundException ex) {
               Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           } catch (SQLException ex) {
@@ -89,14 +90,29 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabelaDespesas.getModel();
         modelo.setNumRows(0);
         DespesaDAO Ddao = new DespesaDAO();
+        CategoriaDespesaDAO Catdesp = new CategoriaDespesaDAO();
+
 
         Ddao.readDepesaByIdUser(id_usuario).stream().forEach((d) -> {
+            
+             CategoriaDespesa cat = new CategoriaDespesa();
+             int id_cat = d.getId_categoria_despesa();
+            
+              
+            try {
+                cat = Catdesp.readCategoriaById(id_cat).getFirst();
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaDespesaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             modelo.addRow(new Object[]{
                 d.getId_despesa(),
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
-                d.getCode()
+                cat.getCode()
             });
         });
     }
@@ -145,7 +161,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             movimentacao.getTitulo(),
             movimentacao.getValor(),
             movimentacao.getData(),
-            movimentacao.getCode(),
             movimentacao.getTipo()
         });
     });
@@ -166,7 +181,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
     }
     
-    public  void readJtableCategoriasDepesas() throws  ClassNotFoundException, SQLException {
+    public  void readJtableCategoriasDespesas() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaCategoriaDespesa.getModel();
         modelo.setNumRows(0);
         CategoriaDespesaDAO Cdao = new CategoriaDespesaDAO();
@@ -205,7 +220,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 m.getTitulo(),
                 m.getValor(),
                 m.getData(),
-                m.getCode(),
+               // m.getCode(),
                 m.getTipo()
             });
         });
@@ -601,17 +616,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         tabelaMovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Titulo", "Valor", "Data", "Code", "Tipo"
+                "Titulo", "Valor", "Data", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false
+                false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

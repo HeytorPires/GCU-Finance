@@ -38,12 +38,17 @@ public class DespesaRepositoryService {
         Despesa d = new Despesa();
         DespesaDAO despesadao = new DespesaDAO();
         
+        CategoriaDespesa desp = new CategoriaDespesa();
+        CategoriaDespesaDAO desps = new CategoriaDespesaDAO();
+        
+        desp = desps.readByIdAndCode(id_usuario, code).getFirst();
+        System.out.println("repositorio id pelo code: " + desp.getCode() + " id: "+ + desp.getId_categoria_despesa());
+        
         d.setTitulo(titulo);
         d.setValor(valor);
         d.setData(java.sql.Date.valueOf(data));
-        d.setCode(code);
         d.setId_usuario(id_usuario);
-        d.setId_despesa(id_despesa);
+        d.setId_categoria_despesa(desp.getId_categoria_despesa());
         despesadao.update(d);
         System.out.println("log no repositorio de criaçao");
     }

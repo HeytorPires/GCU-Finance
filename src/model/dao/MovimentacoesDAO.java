@@ -42,9 +42,9 @@ public class MovimentacoesDAO {
                     moviG.setTitulo(rs.getString("titulo"));
                     moviG.setValor(rs.getDouble("valor"));
                     moviG.setData(rs.getDate("data"));
-                    moviG.setCode(rs.getInt("code"));
-                    //moviG.setId_usuario(rs.getInt("id_usuario"));
                     moviG.setTipo(rs.getString("tipo"));
+                     //moviG.setcosw(rs.getInt("code"));
+                    //moviG.setId_usuario(rs.getInt("id_usuario"));
                     
                     Movis.add(moviG);
                 }

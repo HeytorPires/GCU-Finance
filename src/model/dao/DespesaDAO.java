@@ -82,12 +82,12 @@ public class DespesaDAO {
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("UPDATE despesa SET titulo = ?, valor = ?, data = ?, code = ? WHERE id_despesa = ?");
+                stmt = con.prepareStatement("UPDATE despesa SET titulo = ?, valor = ?, data = ?, id_categoria_despesa = ? WHERE id_despesa = ?");
                 
                stmt.setString(1, d.getTitulo());
                 stmt.setDouble(2, d.getValor());
                 stmt.setDate(3, d.getData()); 
-                stmt.setInt(4, d.getCode()); 
+                stmt.setInt(4, d.getId_categoria_despesa()); 
                 stmt.setInt(5, d.getId_despesa()); 
                 
                 stmt.executeUpdate();
