@@ -7,7 +7,9 @@ package Service.Validations.CategoriaDespesa;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.bean.CategoriaDespesa;
 import model.bean.Despesa;
+import model.dao.CategoriaDespesaDAO;
 import model.dao.DespesaDAO;
 
 /**
@@ -16,9 +18,16 @@ import model.dao.DespesaDAO;
  */
 public class ValidateDeleteExistsDespesaByIdCatService {
     public static boolean validateExitsDespesaByIdcat(int id_usuario, int code) throws ClassNotFoundException, SQLException{
+        //Dao
         DespesaDAO ddao = new DespesaDAO();
+        CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();
+        //bean
         List<Despesa> categoriaDespesa;
-        categoriaDespesa = ddao.readDepesaByIdUserAndCodeList(id_usuario, code);
+        CategoriaDespesa cat = new CategoriaDespesa();
+        //Operator
+        cat = cdao.readByIdAndCode(id_usuario, code).getFirst();
+        int id_despesa =  cat.getId_categoria_despesa();
+        categoriaDespesa = ddao.readDepesaByIdUserAndCodeList(id_usuario, id_despesa);
         System.out.println("code existente :" + categoriaDespesa);
         if(categoriaDespesa.isEmpty()){
             return false;

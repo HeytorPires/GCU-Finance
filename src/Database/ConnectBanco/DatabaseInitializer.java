@@ -111,25 +111,21 @@ public class DatabaseInitializer {
             """;
             statement.executeUpdate(insertDataQuery);
 
+            // Excluindo a view se ela já existir
+            String dropViewQuery = "DROP VIEW IF EXISTS MoviGeral";
+            statement.executeUpdate(dropViewQuery);
+
             // Criação da view
-            try {
-                String createViewQuery = """
-                    CREATE VIEW MoviGeral AS
-                    SELECT r.titulo, r.valor, r.data, r.id_usuario, 'Receita' AS tipo 
-                    FROM receita r
-                    UNION ALL
-                    SELECT d.titulo, d.valor, d.data, d.id_usuario, 'Despesa' AS tipo 
-                    FROM despesa d;
-                """;
-                statement.executeUpdate(createViewQuery);
-                System.out.println("Visão MoviGeral criada.");
-            } catch (SQLException e) {
-                if (e.getSQLState().equals("42000")) {  // SQLState para erros de sintaxe
-                    System.out.println("A visão MoviGeral já existe. Ignorando criação.");
-                } else {
-                    throw e;  // Re-throw para outros erros
-                }
-            }
+            String createViewQuery = """
+                CREATE VIEW MoviGeral AS
+                SELECT r.titulo, r.valor, r.data, r.id_usuario, 'Receita' AS tipo 
+                FROM receita r
+                UNION ALL
+                SELECT d.titulo, d.valor, d.data, d.id_usuario, 'Despesa' AS tipo 
+                FROM despesa d;
+            """;
+            statement.executeUpdate(createViewQuery);
+            System.out.println("Visão MoviGeral criada.");
 
             System.out.println("Tabelas e visão MoviGeral criadas.");
         } catch (SQLException e) {

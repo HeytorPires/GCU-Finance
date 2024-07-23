@@ -219,7 +219,7 @@ public class DespesaDAO {
             }
             return despesa;
         }
-        public List <Despesa> readDepesaByIdUserAndCodeList(int id_usuario,int code) throws ClassNotFoundException, SQLException{
+        public List <Despesa> readDepesaByIdUserAndCodeList(int id_usuario,int id_cat_despesa) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
@@ -229,9 +229,9 @@ public class DespesaDAO {
             
             try{
                 
-                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ? and code = ?");
+                stmt = con.prepareStatement("SELECT * FROM despesa WHERE id_usuario = ? and id_categoria_despesa = ?");
                 stmt.setInt(1, id_usuario);
-                stmt.setInt(2, code);
+                stmt.setInt(2, id_cat_despesa);
                 rs = stmt.executeQuery();
                 
                 while(rs.next()){
@@ -240,7 +240,7 @@ public class DespesaDAO {
                     despesa.setTitulo(rs.getString("titulo"));
                     despesa.setValor(rs.getDouble("valor"));
                     despesa.setData(rs.getDate("data"));
-                    despesa.setCode(rs.getInt("code"));
+                    despesa.setId_categoria_despesa(rs.getInt("id_categoria_despesa"));
                     despesa.setId_usuario(rs.getInt("id_usuario"));
                     despesas.add(despesa);
                 }
