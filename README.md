@@ -81,5 +81,6 @@ Após vincular o driver a todos os problemas, o projeto está totalmente apto pa
 Pronto o GCU Finance já estará rodando sem sua maquina. 
 Caso tenha duvidas meu Email para contato:
 
-[Heytor Pires](heytor.cacho29@gmail.com)
+[Enviar e-mail](mailto:heytor.cacho29@gmail.com)
+
 
