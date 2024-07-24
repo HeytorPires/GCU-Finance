@@ -68,7 +68,7 @@ Ao  clonar o projeto em sua maquina, voce precisará Baixar e extrair o driver d
 ### 2.1 
 Em seguida será exibida uma tela com os problemas de conexão, onde voce devera procurar o driver JDBC que foi baixado e extraido na sua maquina, para vincular o driver ao problema, basta clicar no problema e depois em "resolve", e navegue até onde o drive foi extraido, como está sendo mostrado no exemplo:
 
-[Download do vídeo](https://github.com/HeytorPires/GCU-Finance/main/src/assets/Docs/MarkDown-03.mp4)
+[Download do vídeo](https://github.com/HeytorPires/GCU-Finance/raw/main/src/assets/%20Docs/MarkDown-03.mp4)
 
 
 
