@@ -1,6 +1,7 @@
 
 # GCU Finance
- breve sobre o projeto. O que ele faz, qual problema resolve, etc.
+Gestão financeira não é um problema a este projeto, a gestão nunca foi tão facil e simples com apenas o Pouco bem feito, GCU visa Facilidade e usabilidade ao usuario sem deixar nenhuma duvida, dando a voce uma vontade de gerenciar cada vez mais suas movimentações.
+
  ## Índice 
  - [Sobre](#sobre)
  - [Funcionalidades](#funcionalidades)
@@ -27,6 +28,8 @@
 O objetivo do GCU é proporcionar uma visão ampla e simples da gestão financeira do usuário, permitindo acompanhar para onde vai e de onde vem o seu dinheiro. A plataforma facilita a visualização de despesas e receitas mensais, bem como de todas as movimentações financeiras, oferecendo um panorama completo das finanças pessoais.
 
  ## Funcionalidades 
+ Funcionalidade dadas por entidades:
+ 
  ### Usuario
 
 - Cadastro de Usuario
@@ -34,7 +37,31 @@ O objetivo do GCU é proporcionar uma visão ampla e simples da gestão financei
 - alterar senha, nome e Email do usuario
 - apagar Todos os dados do usuario. 
   
- ### Requisitos 
+### Despesas
+
+- Cadastro de despesas.
+- listagem de despesas
+- filtro por meses.
+- alterar dados da despesas.
+- apagar despesas. 
+
+### Receitas
+
+- Cadastro de receitas.
+- listagem de receitas
+- filtro por meses.
+- alterar dados da receita.
+- apagar receitas. 
+
+ ### Categorias
+
+- Cadastro de Categorias.
+- listagem de Categorias
+- alterar dados da Categorias.
+- apagar Categorias. 
+  
+
+ ## Requisitos 
 
  #### Mysql Configurado com credenciais padrão:
 
@@ -65,14 +92,14 @@ Ao  clonar o projeto em sua maquina, voce precisará Baixar e extrair o driver d
 
 ![Exemplo Visual](/src/assets/%20Docs//MarkDown-01.png)
 
-### 2.1 
+### 2.1: Anexar Drive
 Em seguida será exibida uma tela com os problemas de conexão, onde voce devera procurar o driver JDBC que foi baixado e extraido na sua maquina, para vincular o driver ao problema, basta clicar no problema e depois em "resolve", e navegue até onde o drive foi extraido, como está sendo mostrado no exemplo:
 
 [Download do vídeo](https://github.com/HeytorPires/GCU-Finance/raw/main/src/assets/%20Docs/MarkDown-03.mp4)
 
 
 
-### 2.2
+### 2.2: Rodar o Projeto
 Após vincular o driver a todos os problemas, o projeto está totalmente apto para ser usado, clique com o botão direito em cima do projeto e em "run": 
 
 ![Exemplo visual](/src/assets/%20Docs/MarkDown-03.png)
