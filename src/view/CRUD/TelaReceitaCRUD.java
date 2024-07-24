@@ -59,15 +59,28 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
     public void readJtable() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
+        //dao
         ReceitaDAO pdao = new ReceitaDAO();
+        CategoriaReceitaDAO CatRec = new CategoriaReceitaDAO();
+        
 
         pdao.readReceitaByIdUser(id_usuario).stream().forEach((d) -> {
+            CategoriaReceita rec = new CategoriaReceita();
+            int id_cat= d.getId_categoria_receita();
+            
+            try {
+                rec = CatRec.readCategoriaById(id_cat).getFirst();
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaReceitaCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
             modelo.addRow(new Object[]{
                 d.getId_receita(),
                 d.getTitulo(),
                 d.getValor(),
                 d.getData(),
-                d.getCode()
+                rec.getCode()
             });
         });
     }

@@ -25,7 +25,7 @@ public class DespesaRepositoryService {
         CategoriaDespesaDAO desps = new CategoriaDespesaDAO();
         
         desp = desps.readByIdAndCode(id_usuario, code).getFirst();
-        System.out.println("repositorio id pelo code: " + desp.getCode() + " id: "+ + desp.getId_categoria_despesa());
+        System.out.println(desp.toString());
         d.setTitulo(titulo);
         d.setValor(valor);
         d.setData(java.sql.Date.valueOf(data));
@@ -35,11 +35,11 @@ public class DespesaRepositoryService {
         despesadao.Create(d);
     }
     public static void update(String titulo, double valor, String data, int code, int id_usuario, int id_despesa) throws ClassNotFoundException, SQLException{
-        //bean
-        Despesa d = new Despesa();
-        DespesaDAO despesadao = new DespesaDAO();
-        //dao
+        //bean 
         CategoriaDespesa desp = new CategoriaDespesa();
+        Despesa d = new Despesa();
+        //dao
+        DespesaDAO despesadao = new DespesaDAO();
         CategoriaDespesaDAO desps = new CategoriaDespesaDAO();
         //operator
         desp = desps.readByIdAndCode(id_usuario, code).getFirst();

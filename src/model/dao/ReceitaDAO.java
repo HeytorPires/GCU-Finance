@@ -25,13 +25,13 @@ public class ReceitaDAO {
             PreparedStatement stmt = null;
              ResultSet rs = null;
             try {
-                    stmt = con.prepareStatement("INSERT INTO receita (titulo, valor, id_usuario, data, code) values  (?,?,?,?,?)");
+                    stmt = con.prepareStatement("INSERT INTO receita (titulo, valor, id_usuario, data, id_categoria_receita) values  (?,?,?,?,?)");
                 
                 stmt.setString(1,r.getTitulo());
                 stmt.setDouble(2, r.getValor());
                 stmt.setInt(3, r.getId_usuario());
                 stmt.setDate(4, (Date) r.getData());
-                stmt.setInt(5, r.getCode());
+                stmt.setInt(5, r.getId_categoria_receita());
                 
                 stmt.executeUpdate();
                 
@@ -83,12 +83,12 @@ public class ReceitaDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?, data = ?, code = ?   WHERE id_receita = ?");
+                stmt = con.prepareStatement("UPDATE receita SET titulo = ?, valor = ?, data = ?, id_categoria_receita = ?   WHERE id_receita = ?");
                 
                 stmt.setString(1, r.getTitulo());
                 stmt.setDouble(2, r.getValor());
                 stmt.setDate(3, (Date) r.getData());
-                stmt.setInt(4, r.getCode());
+                stmt.setInt(4, r.getId_categoria_receita());
                 stmt.setInt(5, r.getId_receita());
                 
                 
@@ -123,7 +123,6 @@ public class ReceitaDAO {
                 ConnectionFactory.closeConnection(con, stmt, rs);
             }
         }
-        
         public List<Receita> readForDesc(String titulo, int id_usuario) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -180,7 +179,8 @@ public class ReceitaDAO {
                     receita.setValor(rs.getDouble("valor"));
                     receita.setId_usuario(rs.getInt("id_usuario"));
                     receita.setData(rs.getDate("data"));
-                    receita.setCode(rs.getInt("code"));
+                    receita.setId_categoria_receita(rs.getInt("id_categoria_receita"));
+                   // receita.setCode(rs.getInt("code"));
                     
                     receitas.add(receita);
                 }
