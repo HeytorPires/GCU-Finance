@@ -192,7 +192,7 @@ public class ReceitaDAO {
             }
             return receitas;
         }
-        public List <Receita> readDepesaByIdUserAndCodeList(int id_usuario,int code) throws ClassNotFoundException, SQLException{
+        public List <Receita> readReceitaByIdUserAndCodeList(int id_usuario,int code) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
@@ -284,7 +284,7 @@ public class ReceitaDAO {
             receita.setTitulo(rs.getString("titulo"));
             receita.setData(rs.getDate("data"));
             receita.setValor(rs.getDouble("valor"));
-            receita.setCode(rs.getInt("code")); 
+            receita.setId_categoria_receita(rs.getInt("id_categoria_receita")); 
             receitas.add(receita);
         }
     } catch (SQLException ex) {

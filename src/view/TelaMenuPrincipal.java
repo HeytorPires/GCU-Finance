@@ -125,7 +125,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     CategoriaDespesaDAO Catdesp = new CategoriaDespesaDAO();
 
     despesas.stream().forEach((d) -> {
-         CategoriaDespesa cat = new CategoriaDespesa();
+            CategoriaDespesa cat = new CategoriaDespesa();
             int id_cat = d.getId_categoria_despesa();
             
             
@@ -148,17 +148,28 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public void filterJtableReceita(String year, String month) throws ClassNotFoundException, SQLException {
     DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
     modelo.setNumRows(0);
-    ReceitaDAO ddao = new ReceitaDAO();
+    ReceitaDAO rdao = new ReceitaDAO();
 
-    List<Receita> receitas = ddao.filterByYearAndMonth(year, month, id_usuario);
+    List<Receita> receitas = rdao.filterByYearAndMonth(year, month, id_usuario);
+    CategoriaReceitaDAO Cat_rec = new CategoriaReceitaDAO();
 
     receitas.stream().forEach((d) -> {
+        CategoriaReceita rec = new CategoriaReceita();
+        int id_cat = d.getId_categoria_receita();
+        
+        try {
+            rec = Cat_rec.readCategoriaById(id_cat).getFirst();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modelo.addRow(new Object[]{
             d.getId_receita(),
             d.getTitulo(),
             d.getValor(),
             d.getData(),
-            d.getCode()
+            rec.getCode()
         });
     });
 }
@@ -181,14 +192,30 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public void readJtableReceita() throws  ClassNotFoundException, SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TabelaReceitas.getModel();
         modelo.setNumRows(0);
+        
         ReceitaDAO Rdao = new ReceitaDAO();
+        CategoriaReceitaDAO cat_dao = new CategoriaReceitaDAO();
+        
+        
         Rdao.readReceitaByIdUser(id_usuario).stream().forEach((r) -> {
-            modelo.addRow(new Object[]{
+            
+            CategoriaReceita cat = new CategoriaReceita();
+            int id_cat = r.getId_categoria_receita();
+            
+            try {
+                cat = cat_dao.readCategoriaById(id_cat).getFirst();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+                modelo.addRow(new Object[]{
                 r.getId_receita(),
                 r.getTitulo(),
                 r.getValor(),
                 r.getData(),
-                r.getCode()
+                cat.getCode()
             });
         });
     }
@@ -1001,17 +1028,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_filtroDespesasActionPerformed
 
     private void ButtonFiltro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFiltro1ActionPerformed
-        try {
-              readJtableReceita();
-          } catch (ClassNotFoundException ex) {
-              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-          } catch (SQLException ex) {
-              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-          }
-    }//GEN-LAST:event_ButtonFiltro1ActionPerformed
-
-    private void FiltroReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroReceitasActionPerformed
-       
+           
     String mesSelecionado = comboMountsReceita.getSelectedItem().toString();
     String anoSelecionado = comboYearsReceita.getSelectedItem().toString();
     
@@ -1022,6 +1039,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     } catch (ClassNotFoundException | SQLException ex) {
         Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }//GEN-LAST:event_ButtonFiltro1ActionPerformed
+
+    private void FiltroReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroReceitasActionPerformed
+        try {
+              readJtableReceita();
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(TelaMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_FiltroReceitasActionPerformed
 
     private void comboMountsMoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMountsMoviActionPerformed

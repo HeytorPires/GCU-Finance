@@ -252,7 +252,7 @@ public class CategoriaReceitaDAO {
             }
             return categorias;
         }
-        public static List<CategoriaReceita> readCategoriaById(int id_categoria_receita) throws ClassNotFoundException, SQLException{
+        public List<CategoriaReceita> readCategoriaById(int id_categoria_receita) throws ClassNotFoundException, SQLException{
             
             Connection con = (Connection) ConnectionFactory.getConnection();
             PreparedStatement stmt = null;

@@ -65,6 +65,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         
 
         pdao.readReceitaByIdUser(id_usuario).stream().forEach((d) -> {
+            
             CategoriaReceita rec = new CategoriaReceita();
             int id_cat= d.getId_categoria_receita();
             

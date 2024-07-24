@@ -18,7 +18,7 @@ public class ValidateUpdateExistsReceitaByIdCatService {
     public static boolean ValidateUpdateExistsReceitaByIdCat(int id_usuario, int antigocode, int code) throws ClassNotFoundException, SQLException{
         ReceitaDAO ddao = new ReceitaDAO();
         List<Receita> categoriaReceita;
-        categoriaReceita = ddao.readDepesaByIdUserAndCodeList(id_usuario, antigocode);
+        categoriaReceita = ddao.readReceitaByIdUserAndCodeList(id_usuario, antigocode);
         System.out.println("code existente :" + categoriaReceita);
         if(code != antigocode){
         if(!categoriaReceita.isEmpty()){

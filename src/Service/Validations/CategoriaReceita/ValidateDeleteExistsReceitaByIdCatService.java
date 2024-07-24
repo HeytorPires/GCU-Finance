@@ -18,7 +18,7 @@ public class ValidateDeleteExistsReceitaByIdCatService {
     public static boolean validateExitsReceitaByIdcat(int id_usuario, int code) throws ClassNotFoundException, SQLException{
         ReceitaDAO ddao = new ReceitaDAO();
         List<Receita> categoriaReceita;
-        categoriaReceita = ddao.readDepesaByIdUserAndCodeList(id_usuario, code);
+        categoriaReceita = ddao.readReceitaByIdUserAndCodeList(id_usuario, code);
         System.out.println("code existente :" + categoriaReceita);
         if(categoriaReceita.isEmpty()){
             return false;
