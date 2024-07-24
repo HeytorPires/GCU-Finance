@@ -145,7 +145,6 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Receitas");
-        setPreferredSize(new java.awt.Dimension(681, 460));
         setResizable(false);
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
@@ -223,11 +222,11 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Data(yyyy-mm-dd)");
+        jLabel5.setText("Data(dd-mm-yyyy)");
 
         jLabel6.setText("Code");
 
-        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-y"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

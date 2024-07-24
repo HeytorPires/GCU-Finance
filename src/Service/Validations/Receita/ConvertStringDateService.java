@@ -13,12 +13,12 @@ import java.util.regex.Pattern;
  */
 public class ConvertStringDateService {
     public static String converterDataParaMySQL(String texto) {
-        String regex = "\\b(\\d{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])\\b";
+        String regex = "\\b(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-(\\d{4})\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(texto);
         
         if (matcher.find()) {
-            String dataMySQL = matcher.group(1) + "-" + matcher.group(2) + "-" + matcher.group(3);
+            String dataMySQL = matcher.group(3) + "-" + matcher.group(2) + "-" + matcher.group(1);
             return dataMySQL;
         } else {
             return null; // Retorna null se não encontrar uma data no formato especificado

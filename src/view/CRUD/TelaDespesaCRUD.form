@@ -259,7 +259,7 @@
     <Component class="javax.swing.JFormattedTextField" name="Inputdata">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
+          <Format format="dd-MM-y" subtype="-1" type="1"/>
         </Property>
       </Properties>
       <Events>
@@ -273,7 +273,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Data(yyyy-mm-dd)"/>
+        <Property name="text" type="java.lang.String" value="Data(dd-mm-yyyy)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboBoxCat">

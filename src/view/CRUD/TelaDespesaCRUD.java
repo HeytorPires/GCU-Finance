@@ -231,7 +231,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
             }
         });
 
-        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        Inputdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-y"))));
         Inputdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputdataActionPerformed(evt);
@@ -240,7 +240,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
 
         jLabel5.setText("Categoria");
 
-        jLabel6.setText("Data(yyyy-mm-dd)");
+        jLabel6.setText("Data(dd-mm-yyyy)");
 
         comboBoxCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
