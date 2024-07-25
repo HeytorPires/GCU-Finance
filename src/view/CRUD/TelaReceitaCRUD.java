@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view.CRUD;
+import Service.Validations.Despesa.ConvertStringDateService;
 import java.lang.System.Logger;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -145,6 +146,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Receitas");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         TabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
@@ -310,7 +312,7 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
                         .addComponent(buttonPesquisa)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(299, 299, 299))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -321,7 +323,10 @@ public class TelaReceitaCRUD extends javax.swing.JFrame {
         if (TabelaExibir.getSelectedRow() != -1) {
             InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
             InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
-            Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+             String data;
+            data = TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString();
+            data = ConvertStringDateService.converterDataParaFormatoAmericano(data);
+            Inputdata.setText(data);
             
         }
     }//GEN-LAST:event_TabelaExibirKeyReleased

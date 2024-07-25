@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view.CRUD;
+import Service.Validations.Despesa.ConvertStringDateService;
 import java.lang.System.Logger;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -366,7 +367,10 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
     // Atualizar campos de texto
     InputTitulo.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 1).toString());
     InputValor.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 2).toString());
-    Inputdata.setText(TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString());
+    String data;
+    data = TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3).toString();
+    data = ConvertStringDateService.converterDataParaFormatoAmericano(data);
+    Inputdata.setText(data);
 
     // Atualizar comboBox
     if (indexCategoria != null) {

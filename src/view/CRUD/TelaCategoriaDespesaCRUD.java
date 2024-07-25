@@ -43,7 +43,6 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TabelaExibir.getModel();
         modelo.setNumRows(0);
         CategoriaDespesaDAO pdao = new CategoriaDespesaDAO();
-        System.out.println("usaurio id cat" + id_usuario);
         pdao.readCategoriaByIdUser(id_usuario).stream().forEach((c) -> {
             modelo.addRow(new Object[]{
                 c.getId_categoria_despesa(),

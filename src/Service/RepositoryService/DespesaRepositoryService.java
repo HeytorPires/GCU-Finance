@@ -46,6 +46,8 @@ public class DespesaRepositoryService {
         int id_cat_desp = desp.getId_categoria_despesa();
         
         //Database
+
+
         d.setTitulo(titulo);
         d.setValor(valor);
         d.setData(java.sql.Date.valueOf(data));
