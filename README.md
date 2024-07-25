@@ -86,7 +86,7 @@ O objetivo do GCU é proporcionar uma visão ampla e simples da gestão financei
  ```bash 
  git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
-### Passo 2: Vincule o Driver de conexão ao 
+### Passo 2: Vincule o Driver de conexão ao Projeto
 Ao  clonar o projeto em sua maquina, voce precisará Baixar e extrair o driver do JDBC na sua maquina, após extrair vá até o Netbeans no Projeto, clique com o botão direito em cima do projeto, e navegue até "Resolve Project Problems...", como no exemplo visual:
 
 ![Exemplo Visual](/src/assets/%20Docs//MarkDown-01.png)
