@@ -6,7 +6,6 @@ Gestão financeira não é um problema a este projeto, a gestão nunca foi tão 
  - [Sobre](#sobre)
  - [Funcionalidades](#funcionalidades)
  - [Instalação](#instalação) 
- - [Uso](#uso) 
  - [Licença](/LICENCE) 
 
 
@@ -28,37 +27,37 @@ Gestão financeira não é um problema a este projeto, a gestão nunca foi tão 
 O objetivo do GCU é proporcionar uma visão ampla e simples da gestão financeira do usuário, permitindo acompanhar para onde vai e de onde vem o seu dinheiro. A plataforma facilita a visualização de despesas e receitas mensais, bem como de todas as movimentações financeiras, oferecendo um panorama completo das finanças pessoais.
 
  ## Funcionalidades 
- Funcionalidade dadas por entidades:
+ Funcionalidade por entidades:
  
  ### Usuario
 
 - Cadastro de Usuario
 - Login com credencias do usuario
-- alterar senha, nome e Email do usuario
-- apagar Todos os dados do usuario. 
+- Alterar senha, nome e Email do usuario
+- Apagar Todos os dados do usuario. 
   
 ### Despesas
 
 - Cadastro de despesas.
-- listagem de despesas
-- filtro por meses.
-- alterar dados da despesas.
-- apagar despesas. 
+- Listagem de despesas
+- Filtro por meses e por anos, com possibilidade de um filtro complexos de data.
+- Alterar dados da despesas.
+- Apagar despesas. 
 
 ### Receitas
 
 - Cadastro de receitas.
-- listagem de receitas
-- filtro por meses.
-- alterar dados da receita.
-- apagar receitas. 
+- Listagem de receitas
+- Filtro por meses e por anos, com possibilidade de um filtro complexos de data.
+- Alterar dados da receita.
+- Apagar receitas. 
 
  ### Categorias
 
 - Cadastro de Categorias.
-- listagem de Categorias
-- alterar dados da Categorias.
-- apagar Categorias. 
+- Listagem de Categorias
+- Alterar dados da Categorias.
+- Apagar Categorias. 
   
 
  ## Requisitos 
