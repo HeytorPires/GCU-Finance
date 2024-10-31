@@ -45,9 +45,9 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="203" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,7 +71,8 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Bem-vindo ao GCU-Finance, a solu&#xe7;&#xe3;o de gest&#xe3;o financeira pessoal que come&#xe7;ou como&#xa;um projeto acad&#xea;mico e se transformou em uma ferramenta essencial para milhares de &#xa;usu&#xe1;rios ao redor do mundo.&#xa;&#xa;Desenvolvido como parte de um projeto de engenharia de software, o GCU-Finance &#xa;nasceu da paix&#xe3;o por simplificar a gest&#xe3;o financeira e proporcionar aos usu&#xe1;rios uma &#xa;maneira intuitiva e eficiente de controlar suas finan&#xe7;as pessoais.&#xa;&#xa;Com uma interface amig&#xe1;vel e recursos poderosos, o GCU-Finance permite que voc&#xea; &#xa;acompanhe suas despesas, receitas e investimentos de forma organizada e eficaz. &#xa;Desde estudantes universit&#xe1;rios at&#xe9; profissionais experientes, nosso aplicativo atende&#xa;&#xe0;s necessidades financeiras de diversos perfis de usu&#xe1;rios, oferecendo insights&#xa;valiosos para uma melhor tomada de decis&#xe3;o.&#xa;&#xa;Nossa equipe est&#xe1; comprometida em fornecer atualiza&#xe7;&#xf5;es regulares e suporte &#xa;cont&#xed;nuo para garantir que o GCU-Finance permane&#xe7;a como a escolha n&#xfa;mero um &#xa;para aqueles que buscam um controle financeiro robusto e acess&#xed;vel.&#xa;&#xa;Junte-se a n&#xf3;s e simplifique sua vida financeira com o GCU-Finance - onde a &#xa;excel&#xea;ncia acad&#xea;mica se encontra com a inova&#xe7;&#xe3;o tecnol&#xf3;gica para transformar &#xa;suas finan&#xe7;as pessoais.&#xa;&#xa;&#xa;"/>
+            <Property name="text" type="java.lang.String" value="Bem-vindo ao GCU-Finance, a solu&#xe7;&#xe3;o de gest&#xe3;o financeira pessoal &#xa;que come&#xe7;ou como um projeto acad&#xea;mico e se transformou em &#xa;uma ferramenta essencial para milhares de &#xa;usu&#xe1;rios ao redor do mundo.&#xa;&#xa;Desenvolvido como parte de um projeto de engenharia de software, &#xa;o GCU-Finance nasceu da paix&#xe3;o por simplificar a gest&#xe3;o financeira &#xa;e proporcionar aos usu&#xe1;rios uma maneira intuitiva e eficiente de &#xa;controlar suas finan&#xe7;as pessoais.&#xa;&#xa;Com uma interface amig&#xe1;vel e recursos poderosos, o GCU-Finance &#xa;permite que voc&#xea; acompanhe suas despesas, receitas e investimentos de forma organizada e eficaz. &#xa;Desde estudantes universit&#xe1;rios at&#xe9; profissionais experientes, nosso &#xa;aplicativo atende &#xe0;s necessidades financeiras de diversos perfis de&#xa;usu&#xe1;rios, oferecendo insights valiosos para uma melhor tomada de &#xa;decis&#xe3;o.&#xa;&#xa;Nossa equipe est&#xe1; comprometida em fornecer atualiza&#xe7;&#xf5;es regulares &#xa;e suporte cont&#xed;nuo para garantir que o GCU-Finance permane&#xe7;a como &#xa;a escolha n&#xfa;mero um para aqueles que buscam um controle financeiro robusto e acess&#xed;vel.&#xa;&#xa;Junte-se a n&#xf3;s e simplifique sua vida financeira com o GCU-Finance &#xa;onde a excel&#xea;ncia acad&#xea;mica se encontra com a inova&#xe7;&#xe3;o tecnol&#xf3;gica para transformar &#xa;suas finan&#xe7;as pessoais.&#xa;&#xa;&#xa;"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>

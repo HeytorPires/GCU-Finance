@@ -44,7 +44,8 @@ public class TelaSobre extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Bem-vindo ao GCU-Finance, a solução de gestão financeira pessoal que começou como\num projeto acadêmico e se transformou em uma ferramenta essencial para milhares de \nusuários ao redor do mundo.\n\nDesenvolvido como parte de um projeto de engenharia de software, o GCU-Finance \nnasceu da paixão por simplificar a gestão financeira e proporcionar aos usuários uma \nmaneira intuitiva e eficiente de controlar suas finanças pessoais.\n\nCom uma interface amigável e recursos poderosos, o GCU-Finance permite que você \nacompanhe suas despesas, receitas e investimentos de forma organizada e eficaz. \nDesde estudantes universitários até profissionais experientes, nosso aplicativo atende\nàs necessidades financeiras de diversos perfis de usuários, oferecendo insights\nvaliosos para uma melhor tomada de decisão.\n\nNossa equipe está comprometida em fornecer atualizações regulares e suporte \ncontínuo para garantir que o GCU-Finance permaneça como a escolha número um \npara aqueles que buscam um controle financeiro robusto e acessível.\n\nJunte-se a nós e simplifique sua vida financeira com o GCU-Finance - onde a \nexcelência acadêmica se encontra com a inovação tecnológica para transformar \nsuas finanças pessoais.\n\n\n");
+        jTextArea1.setText("Bem-vindo ao GCU-Finance, a solução de gestão financeira pessoal \nque começou como um projeto acadêmico e se transformou em \numa ferramenta essencial para milhares de \nusuários ao redor do mundo.\n\nDesenvolvido como parte de um projeto de engenharia de software, \no GCU-Finance nasceu da paixão por simplificar a gestão financeira \ne proporcionar aos usuários uma maneira intuitiva e eficiente de \ncontrolar suas finanças pessoais.\n\nCom uma interface amigável e recursos poderosos, o GCU-Finance \npermite que você acompanhe suas despesas, receitas e investimentos de forma organizada e eficaz. \nDesde estudantes universitários até profissionais experientes, nosso \naplicativo atende às necessidades financeiras de diversos perfis de\nusuários, oferecendo insights valiosos para uma melhor tomada de \ndecisão.\n\nNossa equipe está comprometida em fornecer atualizações regulares \ne suporte contínuo para garantir que o GCU-Finance permaneça como \na escolha número um para aqueles que buscam um controle financeiro robusto e acessível.\n\nJunte-se a nós e simplifique sua vida financeira com o GCU-Finance \nonde a excelência acadêmica se encontra com a inovação tecnológica para transformar \nsuas finanças pessoais.\n\n\n");
+        jTextArea1.setEnabled(false);
         jTextArea1.setOpaque(false);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -79,9 +80,9 @@ public class TelaSobre extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
 
         pack();

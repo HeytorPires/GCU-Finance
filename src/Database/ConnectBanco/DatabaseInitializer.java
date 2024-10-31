@@ -26,19 +26,24 @@ public class DatabaseInitializer {
             // Verifica se o banco de dados existe
             String checkDBExistsQuery = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + DB_NAME + "'";
             ResultSet resultSet = statement.executeQuery(checkDBExistsQuery);
-
+            boolean existentDb;
             if (!resultSet.next()) {
                 String createDatabaseQuery = "CREATE DATABASE " + DB_NAME;
                 statement.executeUpdate(createDatabaseQuery);
                 System.out.println("Banco de dados criado: " + DB_NAME);
+                existentDb = false;
             } else {
                 System.out.println("Banco de dados já existe: " + DB_NAME);
-            }
+                existentDb = true;
 
+            }
             // Usa o banco de dados
             connection = DriverManager.getConnection(DB_URL + DB_NAME, USER, PASSWORD);
             statement = connection.createStatement();
 
+            //condição para ver o bd criadoã
+            if(!existentDb){
+            
             // Criação das tabelas
             String createTablesQuery = """
                 CREATE TABLE IF NOT EXISTS usuario (
@@ -128,12 +133,17 @@ public class DatabaseInitializer {
             System.out.println("Visão MoviGeral criada.");
 
             System.out.println("Tabelas e visão MoviGeral criadas.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
