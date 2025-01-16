@@ -164,7 +164,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         String confirmarSenha = new String(inputConfirmeSenha.getPassword());
         
         try {
-            UsuarioController.validateUserRegistration(nome, email, senha, confirmarSenha);
+            UsuarioController.Registration(nome, email, senha, confirmarSenha);
             inputNome.setText("");
             InputEmail.setText("");
             InputSenha.setText("");

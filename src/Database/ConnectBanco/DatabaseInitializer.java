@@ -13,7 +13,7 @@ public class DatabaseInitializer {
     private static final String DB_NAME = "finance";
     private static final String USER = "root";
     private static final String PASSWORD = "1234";
-
+ 
     public static void initializeDatabase() {
         Connection connection = null;
         Statement statement = null;

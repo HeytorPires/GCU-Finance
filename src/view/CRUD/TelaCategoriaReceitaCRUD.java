@@ -292,7 +292,7 @@ public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
            int antigoCode = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3);
 
             try {
-                if(Controller.CategoriaReceitaController.validateCategoriaReceitaDelete(id_categoriaReceita, id_usuario, antigoCode)){
+                if(Controller.CategoriaReceitaController.Delete(id_categoriaReceita, id_usuario, antigoCode)){
                       InputTitulo.setText("");
                         InputDescricao.setText("");
                         InputPesquisa.setText("");
@@ -323,7 +323,7 @@ public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
             return; 
         }
         try {
-            if(Controller.CategoriaReceitaController.validateCategoriaReceitaCreate(Titulo, Descricao, code, id_usuario)){
+            if(Controller.CategoriaReceitaController.Create(Titulo, Descricao, code, id_usuario)){
                 InputTitulo.setText("");
                 InputDescricao.setText("");
                 InputCode.setText("");
@@ -359,7 +359,7 @@ public class TelaCategoriaReceitaCRUD extends javax.swing.JFrame {
             return; 
         }
         try {
-            if(Controller.CategoriaReceitaController.validateCategoriaReceitaUpdate(Titulo, Descricao, code, antigoCode, id_usuario)){
+            if(Controller.CategoriaReceitaController.Update(Titulo, Descricao, code, antigoCode, id_usuario)){
                 InputTitulo.setText("");
                 InputDescricao.setText("");
                 InputCode.setText("");

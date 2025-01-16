@@ -190,7 +190,7 @@ public class TelaEditarUsuario extends javax.swing.JFrame {
         
 
         try {
-            UsuarioController.AlterarInfo(NomeNovo, EmailNovo, id_usuario);
+            UsuarioController.UpdateInfo(NomeNovo, EmailNovo, id_usuario);
             InputNomeNovo.setText("");
             InputEmailNovo.setText("");
         } catch (ClassNotFoundException | SQLException ex) {

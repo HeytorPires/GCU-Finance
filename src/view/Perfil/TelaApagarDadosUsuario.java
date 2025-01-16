@@ -107,7 +107,7 @@ public class TelaApagarDadosUsuario extends javax.swing.JFrame {
          int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
              try {
-                 Controller.UsuarioController.ApagarTodososdados(id_usuario);
+                 Controller.UsuarioController.DeleteAllData(id_usuario);
              } catch (ClassNotFoundException ex) {
                  Logger.getLogger(TelaApagarDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
              } catch (SQLException ex) {

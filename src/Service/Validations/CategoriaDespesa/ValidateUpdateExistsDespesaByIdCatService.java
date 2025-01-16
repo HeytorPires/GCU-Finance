@@ -15,7 +15,7 @@ import model.dao.DespesaDAO;
  * @author heyto
  */
 public class ValidateUpdateExistsDespesaByIdCatService {
-    public static boolean ValidateUpdateExistsDespesaByIdCat(int id_usuario, int antigocode, int code) throws ClassNotFoundException, SQLException{
+    public static boolean execute(int id_usuario, int antigocode, int code) throws ClassNotFoundException, SQLException{
         DespesaDAO ddao = new DespesaDAO();
         List<Despesa> categoriaDespesa;
         categoriaDespesa = ddao.readDepesaByIdUserAndCodeList(id_usuario, antigocode);

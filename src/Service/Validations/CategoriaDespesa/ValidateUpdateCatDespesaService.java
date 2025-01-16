@@ -15,7 +15,7 @@ import model.dao.CategoriaDespesaDAO;
  * @author heyto
  */
 public class ValidateUpdateCatDespesaService {
-     public static boolean validateUpdateCatDespesa(String titulo, String Descricao, int code,int antigocode, int id_usuario) throws ClassNotFoundException, SQLException {
+     public static boolean execute(String titulo, String Descricao, int code,int antigocode, int id_usuario) throws ClassNotFoundException, SQLException {
          if (titulo.isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, preencha o campo titulo");
             return false;
@@ -24,10 +24,10 @@ public class ValidateUpdateCatDespesaService {
              JOptionPane.showMessageDialog(null, "Por favor, preencha o campo Descricao");
             return false;
          }
-         if(!Service.Validations.CategoriaDespesa.ValidateUpdateExistsDespesaByIdCatService.ValidateUpdateExistsDespesaByIdCat(id_usuario, antigocode, code)){
+         if(!Service.Validations.CategoriaDespesa.ValidateUpdateExistsDespesaByIdCatService.execute(id_usuario, antigocode, code)){
              return false;
          }
-         if(Service.Validations.CategoriaDespesa.ValidateUpdateExistsCatDespesaService.ValidateUpdateExistsCatDespesa(id_usuario,code, antigocode)){
+         if(Service.Validations.CategoriaDespesa.ValidateUpdateExistsCatDespesaService.execute(id_usuario,code, antigocode)){
                 return true;
          }
      return false;

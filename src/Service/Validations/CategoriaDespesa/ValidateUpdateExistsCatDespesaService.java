@@ -7,7 +7,7 @@ import model.bean.CategoriaDespesa;
 
 public class ValidateUpdateExistsCatDespesaService {
 
-    public static boolean ValidateUpdateExistsCatDespesa(int id_usuario, int code, int antigoCode) throws ClassNotFoundException, SQLException {
+    public static boolean execute(int id_usuario, int code, int antigoCode) throws ClassNotFoundException, SQLException {
         List<CategoriaDespesa> categoriaDespesaList;
         
         categoriaDespesaList = Service.RepositoryService.CategoriaDespesaRepositoryService.FindCatByUserAndCode(id_usuario, code);

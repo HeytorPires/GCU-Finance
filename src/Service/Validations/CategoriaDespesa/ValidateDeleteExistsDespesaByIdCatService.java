@@ -17,7 +17,7 @@ import model.dao.DespesaDAO;
  * @author heyto
  */
 public class ValidateDeleteExistsDespesaByIdCatService {
-    public static boolean validateExitsDespesaByIdcat(int id_usuario, int code) throws ClassNotFoundException, SQLException{
+    public static boolean execute(int id_usuario, int code) throws ClassNotFoundException, SQLException{
         //Dao
         DespesaDAO ddao = new DespesaDAO();
         CategoriaDespesaDAO cdao = new CategoriaDespesaDAO();

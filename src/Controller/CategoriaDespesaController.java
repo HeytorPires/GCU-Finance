@@ -14,27 +14,32 @@ import model.dao.CategoriaDespesaDAO;
  * @author heyto
  */
 public class CategoriaDespesaController {
-    public static boolean validateCategoriaDespesaCreate(String titulo, String decricao, int code, int id_usuario) throws ClassNotFoundException, SQLException {
-        if(Service.Validations.CategoriaDespesa.ValidateCreateService.validateCreateCatDespesa(titulo, decricao, code, id_usuario)){  
+    public static boolean Create(String titulo, String decricao, int code, int id_usuario) throws ClassNotFoundException, SQLException {
+       
+        boolean allowedCreate = Service.Validations.CategoriaDespesa.ValidateCreateService.execute(titulo, decricao, code, id_usuario);
+        if(allowedCreate){  
             Service.RepositoryService.CategoriaDespesaRepositoryService.create(titulo, decricao, code, id_usuario);
             return true;
         } 
         return false;
      }
-     public static boolean validateCategoriaDespesaUpdate(String titulo, String decricao, int code, int antigocode, int id_usuario) throws ClassNotFoundException, SQLException {
+     public static boolean Update(String titulo, String decricao, int code, int antigocode, int id_usuario) throws ClassNotFoundException, SQLException {
         CategoriaDespesaDAO dao = new CategoriaDespesaDAO();
-        List<CategoriaDespesa> BuscandoID;
-        BuscandoID = dao.readByIdAndCode(id_usuario, antigocode);
-        int id_CategoriaDespesa = BuscandoID.getFirst().getId_categoria_despesa();
-         if(Service.Validations.CategoriaDespesa.ValidateUpdateCatDespesaService.validateUpdateCatDespesa(titulo, decricao, code, antigocode, id_usuario)){
+        List<CategoriaDespesa> categorysExists;
+        categorysExists = dao.readByIdAndCode(id_usuario, antigocode);
+        int id_CategoriaDespesa = categorysExists.getFirst().getId_categoria_despesa();
+        
+        boolean allowedUpdate = Service.Validations.CategoriaDespesa.ValidateUpdateCatDespesaService.execute(titulo, decricao, code, antigocode, id_usuario);
+        
+         if(allowedUpdate){
             Service.RepositoryService.CategoriaDespesaRepositoryService.update(titulo, decricao, code, id_CategoriaDespesa);
             return true;
         }
         return false;
     }
-     public static boolean validateCategoriaDespesaDelete(int id_cat_despesa, int id_usuario, int antigocode) throws ClassNotFoundException, SQLException{
-         if(Service.Validations.CategoriaDespesa.ValidateDeleteService.ValidateDeleteCatDespesas(id_usuario, antigocode)){
-             System.out.println("passa aqui");
+     public static boolean Delete(int id_cat_despesa, int id_usuario, int antigocode) throws ClassNotFoundException, SQLException{
+         boolean allowedDelete = Service.Validations.CategoriaDespesa.ValidateDeleteService.execute(id_usuario, antigocode);
+         if(allowedDelete){
              Service.RepositoryService.CategoriaDespesaRepositoryService.delete(id_cat_despesa);
 
          }

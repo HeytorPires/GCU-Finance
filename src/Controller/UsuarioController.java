@@ -14,22 +14,22 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioController {
     
-    public static void validateUserRegistration(String nome, String email, String senha, String confirmarSenha) throws ClassNotFoundException, SQLException{
+    public static void Registration(String nome, String email, String senha, String confirmarSenha) throws ClassNotFoundException, SQLException{
         if(Service.Validations.Usuario.ValidateCreateUserService.validateCreateUser(nome, email, senha, confirmarSenha)){
             Service.RepositoryService.UsuarioRepositoriyService.create(nome, email, senha);
         }
     }
-    public static void AlterarInfo(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
+    public static void UpdateInfo(String NomeNovo, String EmailNovo, int id_usuario) throws ClassNotFoundException, SQLException{
        if(Service.Validations.Usuario.ValidationUserUpdate.validateUserUpdate(NomeNovo, EmailNovo, id_usuario)){
         //Service.RepositoryService.UsuarioRepositoriyService.chargeUserInfo(NomeNovo, EmailNovo, id_usuario);
     }
     }
-    public static void AlterarSenha(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws SQLException, ClassNotFoundException{
+    public static void ChangePassword(String AntigaSenhaDB, String AntigaSenhaInput, String SenhaInput, String SenhaInputConfirme, int id_usuario) throws SQLException, ClassNotFoundException{
         if(Service.Validations.Usuario.ValidationPassawordService.validatePasswordUpdate(AntigaSenhaDB, AntigaSenhaInput, SenhaInput, SenhaInputConfirme, id_usuario)){
            Service.RepositoryService.UsuarioRepositoriyService.chargePassword(SenhaInput, id_usuario);
        }
     }
-    public static void ApagarTodososdados(int id_usuario) throws ClassNotFoundException, SQLException{
+    public static void DeleteAllData(int id_usuario) throws ClassNotFoundException, SQLException{
         try {
             Service.RepositoryService.UsuarioRepositoriyService.DeleteAllRegisters(id_usuario);
         } catch (SQLException ex) {

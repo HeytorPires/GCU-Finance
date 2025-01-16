@@ -290,7 +290,7 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
            int antigoCode = (int) TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 3);
 
             try {
-                if(Controller.CategoriaDespesaController.validateCategoriaDespesaDelete(id_categoriaDespesa, id_usuario, antigoCode)){
+                if(Controller.CategoriaDespesaController.Delete(id_categoriaDespesa, id_usuario, antigoCode)){
                       InputTitulo.setText("");
                         InputDescricao.setText("");
                         InputPesquisa.setText("");
@@ -320,7 +320,7 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
             return; 
         }
         try {
-            if(Controller.CategoriaDespesaController.validateCategoriaDespesaCreate(Titulo, Descricao, code, id_usuario)){
+            if(Controller.CategoriaDespesaController.Create(Titulo, Descricao, code, id_usuario)){
                 InputTitulo.setText("");
                 InputDescricao.setText("");
                 InputCode.setText("");
@@ -356,7 +356,7 @@ public class TelaCategoriaDespesaCRUD extends javax.swing.JFrame {
             return; 
         }
         try {
-            if(Controller.CategoriaDespesaController.validateCategoriaDespesaUpdate(Titulo, Descricao, code, antigoCode, id_usuario)){
+            if(Controller.CategoriaDespesaController.Update(Titulo, Descricao, code, antigoCode, id_usuario)){
                 InputTitulo.setText("");
                 InputDescricao.setText("");
                 InputCode.setText("");

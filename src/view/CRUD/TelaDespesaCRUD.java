@@ -394,7 +394,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         if (TabelaExibir.getSelectedRow() != -1) {
             int id_despesa = ((int)TabelaExibir.getValueAt(TabelaExibir.getSelectedRow(), 0));
             try {
-                if(Controller.DespesaController.validateDespesaDelete(id_despesa)){
+                if(Controller.DespesaController.Delete(id_despesa)){
                       InputTitulo.setText("");
                         InputValor.setText("");
                         Inputdata.setText("");
@@ -430,7 +430,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         }
 
         try {
-            if(Controller.DespesaController.validateDespesaCreate(titulo, valor, data, code, id_usuario)){
+            if(Controller.DespesaController.Create(titulo, valor, data, code, id_usuario)){
                 InputTitulo.setText("");
                 InputValor.setText("");
                 Inputdata.setText("");
@@ -471,7 +471,7 @@ public class TelaDespesaCRUD extends javax.swing.JFrame {
         }
 
         try {
-            if (Controller.DespesaController.validateDespesaUpdate(titulo, valor, data, code, id_usuario, id_despesa)) {
+            if (Controller.DespesaController.Update(titulo, valor, data, code, id_usuario, id_despesa)) {
                 InputTitulo.setText("");
                 InputValor.setText("");
                 Inputdata.setText("");

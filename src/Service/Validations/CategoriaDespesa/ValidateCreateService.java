@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author heyto
  */
 public class ValidateCreateService {
-     public static boolean validateCreateCatDespesa(String titulo, String Descricao, int code, int id_usuario) throws ClassNotFoundException, SQLException {
+     public static boolean execute(String titulo, String Descricao, int code, int id_usuario) throws ClassNotFoundException, SQLException {
         if ( titulo.isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, preencha o campo titulo");
             return false;
@@ -25,7 +25,7 @@ public class ValidateCreateService {
              JOptionPane.showMessageDialog(null, "Por favor, preencha o campo Descricao");
             return false;
          }
-         if(!ValidateCreateExistsCatDespesaService.ValidateExistsCatDespesa(id_usuario, code)){
+         if(!ValidateCreateExistsCatDespesaService.execute(id_usuario, code)){
           return false;   
          }
      return true;
